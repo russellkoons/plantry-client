@@ -1,5 +1,12 @@
 language: node_js
- node_js: node
- cache:
-   directories:
-     - node_modules
+node_js: node
+cache:
+  directories:
+  - node_modules
+deploy:
+  provider: heroku
+  api_key:
+    secure: nZHZu9HFmVDaPUxhJ4OSd2VzAfEWlONc8gdIwdiAbg5qs1Q1SbKdQD19YTWbvEtP/SJR1vmvAP9UBhd2hU/qSJX/Vi2R59Hb1v/umJQ6CJqibTSmByEn16OEVKEkQq4IdIRNjXAhGPNtxatbUG5bSpxO1kAIxGXHsuRgXwM1dV5SZ9Ve626ri6/0xs6t8zG32RV2TbdsILz1AIDmKQVurUIxwJ7oUTn+yaoaKdLg7MRWAGiNvQYz5HYtdsmhC9VTM+Yl53lGuusZxcO615GyeaEwcr2cYZf/wA4eq0bqgLCRMVZ45rgwwZEy2FZy9ZnrrRhTvZ0sEo1oqjSk7IXLCJ+OhgZ2a9SbJbv0BbcOOiLP0AiFCLpDkbYOSh2OfYmNFm9/nT44jyQvK/zIyavmWRn19dJxFLMldgzc3s9uj+DzmJy7SFSZZKA9njvVP36g/YmlTibIld8GdOy8AM34DY+vV2rXjRYCu+UCrZFJsOLLavKZIPjtkRBpiejXXjbDQg3ZUylgFhwLAR0sbzYXQ97tkc+JKYXcJJfOS7O5CJnPIttDHMOz3BLxV+laJaONSJvYIbe7w3mlq1hlCPobajve6QJHtQr4OysT2NpJpehStKw+716KGLDhAZcI/JG0bUQRH+am3GNCvidNlDcSOqbVAHVNhok3o2fdzRRCNaM=
+  app: plantry-client
+  on:
+    repo: russellkoons/plantry-client
