@@ -6,6 +6,16 @@ import * as serviceWorker from './serviceWorker';
 import Popup from 'reactjs-popup';
 import { Container, Row, Col } from 'react-grid-system';
 
+// Things I need to do:
+  // Make the calendar not look like crap!
+  // Figure out how I'm going to make the meal plan forms look and implement the ingredient list stuff
+  // REACT FORMS!!! AHHHHHH Formik: https://jaredpalmer.com/formik/
+  // Make everything look real purty
+  // Put my components into seperate files lol
+  // How will I do weeks? Should I just have the user set the week when they're making their meal plan? Seems like the easiest solution...
+  // Meal cards! Should include a list of ingredients plus any other info included in the notes
+  // Have fun! YOU CAN DO THIS!!! YOU'RE DOING GREAT!!!!!!
+
 class Login extends React.Component {
   render() {
     return(
@@ -161,16 +171,6 @@ class Calendar extends React.Component {
             <Col>Tacos</Col>
             <Col>Spaghetti</Col>
             <Col>Spaghetti</Col>
-          </Row>
-          <Row align="center" style={{ height: '75px' }}>
-            <Col>Snacks</Col>
-            <Col>Tangerines, chips</Col>
-            <Col>Pita chips and hummus</Col>
-            <Col>Grapes and apples</Col>
-            <Col>Fritos</Col>
-            <Col>Crackers</Col>
-            <Col>Cookies</Col>
-            <Col>Tangerines</Col>
           </Row>
         </Container>
         <button>Edit</button>
