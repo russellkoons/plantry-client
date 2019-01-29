@@ -5,6 +5,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Popup from 'reactjs-popup';
 import { Container, Row, Col } from 'react-grid-system';
+import { slide as Menu } from 'react-burger-menu';
 
 // Things I need to do:
   // Make the calendar not look like crap!
@@ -15,6 +16,140 @@ import { Container, Row, Col } from 'react-grid-system';
   // How will I do weeks? Should I just have the user set the week when they're making their meal plan? Seems like the easiest solution...
   // Meal cards! Should include a list of ingredients plus any other info included in the notes
   // Have fun! YOU CAN DO THIS!!! YOU'RE DOING GREAT!!!!!!
+
+const DAYS = [
+  {name: 'Sunday', initial: 's'},
+  {name: 'Monday', initial: 'm'},
+  {name: 'Tuesday', initial: 't'},
+  {name: 'Wednesday', initial: 'w'},
+  {name: 'Thursday', initial: 'r'},
+  {name: 'Friday', initial: 'f'},
+  {name: 'Saturday', initial: 'a'}
+];
+
+const MEALS = [
+  {name: 'Egg Bagel', ingredients: ['Eggs', 'Everything bagel', 'Cream cheese', 'Green Onion', 'Hot Sauce'], type: 'breakfast', notes: 'Delicious'},
+  {name: 'Peanut Butter Sandwich', ingredients: ['Bread', 'Peanut butter', 'Hot honey'], type: 'lunch', notes: 'The standard'},
+  {name: 'Eggs and toast', ingredients: ['Eggs', 'Bread', 'Hot Sauce'], type: 'breakfast', notes: 'A personal fave'},
+  {name: 'Salad', ingredients: ['Greens', 'Tomato', 'Red onion', 'Eggs', 'Dressing'], type: 'lunch', notes: 'Healthy!'},
+  {name: 'Spaghetti', ingredients: ['Spaghetti', 'Marinara', 'Parmesan', 'Garlic Bread'], type: 'dinner', notes: 'Too easy'},
+  {name: 'Stir Fry', ingredients: ['Chicken', 'Mushrooms', 'Onion', 'Hoisin Sauce', 'Garlic'], type: 'dinner', notes: 'The new hotness'}
+];
+
+const PLAN = {
+  breakfast: ['Breakfast', 'Egg Bagel', 'Eggs and Toast', 'Egg Bagel', 'Eggs and Toast', 'Egg Bagel', 'Eggs and Toast', 'Egg Bagel'],
+  lunch: ['Lunch', 'Peanut Butter Sandwich', 'Salad', 'Peanut Butter Sandwich', 'Salad', 'Peanut Butter Sandwich', 'Salad', 'Peanut Butter Sandwich'],
+  dinner: ['Dinner', 'Stir Fry', 'Spaghetti', 'Stir Fry', 'Spaghetti', 'Stir Fry', 'Spaghetti', 'Stir Fry']
+};
+
+class ShoppingList extends React.Component {
+  render() {
+    const list = [];
+    const formatted = [];
+
+    for (let i = 0; i < MEALS.length; i++) {
+      for(let j = 0; j < MEALS[i].ingredients.length; j++) {
+        const ingredient = MEALS[i].ingredients[j];
+        if (!(ingredient in list)) {
+          list.push(ingredient)
+        }
+      }
+    }
+
+    const short = [...new Set(list)]
+
+    for (let i = 0; i < short.length; i++) {
+      formatted.push(
+        <div>
+          <input type="checkbox" /><span>{short[i]}</span>
+        </div>
+      )
+    }
+
+    return(
+      <div>
+        <h2>Shopping List</h2>
+        {formatted}
+      </div>
+    )
+  }
+}
+
+class MealPlan extends React.Component {
+  render() {
+    return(
+      <div>
+        <h2>New Meal Plan</h2>
+        <form>
+          <input type="date" name="date" /><br/>
+          <DayCard day={DAYS[0]} />
+          <DayCard day={DAYS[1]} />
+          <DayCard day={DAYS[2]} />
+          <DayCard day={DAYS[3]} />
+          <DayCard day={DAYS[4]} />
+          <DayCard day={DAYS[5]} />
+          <DayCard day={DAYS[6]} />
+          <input type="submit" />
+        </form>
+      </div>
+    )
+  }
+}
+
+class MealInput extends React.Component {
+  render() {
+    return(
+      <option value={this.props.meal.name}>{this.props.meal.name}</option>
+    )
+  }
+}
+
+class DayCard extends React.Component {
+  render() {
+    const breakfast = [];
+    const lunch = [];
+    const dinner = [];
+    for (let i = 0; i < MEALS.length; i++) {
+      if (MEALS[i].type === 'breakfast') {
+        breakfast.push(
+          <MealInput meal={MEALS[i]} />
+        )
+      } else if (MEALS[i].type === 'lunch') {
+        lunch.push(
+          <MealInput meal={MEALS[i]} />
+        )
+      } else if (MEALS[i].type === 'dinner') {
+        dinner.push(
+          <MealInput meal={MEALS[i]} />
+        )
+      }
+    }
+
+    return(
+      <fieldset>
+        <legend>{this.props.day.name}</legend>
+        <label htmlFor="breakfast">Breakfast: </label>
+        <select id={this.props.day.initial + 'b'}>
+          <option disabled selected>--Choose a meal--</option>
+          <option value="new">New Meal</option>
+          {breakfast}
+        </select>
+        <label htmlFor="lunch"> Lunch: </label>
+        <select id={this.props.day.initial + 'l'}>
+          <option disabled selected>--Choose a meal--</option>
+          <option value="new">New Meal</option>
+          {lunch}
+        </select>
+        <label htmlFor="dinner"> Dinner: </label>
+        <select id={this.props.day.initial + 'd'}>
+          <option disabled selected>--Choose a meal--</option>
+          <option value="new">New Meal</option>
+          {dinner}
+        </select>
+      </fieldset>
+    )
+  }
+}
 
 class Login extends React.Component {
   render() {
@@ -66,16 +201,6 @@ class Login extends React.Component {
   }
 }
 
-class PlanButton extends React.Component {
-  render() {
-    return(
-      <div>
-        <button>Create a meal plan</button>
-      </div>
-    )
-  }
-}
-
 class Info extends React.Component {
   render() {
     return(
@@ -91,20 +216,9 @@ class Info extends React.Component {
 class TopNav extends React.Component {
   render() {
     return(
-      <nav>
+      <nav id="topnav">
         <h1>Plantry</h1>
         <Login />
-      </nav>
-    )
-  }
-}
-
-class HomeNav extends React.Component {
-  render() {
-    return(
-      <nav>
-        <h1>Plantry</h1>
-        <PlanButton />
       </nav>
     )
   }
@@ -126,70 +240,53 @@ class Splash extends React.Component {
   }
 }
 
+class MealRow extends React.Component {
+  render() {
+    const meals = [];
+
+    for (let i = 0; i < this.props.plan.length; i++) {
+      meals.push(
+        <Col>{this.props.plan[i]}</Col>
+      );
+    }
+
+    return(
+        <Row align="center" style={{ height: '75px' }}>
+          {meals}
+        </Row>
+    )
+  }
+}
+
+class CalendarRow extends React.Component {
+  render() {
+    return (
+      <Row align="center" style={{ height: '50px' }}>
+        <Col>Meals</Col>
+        <Col>Sunday</Col>
+        <Col>Monday</Col>
+        <Col>Tuesday</Col>
+        <Col>Wednesday</Col>
+        <Col>Thursday</Col>
+        <Col>Friday</Col>
+        <Col>Saturday</Col>
+      </Row>
+    )
+  }
+}
+
 class Calendar extends React.Component {
   render() {
     return(
       <div>
         <h2>Meal Plan</h2>
         <Container className="container">
-          <Row align="center" style={{ height: '50px' }}>
-            <Col>Meals</Col>
-            <Col>Sunday</Col>
-            <Col>Monday</Col>
-            <Col>Tuesday</Col>
-            <Col>Wednesday</Col>
-            <Col>Thursday</Col>
-            <Col>Friday</Col>
-            <Col>Saturday</Col>
-          </Row>
-          <Row align="center" style={{ height: '75px' }}>
-            <Col>Breakfast</Col>
-            <Col>Eggs and Toast</Col>
-            <Col>Eggs and Toast</Col>
-            <Col>Eggs and Toast</Col>
-            <Col>Eggs and Toast</Col>
-            <Col>Eggs and Toast</Col>
-            <Col>Eggs and Toast</Col>
-            <Col>Eggs and Toast</Col>
-          </Row>
-          <Row align="center" style={{ height: '75px' }}>
-            <Col>Lunch</Col>
-            <Col>Peanut butter sandwich</Col>
-            <Col>Salad</Col>
-            <Col>Turkey sandwich</Col>
-            <Col>Salad</Col>
-            <Col>Peanut butter sandwich</Col>
-            <Col>Salad</Col>
-            <Col>Turkey Sandwich</Col>
-          </Row>
-          <Row align="center" style={{ height: '75px' }}>
-            <Col>Dinner</Col>
-            <Col>Stir Fry</Col>
-            <Col>Stir Fry</Col>
-            <Col>El Barrio</Col>
-            <Col>Tacos</Col>
-            <Col>Tacos</Col>
-            <Col>Spaghetti</Col>
-            <Col>Spaghetti</Col>
-          </Row>
+          <CalendarRow />
+          <MealRow plan={PLAN.breakfast} />
+          <MealRow plan={PLAN.lunch} />
+          <MealRow plan={PLAN.dinner}/>
         </Container>
         <button>Edit</button>
-      </div>
-    )
-  }
-}
-
-class ShoppingList extends React.Component {
-  render() {
-    return(
-      <div>
-        <h3>Shopping List</h3>
-        <input type="checkbox" name="item1" value="item1" />Item 1
-        <input type="checkbox" name="item2" value="item2" />Item 2
-        <input type="checkbox" name="item3" value="item3" />Item 3
-        <input type="checkbox" name="item4" value="item4" />Item 4
-        <input type="checkbox" name="item5" value="item5" />Item 5
-        <input type="checkbox" name="item6" value="item6" />Item 6
       </div>
     )
   }
@@ -208,21 +305,31 @@ class Footer extends React.Component {
 class App extends React.Component {
   render() {
     return(
-      <Router>
-        <div className="app">
-          <header>
-            <Route exact path="/" component={TopNav} />
-            <Route exact path="/home" component={HomeNav} />
-          </header>
-          <main>
-            <Route exact path="/" component={Info} />
-            <Route exact path="/home" component={Splash} />
-          </main>
-          <footer>
-            <Footer />
-          </footer>
-        </div>
-      </Router>
+      <div>  
+        <Router>
+          <div className="app">
+            <header>
+              <TopNav />
+            </header>
+              <Menu left>
+                <a id="newplan" href="/newplan">Make a new meal plan!</a>
+                <a id="plans" href="/plans">Plans</a>
+                <a id="meals" href="/meals">Meals</a>
+                <a id="shoppinglist" href="/shoppinglist">Shopping List</a>
+              </Menu>
+            <main>
+              <Route exact path="/" component={Info} />
+              <Route exact path="/home" component={Splash} />
+              <Route exact path="/newplan" component={MealPlan} />
+              <Route exact path="/plans" component={Calendar} />
+              <Route exact path="/shoppinglist" component={ShoppingList} />
+            </main>
+            <footer>
+              <Footer />
+            </footer>
+          </div>
+        </Router>
+      </div> 
     )
   }
 }
