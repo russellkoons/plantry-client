@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import Popup from 'reactjs-popup';
 import { Container, Row, Col } from 'react-grid-system';
 import { slide as Menu } from 'react-burger-menu';
+import $ from 'jquery';
 
 // Things I need to do:
   // Make the calendar not look like crap!
@@ -46,7 +47,16 @@ class MealForm extends React.Component {
   render() {
     return(
       <div>
-        <span>Hello</span>
+        <h2>New Meal</h2>
+        <label htmlFor="name">Name: </label>
+        <input type="text" /><br/>
+        <fieldset>
+          <legend>Ingredients</legend>
+          <input type="text" /><br/>
+          <button>Add Ingredient</button>
+          <button>Remove Ingredient</button>
+        </fieldset>
+        <button onClick={e => e.preventDefault()}>Submit Meal</button>
       </div>
     )
   }
@@ -117,14 +127,19 @@ class MealInput extends React.Component {
 class DayCard extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { open: false }
+    this.state = { 
+      open: false
+    }
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
+  }
 
+  openModal (id) {
+    if ($(`#${id}`).val() === 'new') {
+      this.setState({ open: true })
+    }
   }
-  openModal (){
-    this.setState({ open: true })
-  }
+
   closeModal () {
     this.setState({ open: false })
   }
@@ -149,23 +164,26 @@ class DayCard extends React.Component {
       }
     }
 
+    const initial = this.props.day.initial
+    let initials = [initial + 'b', initial + 'l', initial + 'd']
+
     return(
       <fieldset>
         <legend>{this.props.day.name}</legend>
         <label htmlFor="breakfast">Breakfast: </label>
-        <select id={this.props.day.initial + 'b'} defaultValue="choose" onChange={this.openModal}>
+        <select id={initials[0]} defaultValue="choose" onChange={() => this.openModal(initials[0])}>
           <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {breakfast}
         </select>
         <label htmlFor="lunch"> Lunch: </label>
-        <select id={this.props.day.initial + 'l'} defaultValue="choose" onChange={this.openModal}>
+        <select id={initials[1]} defaultValue="choose" onChange={() => this.openModal(initials[1])}>
           <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {lunch}
         </select>
         <label htmlFor="dinner"> Dinner: </label>
-        <select id={this.props.day.initial + 'd'} defaultValue="choose" onChange={this.openModal}>
+        <select id={initials[2]} defaultValue="choose" onChange={() => this.openModal(initials[2])}>
           <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {dinner}
