@@ -42,6 +42,16 @@ const PLAN = {
   dinner: ['Dinner', 'Stir Fry', 'Spaghetti', 'Stir Fry', 'Spaghetti', 'Stir Fry', 'Spaghetti', 'Stir Fry']
 };
 
+class MealForm extends React.Component {
+  render() {
+    return(
+      <div>
+        <span>Hello</span>
+      </div>
+    )
+  }
+}
+
 class ShoppingList extends React.Component {
   render() {
     const list = [];
@@ -60,7 +70,7 @@ class ShoppingList extends React.Component {
 
     for (let i = 0; i < short.length; i++) {
       formatted.push(
-        <div>
+        <div key={i}>
           <input type="checkbox" /><span>{short[i]}</span>
         </div>
       )
@@ -105,6 +115,20 @@ class MealInput extends React.Component {
 }
 
 class DayCard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { open: false }
+    this.openModal = this.openModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+
+  }
+  openModal (){
+    this.setState({ open: true })
+  }
+  closeModal () {
+    this.setState({ open: false })
+  }
+
   render() {
     const breakfast = [];
     const lunch = [];
@@ -112,15 +136,15 @@ class DayCard extends React.Component {
     for (let i = 0; i < MEALS.length; i++) {
       if (MEALS[i].type === 'breakfast') {
         breakfast.push(
-          <MealInput meal={MEALS[i]} />
+          <MealInput meal={MEALS[i]} key={i} />
         )
       } else if (MEALS[i].type === 'lunch') {
         lunch.push(
-          <MealInput meal={MEALS[i]} />
+          <MealInput meal={MEALS[i]} key={i} />
         )
       } else if (MEALS[i].type === 'dinner') {
         dinner.push(
-          <MealInput meal={MEALS[i]} />
+          <MealInput meal={MEALS[i]} key={i} />
         )
       }
     }
@@ -129,23 +153,35 @@ class DayCard extends React.Component {
       <fieldset>
         <legend>{this.props.day.name}</legend>
         <label htmlFor="breakfast">Breakfast: </label>
-        <select id={this.props.day.initial + 'b'}>
-          <option disabled selected>--Choose a meal--</option>
+        <select id={this.props.day.initial + 'b'} defaultValue="choose" onChange={this.openModal}>
+          <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {breakfast}
         </select>
         <label htmlFor="lunch"> Lunch: </label>
-        <select id={this.props.day.initial + 'l'}>
-          <option disabled selected>--Choose a meal--</option>
+        <select id={this.props.day.initial + 'l'} defaultValue="choose" onChange={this.openModal}>
+          <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {lunch}
         </select>
         <label htmlFor="dinner"> Dinner: </label>
-        <select id={this.props.day.initial + 'd'}>
-          <option disabled selected>--Choose a meal--</option>
+        <select id={this.props.day.initial + 'd'} defaultValue="choose" onChange={this.openModal}>
+          <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {dinner}
         </select>
+        <Popup
+          open={this.state.open}
+          closeOnDocumentClick
+          onClose={this.closeModal}
+        >
+          <div className="modal">
+            <button className="close" onClick={this.closeModal}>
+              &times;
+            </button>
+            <MealForm />
+          </div>
+        </Popup>
       </fieldset>
     )
   }
@@ -246,7 +282,7 @@ class MealRow extends React.Component {
 
     for (let i = 0; i < this.props.plan.length; i++) {
       meals.push(
-        <Col>{this.props.plan[i]}</Col>
+        <Col key={i}>{this.props.plan[i]}</Col>
       );
     }
 
@@ -314,7 +350,6 @@ class App extends React.Component {
               <Menu left>
                 <a id="newplan" href="/newplan">Make a new meal plan!</a>
                 <a id="plans" href="/plans">Plans</a>
-                <a id="meals" href="/meals">Meals</a>
                 <a id="shoppinglist" href="/shoppinglist">Shopping List</a>
               </Menu>
             <main>
