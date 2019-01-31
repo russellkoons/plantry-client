@@ -32,7 +32,7 @@ const DAYS = [
 const MEALS = [
   {name: 'Egg Bagel', ingredients: ['Eggs', 'Everything bagel', 'Cream cheese', 'Green Onion', 'Hot Sauce'], type: 'breakfast', notes: 'Delicious'},
   {name: 'Peanut Butter Sandwich', ingredients: ['Bread', 'Peanut butter', 'Hot honey'], type: 'lunch', notes: 'The standard'},
-  {name: 'Eggs and toast', ingredients: ['Eggs', 'Bread', 'Hot Sauce'], type: 'breakfast', notes: 'A personal fave'},
+  {name: 'Eggs and Toast', ingredients: ['Eggs', 'Bread', 'Hot Sauce'], type: 'breakfast', notes: 'A personal fave'},
   {name: 'Salad', ingredients: ['Greens', 'Tomato', 'Red onion', 'Eggs', 'Dressing'], type: 'lunch', notes: 'Healthy!'},
   {name: 'Spaghetti', ingredients: ['Spaghetti', 'Marinara', 'Parmesan', 'Garlic Bread'], type: 'dinner', notes: 'Too easy'},
   {name: 'Stir Fry', ingredients: ['Chicken', 'Mushrooms', 'Onion', 'Hoisin Sauce', 'Garlic'], type: 'dinner', notes: 'The new hotness'}
@@ -49,7 +49,7 @@ class MealForm extends React.Component {
     return(
       <div>
         <h2>New Meal</h2>
-        <Formik initialValues={{name: '', ingredients: ['']}} render={({values}) => (
+        <Formik initialValues={{name: '', ingredients: [''], notes: ''}} render={({values}) => (
           <Form>
             <label htmlFor="name">Name: </label>
             <Field type="text" id="name" name="name" /><br/>
@@ -83,6 +83,8 @@ class MealForm extends React.Component {
                 </div>
               )} /><br/>
             </fieldset>
+            <label htmlFor="notes">Notes: </label>
+            <Field name="notes" type="textarea" /><br/>
             <button onClick={e => e.preventDefault()}>Submit Meal</button>
           </Form>
         )} />
@@ -370,11 +372,38 @@ class Splash extends React.Component {
 class MealRow extends React.Component {
   render() {
     const meals = [];
-
     for (let i = 0; i < this.props.plan.length; i++) {
-      meals.push(
-        <Col key={i}>{this.props.plan[i]}</Col>
-      );
+      let meal = MEALS.find(e => e.name === this.props.plan[i]);
+      console.log(meal);
+      if (meal === undefined) {
+        meals.push(<Col key={i}>{this.props.plan[i]}</Col>)
+      } else {
+        let ingredients = [];
+        for(let j = 0; j < meal.ingredients.length; j++) {
+          ingredients.push(
+            <li key={j}>{meal.ingredients[j]}</li>
+          )
+        }
+        meals.push(
+          <Col key={i}>
+            <Popup trigger={<span>{meal.name}</span>} modal>
+              {close => (
+                <div className="modal">
+                  <button className="close" onClick={close}>
+                    &times;
+                  </button>
+                  <h3>{meal.name}</h3>
+                  <h4>Ingredients</h4>
+                  <ul>
+                    {ingredients}
+                  </ul>
+                  <p>Notes: {meal.notes}</p>
+                </div>
+              )}
+            </Popup>
+          </Col>
+        );
+      }
     }
 
     return(
@@ -411,7 +440,7 @@ class Calendar extends React.Component {
           <CalendarRow />
           <MealRow plan={PLAN.breakfast} />
           <MealRow plan={PLAN.lunch} />
-          <MealRow plan={PLAN.dinner}/>
+          <MealRow plan={PLAN.dinner} />
         </Container>
         <button>Edit</button>
       </div>
