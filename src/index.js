@@ -7,6 +7,7 @@ import Popup from 'reactjs-popup';
 import { Container, Row, Col } from 'react-grid-system';
 import { slide as Menu } from 'react-burger-menu';
 import $ from 'jquery';
+import {Formik, Field, Form, FieldArray} from 'formik';
 
 // Things I need to do:
   // Make the calendar not look like crap!
@@ -48,15 +49,43 @@ class MealForm extends React.Component {
     return(
       <div>
         <h2>New Meal</h2>
-        <label htmlFor="name">Name: </label>
-        <input type="text" /><br/>
-        <fieldset>
-          <legend>Ingredients</legend>
-          <input type="text" /><br/>
-          <button>Add Ingredient</button>
-          <button>Remove Ingredient</button>
-        </fieldset>
-        <button onClick={e => e.preventDefault()}>Submit Meal</button>
+        <Formik initialValues={{name: '', ingredients: ['']}} render={({values}) => (
+          <Form>
+            <label htmlFor="name">Name: </label>
+            <Field type="text" id="name" name="name" /><br/>
+            <fieldset>
+              <legend>Ingredients</legend>
+              <FieldArray type="text" name="ingredients" render={arrayHelpers => (
+                <div>
+                  {values.ingredients && values.ingredients.length > 0 ? (
+                    values.ingredients.map((ingredient, index) => (
+                      <div key={index}>
+                        <Field name={`ingredient.${index}`} />
+                        <button
+                          type="button"
+                          onClick={() => arrayHelpers.insert(index, '')}
+                        >
+                          +
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => arrayHelpers.remove(index)}
+                        >
+                          -
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <button type="button" onClick={() => arrayHelpers.push('')}>
+                      Add ingredient
+                    </button>
+                  )}
+                </div>
+              )} /><br/>
+            </fieldset>
+            <button onClick={e => e.preventDefault()}>Submit Meal</button>
+          </Form>
+        )} />
       </div>
     )
   }
@@ -100,17 +129,15 @@ class MealPlan extends React.Component {
     return(
       <div>
         <h2>New Meal Plan</h2>
-        <form>
-          <input type="date" name="date" /><br/>
-          <DayCard day={DAYS[0]} />
-          <DayCard day={DAYS[1]} />
-          <DayCard day={DAYS[2]} />
-          <DayCard day={DAYS[3]} />
-          <DayCard day={DAYS[4]} />
-          <DayCard day={DAYS[5]} />
-          <DayCard day={DAYS[6]} />
-          <input type="submit" />
-        </form>
+        <input type="date" name="date" /><br/>
+        <DayCard day={DAYS[0]} />
+        <DayCard day={DAYS[1]} />
+        <DayCard day={DAYS[2]} />
+        <DayCard day={DAYS[3]} />
+        <DayCard day={DAYS[4]} />
+        <DayCard day={DAYS[5]} />
+        <DayCard day={DAYS[6]} />
+        <input type="submit" />
       </div>
     )
   }
@@ -128,20 +155,51 @@ class DayCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
-      open: false
+      open: false,
+      sb: 'choose',
+      sl: 'choose',
+      sd: 'choose',
+      mb: 'choose',
+      ml: 'choose',
+      md: 'choose',
+      tb: 'choose',
+      tl: 'choose',
+      td: 'choose',
+      wb: 'choose',
+      wl: 'choose',
+      wd: 'choose',
+      rb: 'choose',
+      rl: 'choose',
+      rd: 'choose',
+      fb: 'choose',
+      fl: 'choose',
+      fd: 'choose',
+      ab: 'choose',
+      al: 'choose',
+      ad: 'choose'
     }
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
 
   openModal (id) {
-    if ($(`#${id}`).val() === 'new') {
-      this.setState({ open: true })
+    const val = $(`#${id}`).val()
+    if (val === 'new') {
+      this.setState({ 
+        open: true,
+        [id]: val
+      });
+    } else {
+      this.setState({
+        [id]: val
+      });
     }
   }
 
-  closeModal () {
-    this.setState({ open: false })
+  closeModal() {
+    this.setState({ 
+      open: false
+    })
   }
 
   render() {
@@ -171,19 +229,19 @@ class DayCard extends React.Component {
       <fieldset>
         <legend>{this.props.day.name}</legend>
         <label htmlFor="breakfast">Breakfast: </label>
-        <select id={initials[0]} defaultValue="choose" onChange={() => this.openModal(initials[0])}>
+        <select id={initials[0]} defaultValue={this.state[initials[0]]} onChange={() => this.openModal(initials[0])}>
           <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {breakfast}
         </select>
         <label htmlFor="lunch"> Lunch: </label>
-        <select id={initials[1]} defaultValue="choose" onChange={() => this.openModal(initials[1])}>
+        <select id={initials[1]} defaultValue={this.state[initials[1]]} onChange={() => this.openModal(initials[1])}>
           <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {lunch}
         </select>
         <label htmlFor="dinner"> Dinner: </label>
-        <select id={initials[2]} defaultValue="choose" onChange={() => this.openModal(initials[2])}>
+        <select id={initials[2]} defaultValue={this.state[initials[2]]} onChange={() => this.openModal(initials[2])}>
           <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {dinner}
@@ -216,12 +274,12 @@ class Login extends React.Component {
               &times;
             </button>
             <h2>Login</h2>
-            <form id="login">
+            <Formik id="login">
               <label htmlFor="loginusername">Username </label>
               <input type="text" name="loginusername" /><br />
               <label htmlFor="loginpassword">Password </label>
               <input type="text" name="loginpassword" /><br />
-            </form>
+            </Formik>
             <Link to="/home">
               <button onClick={close}>Submit</button>
             </Link>
@@ -235,14 +293,14 @@ class Login extends React.Component {
                 &times;
               </button>
               <h2>Sign Up</h2>
-              <form id="signup">
+              <Formik id="signup">
                 <label htmlFor="signupusername">Username </label>
                 <input type="text" name="signupusername" /><br/>
                 <label htmlFor="signuppassword">Password </label>
                 <input type="text" name="signuppassword" /><br/>
                 <label htmlFor="passconfirm">Confirm your Password </label>
                 <input type="text" name="passconfirm" /><br/>
-              </form>
+              </Formik>
               <Link to="/home">
                 <button onClick={close}>Submit</button>
               </Link>
@@ -270,9 +328,24 @@ class Info extends React.Component {
 class TopNav extends React.Component {
   render() {
     return(
-      <nav id="topnav">
-        <h1>Plantry</h1>
+      <nav className="topnav">
+        <h1>
+          <a href="/">Plantry</a>
+        </h1>
         <Login />
+      </nav>
+    )
+  }
+}
+
+class Nav extends React.Component {
+  render() {
+    return(
+      <nav className="topnav">
+        <h1>
+          <a href="/home">Plantry</a>
+        </h1>
+        <Hamburger />
       </nav>
     )
   }
@@ -282,7 +355,7 @@ class Splash extends React.Component {
   render() {
     return(
       <section>
-        <h2>Welcome to Plantry</h2>
+        <h2>Welcome to Plantry!</h2>
         <p>Here's a quick rundown on how this whole thing works</p>
         <ol>
           <li>Click "Create a meal plan" to plan your meals for the week</li>
@@ -356,6 +429,18 @@ class Footer extends React.Component {
   }
 }
 
+class Hamburger extends React.Component {
+  render() {
+    return(
+      <Menu left>
+        <a id="newplan" href="/newplan">Make a new meal plan!</a>
+        <a id="plans" href="/plans">Plans</a>
+        <a id="shoppinglist" href="/shoppinglist">Shopping List</a>
+      </Menu>
+    )
+  }
+}
+
 class App extends React.Component {
   render() {
     return(
@@ -363,13 +448,9 @@ class App extends React.Component {
         <Router>
           <div className="app">
             <header>
-              <TopNav />
+              <Route exact path="/" component={TopNav} />
+              <Route path="/(home|newplan|plans|shoppinglist)" component={Nav} />
             </header>
-              <Menu left>
-                <a id="newplan" href="/newplan">Make a new meal plan!</a>
-                <a id="plans" href="/plans">Plans</a>
-                <a id="shoppinglist" href="/shoppinglist">Shopping List</a>
-              </Menu>
             <main>
               <Route exact path="/" component={Info} />
               <Route exact path="/home" component={Splash} />

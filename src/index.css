@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-#topnav {
+.topnav {
   position: fixed;
   top: 0;
   left: 0;
@@ -21,6 +21,11 @@ code {
   z-index: 10;
   text-align: center;
   background-color: rgb(173, 177, 180);
+}
+
+.topnav a {
+  color: black;
+  text-decoration: none;
 }
 
 h1, p {
