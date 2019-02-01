@@ -277,14 +277,16 @@ class Login extends React.Component {
             </button>
             <h2>Login</h2>
             <Formik id="login">
-              <label htmlFor="loginusername">Username </label>
-              <input type="text" name="loginusername" /><br />
-              <label htmlFor="loginpassword">Password </label>
-              <input type="text" name="loginpassword" /><br />
+              <Form>
+                <label htmlFor="loginusername">Username </label>
+                <input type="text" name="loginusername" /><br />
+                <label htmlFor="loginpassword">Password </label>
+                <input type="text" name="loginpassword" /><br />
+                <Link to="/home">
+                  <button onClick={close}>Submit</button>
+                </Link>
+              </Form>
             </Formik>
-            <Link to="/home">
-              <button onClick={close}>Submit</button>
-            </Link>
           </div>
         )}
         </Popup>
