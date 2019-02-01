@@ -360,9 +360,12 @@ class Splash extends React.Component {
         <h2>Welcome to Plantry!</h2>
         <p>Here's a quick rundown on how this whole thing works</p>
         <ol>
-          <li>Click "Create a meal plan" to plan your meals for the week</li>
-          <li>Create and save meals with the ingredients needed to make it</li>
-          <li>Once your week is planned, click "Create a shopping list" to get a list of all the ingredients needed for the week!</li>
+          <li>Click "Make a new meal plan!" in the menu</li>
+          <li>Use the dropdown in each section to create new meals that you know and love</li>
+          <li>Fill out your week with the meals you've created and submit your plan</li>
+          <li>Once your meal plan is submitted click "Plans" in the menu to see your most recent meal plan</li>
+          <li>Clicking the names of the meals will pull up all the info about the meal in case you forget</li>
+          <li>When you're ready to go to the store click on "Shopping List" and you'll get a list of all the ingredients needed for your most recent plan!</li>
         </ol>
       </section>
     )
@@ -374,7 +377,6 @@ class MealRow extends React.Component {
     const meals = [];
     for (let i = 0; i < this.props.plan.length; i++) {
       let meal = MEALS.find(e => e.name === this.props.plan[i]);
-      console.log(meal);
       if (meal === undefined) {
         meals.push(<Col key={i}>{this.props.plan[i]}</Col>)
       } else {
