@@ -19,7 +19,7 @@ const initialState = {
   error: null
 };
 
-export const authReducer = state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
   if (action.type === SET_AUTH_TOKEN) {
     return Object.assign({}, state, {
       authToken: action.authToken

@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import {API_BASE_URL} from '../config';
-import {saveToken. clearToken} from '../local-storage';
+import {saveToken, clearToken} from '../local-storage';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
