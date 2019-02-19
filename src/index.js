@@ -1,23 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Popup from 'reactjs-popup';
 import { Container, Row, Col } from 'react-grid-system';
 import { slide as Menu } from 'react-burger-menu';
 import $ from 'jquery';
-import {Formik, Field, Form, FieldArray} from 'formik';
-
-// Things I need to do:
-  // Make the calendar not look like crap!
-  // Figure out how I'm going to make the meal plan forms look and implement the ingredient list stuff
-  // REACT FORMS!!! AHHHHHH Formik: https://jaredpalmer.com/formik/
-  // Make everything look real purty
-  // Put my components into seperate files lol
-  // How will I do weeks? Should I just have the user set the week when they're making their meal plan? Seems like the easiest solution...
-  // Meal cards! Should include a list of ingredients plus any other info included in the notes
-  // Have fun! YOU CAN DO THIS!!! YOU'RE DOING GREAT!!!!!!
+import {Formik, Field, Form, FieldArray, FormikProps, ErrorMessage} from 'formik';
+import * as Yup from 'yup';
 
 const DAYS = [
   {name: 'Sunday', initial: 's'},
@@ -265,7 +256,35 @@ class DayCard extends React.Component {
   }
 }
 
+const LoginSchema = Yup.object().shape({
+  username: Yup.string()
+    .required('Required'),
+  password: Yup.string()
+    .required('Required')
+});
+
+const SignupSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(2, 'Username too short!')
+    .max(16, 'Username too long!')
+    .required('Required'),
+  password: Yup.string()
+    .min(6, 'Password too short!')
+    .max(70, 'Password too long!')
+    .required('Required')
+})
+
 class Login extends React.Component {
+
+  handleSubmit = (values, {
+    props = this.props,
+    setSubmitting
+  }) => {
+    console.log(values);
+    setSubmitting(false);
+    return;
+  }
+
   render() {
     return(
       <div>
@@ -276,17 +295,27 @@ class Login extends React.Component {
               &times;
             </button>
             <h2>Login</h2>
-            <Formik id="login">
-              <Form>
-                <label htmlFor="loginusername">Username </label>
-                <input type="text" name="loginusername" /><br />
-                <label htmlFor="loginpassword">Password </label>
-                <input type="text" name="loginpassword" /><br />
-                <Link to="/home">
-                  <button onClick={close}>Submit</button>
-                </Link>
-              </Form>
-            </Formik>
+            <Formik 
+              initialValues={{
+                username: '',
+                password: ''
+              }}
+              validationSchema={LoginSchema}
+              onSubmit={this.handleSubmit}
+              render={(formProps: FormikProps) => {
+                return(
+                  <Form>
+                    <label htmlFor="loginusername">Username </label>
+                    <Field id="username" name="username" /><br />
+                    <ErrorMessage name="username" /><br />
+                    <label htmlFor="loginpassword">Password </label>
+                    <Field id="password" name="password" /><br />
+                    <ErrorMessage name="password" /><br />
+                    <button type="submit" disabled={formProps.isSubmitting}>Submit</button>
+                  </Form>
+                );
+              }} 
+            />
           </div>
         )}
         </Popup>
@@ -297,17 +326,38 @@ class Login extends React.Component {
                 &times;
               </button>
               <h2>Sign Up</h2>
-              <Formik id="signup">
-                <label htmlFor="signupusername">Username </label>
-                <input type="text" name="signupusername" /><br/>
-                <label htmlFor="signuppassword">Password </label>
-                <input type="text" name="signuppassword" /><br/>
-                <label htmlFor="passconfirm">Confirm your Password </label>
-                <input type="text" name="passconfirm" /><br/>
-              </Formik>
-              <Link to="/home">
-                <button onClick={close}>Submit</button>
-              </Link>
+              <Formik 
+              initialValues={{
+                username: '',
+                password: '',
+                passconfirm: ''
+              }}
+              validationSchema={SignupSchema}
+              validate={(values) => {
+                let errors = {};
+                if (values.password !== values.passconfirm) {
+                  errors.passconfirm = 'Both passwords must match!'
+                }
+                return errors;
+              }}
+              onSubmit={this.handleSubmit}
+              render={(formProps: FormikProps) => {
+                return(
+                  <Form>
+                    <label htmlFor="signupusername">Username </label>
+                    <Field id="usersignup" name="username" /><br />
+                    <ErrorMessage name="username" /><br />
+                    <label htmlFor="signuppassword">Password </label>
+                    <Field id="signuppassword" name="password" /><br />
+                    <ErrorMessage name="password" /><br />
+                    <label htmlFor="passconfirm">Confirm password </label>
+                    <Field id="passconfirm" name="passconfirm" /> <br />
+                    <ErrorMessage name="passconfirm" /><br />
+                    <button type="submit" disabled={formProps.isSubmitting}>Submit</button>
+                  </Form>
+                );
+              }} 
+            />
               <button>Login as Guest</button>
             </div>
           )}
@@ -452,16 +502,6 @@ class Calendar extends React.Component {
   }
 }
 
-class Footer extends React.Component {
-  render() {
-    return(
-      <div>
-        <p>Created and coded by Russell Koons 2019</p>
-      </div>
-    )
-  }
-}
-
 class Hamburger extends React.Component {
   render() {
     return(
@@ -492,7 +532,7 @@ class App extends React.Component {
               <Route exact path="/shoppinglist" component={ShoppingList} />
             </main>
             <footer>
-              <Footer />
+              <p>Created and coded by Russell Koons 2019</p>
             </footer>
           </div>
         </Router>
