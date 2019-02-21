@@ -1,8 +1,7 @@
-import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
-export const registerRequest = () ({
+export const registerRequest = () => ({
   type: REGISTER_REQUEST
 });
 
@@ -35,11 +34,9 @@ export const registerUser = user => dispatch => {
     const {reason, message, location} = err;
     dispatch(registerError(message));
     if (reason === 'ValidationError') {
-      return Promise.reject(
-        new SubmissionError({
+      return Promise.reject({
           [location]: message
-        })
-      );
+        });
     }
   });
 };

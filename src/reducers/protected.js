@@ -34,7 +34,8 @@ export const plantryReducer = (state = initialState, action) => {
         name: action.name,
         url: action.url,
         notes: action.notes,
-        ingredients: action.ingredients
+        ingredients: action.ingredients,
+        times: action.times
       }: meal)
     });
   } else if (action.type === actions.UPDATE_MEAL_ERROR) {

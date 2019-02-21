@@ -58,13 +58,14 @@ export const addMeal = (meal) => (dispatch, getState) => {
 };
 
 export const UPDATE_MEAL_SUCCESS = 'UPDATE_MEAL_SUCCESS';
-export const updateMealSuccess = (id, name, url, notes, ingredients) => ({
+export const updateMealSuccess = (id, name, url, notes, ingredients, times) => ({
   type: UPDATE_MEAL_SUCCESS,
   id,
   name,
   url,
   notes,
-  ingredients
+  ingredients,
+  times
 });
 
 export const UPDATE_MEAL_ERROR = 'UPDATE_MEAL_ERROR';
@@ -126,7 +127,7 @@ export const fetchPlans = () => (dispatch, getState) => {
 export const ADD_PLAN_SUCCESS = 'ADD_PLAN_SUCCESS';
 export const addPlanSuccess = plan => ({
   type: ADD_PLAN_SUCCESS,
-  PLAN
+  plan
 });
 
 export const ADD_PLAN_ERROR = 'ADD_PLAN_ERROR';
@@ -191,7 +192,7 @@ export const updatePlan = (id, date, mealplans) => (dispatch, getState) => {
 
 export const DELETE_PLAN_SUCCESS = 'DELETE_PLAN_SUCCESS';
 export const deletePlanSuccess = id => ({
-  type: DELETE_PLAN_SUCCESS
+  type: DELETE_PLAN_SUCCESS,
   id
 });
 

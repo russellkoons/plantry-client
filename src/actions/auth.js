@@ -8,7 +8,7 @@ export const setAuthToken = authToken => ({
   authToken
 });
 
-export CLEAR_AUTH = 'CLEAR_AUTH';
+export const CLEAR_AUTH = 'CLEAR_AUTH';
 export const clearAuth = () => ({
   type: CLEAR_AUTH
 });
@@ -38,6 +38,7 @@ const storeAuthInfo = (authToken, dispatch) => {
 };
 
 export const login = (username, password) => dispatch => {
+  console.log('Logging in...')
   dispatch(authRequest());
   return(
     fetch(`${API_BASE_URL}/auth/login`, {
@@ -50,20 +51,24 @@ export const login = (username, password) => dispatch => {
         password
       })
     })
-    .then(res => res.json())
-    .then(({authToken}) => {
-      storeAuthInfo(authToken, dispatch);
+    .then(res => {
+      console.log('Login successful!');
+      return res.json();
+    })
+    .then(resJson => {
+      console.log(resJson);
+      storeAuthInfo(resJson.authToken, dispatch);
     })
     .catch(e => {
       const {code} = e;
       const message = 
-        code === 401 ? 'Incorrect username or password' : 'Unable to login, please trya again';
-      dispatch(authError(e));
-    });
+        code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
+      dispatch(authError(message));
+    })
   );
 };
 
-export const refeshAuthToken = () => (dispatch, getState) => {
+export const refreshAuthToken = () => (dispatch, getState) => {
   dispatch(authRequest());
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/auth/refresh`, {
