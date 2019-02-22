@@ -1,22 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import Popup from 'reactjs-popup';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {LoginSchema, SignupSchema} from '../schemas';
 import {login} from '../actions/auth';
+import {registerUser} from '../actions/users'
 
-export class Login extends React.Component {
-  login(username, password) {
-    this.props.dispatch(login(username, password));
-  };
-
+class Login extends React.Component {
   handleLogin = (values, {
-    props,
     setSubmitting
   }) => {
-    console.log(values);
-    this.login(values.username, values.password)
+    this.props.dispatch(login(values.username, values.password))
+    setSubmitting(false);
+    return;
+  }
+
+  handleRegister = (values, {
+    setSubmitting
+  }) => {
+    console.log(values)
+    this.props.dispatch(registerUser(values.username, values.password))
+    setSubmitting(false);
+    return;
+  }
+
+  guestLogin = () => {
+    this.props.dispatch(login('guest', 'abc123'));
     return;
   }
 
@@ -76,25 +85,25 @@ export class Login extends React.Component {
                 }
                 return errors;
               }}
-              onSubmit={this.andleSubmit}
-              render={(isSubmitting) => {
+              onSubmit={this.handleRegister}
+              render={({isSubmitting}) => {
                 return(
                   <Form>
                     <label htmlFor="signupusername">Username </label>
                     <Field id="usersignup" name="username" /><br />
                     <ErrorMessage name="username" /><br />
                     <label htmlFor="signuppassword">Password </label>
-                    <Field id="signuppassword" name="password" /><br />
+                    <Field id="signuppassword" name="password" type="password" /><br />
                     <ErrorMessage name="password" /><br />
                     <label htmlFor="passconfirm">Confirm password </label>
-                    <Field id="passconfirm" name="passconfirm" /> <br />
+                    <Field id="passconfirm" name="passconfirm" type="password" /> <br />
                     <ErrorMessage name="passconfirm" /><br />
                     <button type="submit" disabled={isSubmitting}>Submit</button>
                   </Form>
                 );
               }} 
             />
-              <button>Login as Guest</button>
+              <button onClick={this.guestLogin}>Login as Guest</button>
             </div>
           )}
         </Popup>

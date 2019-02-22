@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 import Popup from 'reactjs-popup';
 import {MealForm} from './mealform';
-import {MealInput} from './mealinput';
+// import {MealInput} from './mealinput';
 import $ from 'jquery';
 
 export class DayCard extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Col, Row } from 'react-grid-system';
+import { Container } from 'react-grid-system';
 import {CalendarRow} from './calendarrow';
 import {MealRow} from './mealrow';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Row} from 'react-grid-system';
+import { Row } from 'react-grid-system';
 
 export class MealRow extends React.Component {
   render() {

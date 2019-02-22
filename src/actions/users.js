@@ -16,14 +16,17 @@ export const registerError = (error) => ({
   error: error
 });
 
-export const registerUser = user => dispatch => {
+export const registerUser = (username, password) => dispatch => {
   dispatch(registerRequest());
   return fetch(`${API_BASE_URL}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify({
+      username,
+      password
+    })
   })
   .then(res => {
     dispatch(registerSuccess());
