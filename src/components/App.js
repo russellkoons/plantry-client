@@ -9,8 +9,9 @@ import {MealPlan} from './mealplan';
 import {Calendar} from './calendar';
 import {ShoppingList} from './shoppinglist';
 
-export class App extends React.Component {
+class App extends React.Component {
   render() {
+
     return(
       <div>  
         <Router>

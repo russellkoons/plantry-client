@@ -1,7 +1,7 @@
 import React from 'react';
 // import {connect} from 'react-redux';
-import Popup from 'reactjs-popup';
-import {MealForm} from './mealform';
+// import Popup from 'reactjs-popup';
+// import {MealForm} from './mealform';
 // import {MealInput} from './mealinput';
 import $ from 'jquery';
 
@@ -9,7 +9,6 @@ export class DayCard extends React.Component {
   constructor(props) {
     super(props)
     this.openModal = this.openModal.bind(this)
-    this.closeModal = this.closeModal.bind(this)
   }
 
   openModal (id) {
@@ -19,12 +18,6 @@ export class DayCard extends React.Component {
         open: true
       });
     }
-  }
-
-  closeModal() {
-    this.setState({ 
-      open: false
-    })
   }
 
   render() {
@@ -56,7 +49,7 @@ export class DayCard extends React.Component {
           <option value="new">New Meal</option>
           {dinner}
         </select>
-        <Popup
+        {/* <Popup
           open={this.state.open}
           closeOnDocumentClick
           onClose={this.closeModal}
@@ -67,7 +60,7 @@ export class DayCard extends React.Component {
             </button>
             <MealForm />
           </div>
-        </Popup>
+        </Popup> */}
       </fieldset>
     )
   }

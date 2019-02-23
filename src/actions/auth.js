@@ -38,7 +38,6 @@ const storeAuthInfo = (authToken, dispatch) => {
 };
 
 export const login = (username, password) => dispatch => {
-  console.log('Logging in...')
   dispatch(authRequest());
   return(
     fetch(`${API_BASE_URL}/auth/login`, {
@@ -52,11 +51,9 @@ export const login = (username, password) => dispatch => {
       })
     })
     .then(res => {
-      console.log('Login successful!');
       return res.json();
     })
     .then(resJson => {
-      console.log(resJson);
       storeAuthInfo(resJson.authToken, dispatch);
     })
     .catch(e => {
