@@ -8,7 +8,7 @@ import {TopNav} from './topnav';
 import Nav from './nav';
 import {Info} from './info';
 import {Splash} from './splash';
-import {MealPlan} from './mealplan';
+import MealPlan from './mealplan';
 import {Calendar} from './calendar';
 import {ShoppingList} from './shoppinglist';
 

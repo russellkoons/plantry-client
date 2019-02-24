@@ -17,3 +17,27 @@ export const SignupSchema = Yup.object().shape({
     .max(70, 'Password too long!')
     .required('Required')
 });
+
+export const MealSchema = Yup.object().shape({
+  name: Yup.string().required('Required'),
+  ingredients: Yup.array().of(Yup.string().required('Required')),
+  times: Yup.object().shape({
+    Breakfast: Yup.boolean(),
+    Lunch: Yup.boolean(),
+    Dinner: Yup.boolean()
+  }).test(
+    'timesTest',
+    null,
+    (obj) => {
+      if ( obj.Breakfast || obj.Lunch || obj.Dinner ) {
+        return true; // everything is fine
+      }
+
+      return new Yup.ValidationError(
+        'Please check at least one meal time',
+        null,
+        'times'
+      );
+    }
+  )
+});

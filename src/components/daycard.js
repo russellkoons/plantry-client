@@ -1,9 +1,8 @@
 import React from 'react';
-// import {connect} from 'react-redux';
-// import Popup from 'reactjs-popup';
-// import {MealForm} from './mealform';
-// import {MealInput} from './mealinput';
+import {connect} from 'react-redux';
+import {MealInput} from './mealinput';
 import $ from 'jquery';
+import {openSesame} from '../actions/protected';
 
 export class DayCard extends React.Component {
   constructor(props) {
@@ -14,9 +13,7 @@ export class DayCard extends React.Component {
   openModal (id) {
     const val = $(`#${id}`).val()
     if (val === 'new') {
-      this.setState({ 
-        open: true
-      });
+      this.props.dispatch(openSesame());
     }
   }
 
@@ -25,43 +22,58 @@ export class DayCard extends React.Component {
     const lunch = [];
     const dinner = [];
 
+    const meals = this.props.meals;
+
+    for (let i = 0; i < meals.length; i++) {
+      const times = meals[i].times;
+      for (let j = 0; j < times.length; j++) {
+        if (times[j].time === 'Breakfast') {
+          breakfast.push(
+            <MealInput meal={meals[i]} key={'breakfast' + i} />
+          )
+        } else if (times[j].time === 'Lunch') {
+          lunch.push(
+            <MealInput meal={meals[i]} key={'lunch' + i} />
+          )
+        } else if (times[j].time === 'Dinner') {
+          dinner.push(
+            <MealInput meal={meals[i]} key={'dinner' + i} />
+          )
+        }
+      }
+    }
+
     const day = this.props.day
-    let meals = [day + 'b', day + 'l', day + 'd']
+    let ids = [day + 'breakfast', day + 'lunch', day + 'dinner']
 
     return(
       <fieldset>
-        <legend>{this.props.day.name}</legend>
+        <legend>{day}</legend>
         <label htmlFor="breakfast">Breakfast: </label>
-        <select id={meals[0]} defaultValue="choose" onChange={() => this.openModal(meals[0])}>
+        <select id={ids[0]} defaultValue="choose" onChange={() => this.openModal(ids[0])}>
           <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {breakfast}
         </select>
         <label htmlFor="lunch"> Lunch: </label>
-        <select id={meals[1]} defaultValue="choose" onChange={() => this.openModal(meals[1])}>
+        <select id={ids[1]} defaultValue="choose" onChange={() => this.openModal(ids[1])}>
           <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {lunch}
         </select>
         <label htmlFor="dinner"> Dinner: </label>
-        <select id={meals[2]} defaultValue="choose" onChange={() => this.openModal(meals[2])}>
+        <select id={ids[2]} defaultValue="choose" onChange={() => this.openModal(ids[2])}>
           <option disabled value="choose">--Choose a meal--</option>
           <option value="new">New Meal</option>
           {dinner}
         </select>
-        {/* <Popup
-          open={this.state.open}
-          closeOnDocumentClick
-          onClose={this.closeModal}
-        >
-          <div className="modal">
-            <button className="close" onClick={this.closeModal}>
-              &times;
-            </button>
-            <MealForm />
-          </div>
-        </Popup> */}
       </fieldset>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  meals: state.plantry.meals
+});
+
+export default connect(mapStateToProps)(DayCard);

@@ -47,15 +47,16 @@ export const addMeal = (meal) => (dispatch, getState) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`
       },
-      body: JSON.stringify({
-        meal
-      })
+      body: JSON.stringify(meal)
     })
     .then(res => res.json())
     .then(res => {
       return dispatch(addMealSuccess(res));
     })
-    .catch(err => dispatch(addMealError(err)));
+    .catch(err => {
+      console.log(err);
+      dispatch(addMealError(err))
+    });
 };
 
 export const UPDATE_MEAL_SUCCESS = 'UPDATE_MEAL_SUCCESS';
@@ -75,7 +76,7 @@ export const updateMealError = err => ({
   err
 });
 
-export const updateMeal = (id, name, url, notes, ingredients) => (dispatch, getState) => {
+export const updateMeal = (id, name, url, notes, ingredients, times) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/meals/${id}`, {
       method: 'PUT',
@@ -88,7 +89,8 @@ export const updateMeal = (id, name, url, notes, ingredients) => (dispatch, getS
         name,
         url,
         notes,
-        ingredients
+        ingredients,
+        times
       })
     })
     .then(res => res.json())
@@ -215,3 +217,12 @@ export const deletePlan = id => (dispatch, getState) => {
     .catch(err => dispatch(deletePlanError(err)));
 };
 
+export const OPEN_SESAME = 'OPEN_SESAME';
+export const openSesame = () => ({
+  type: OPEN_SESAME
+});
+
+export const CLOSE_SESAME = 'CLOSE_SESAME';
+export const closeSesame = () => ({
+  type: CLOSE_SESAME
+});

@@ -1,16 +1,11 @@
 import React from 'react';
-// import {connect} from 'react-redux';
-import {DayCard} from './daycard';
+import DayCard from './daycard';
 import Popup from 'reactjs-popup';
-import MealForm from './mealform'
+import {connect} from 'react-redux';
+import MealForm from './mealform';
+import { closeSesame } from '../actions/protected';
 
-export class MealPlan extends React.Component {
-  closeModal() {
-    this.setState({ 
-      open: false
-    })
-  }
-  
+class MealPlan extends React.Component {
   render() {
     return(
       <div>
@@ -25,12 +20,12 @@ export class MealPlan extends React.Component {
         <DayCard day="Saturday" />
         <input type="submit" />
         <Popup
-          open={this.state.open}
+          open={this.props.open}
+          close={!this.props.open}
           closeOnDocumentClick
-          onClose={this.closeModal}
         >
           <div className="modal">
-            <button className="close" onClick={this.closeModal}>
+            <button className="close" onClick={this.props.closeSesame}>
               &times;
             </button>
             <MealForm />
@@ -40,3 +35,9 @@ export class MealPlan extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  open: state.plantry.open
+});
+
+export default connect(mapStateToProps, { closeSesame })(MealPlan);
