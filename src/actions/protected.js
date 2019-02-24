@@ -23,6 +23,7 @@ export const fetchMeals = () => (dispatch, getState) => {
     .then(res => res.json())
     .then(res => dispatch(fetchMealsSuccess(res)))
     .catch(err => {
+      dispatch(fetchMealsError(err))
     });
 };
 
@@ -213,3 +214,4 @@ export const deletePlan = id => (dispatch, getState) => {
     .then(() => dispatch(deletePlanSuccess(id)))
     .catch(err => dispatch(deletePlanError(err)));
 };
+

@@ -1,4 +1,5 @@
 import * as actions from '../actions/protected';
+import {CLEAR_AUTH} from '../actions/auth';
 
 const initialState = {
   meals: [],
@@ -82,6 +83,11 @@ export const plantryReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       error: action.error
     });
+  } else if (action.type === CLEAR_AUTH) {
+    return Object.assign({}, state, {
+      meals: [],
+      plans: []
+    })
   }
   return state;
 }

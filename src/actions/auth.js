@@ -1,6 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import {API_BASE_URL} from '../config';
 import {saveToken, clearToken} from '../local-storage';
+import {fetchMeals, fetchPlans} from './protected';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
@@ -19,9 +20,9 @@ export const authRequest = () => ({
 });
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const authSuccess = currentUser => ({
+export const authSuccess = user => ({
   type: AUTH_SUCCESS,
-  currentUser
+  user
 });
 
 export const AUTH_ERROR = 'AUTH_ERROR';
@@ -32,8 +33,10 @@ export const authError = error => ({
 
 const storeAuthInfo = (authToken, dispatch) => {
   const decoded = jwtDecode(authToken);
+  dispatch(authSuccess(decoded.user.username));
   dispatch(setAuthToken(authToken));
-  dispatch(authSuccess(decoded.username));
+  dispatch(fetchMeals());
+  dispatch(fetchPlans());
   saveToken(authToken);
 };
 
@@ -54,7 +57,7 @@ export const login = (username, password) => dispatch => {
       return res.json();
     })
     .then(resJson => {
-      storeAuthInfo(resJson.authToken, dispatch);
+      return storeAuthInfo(resJson.authToken, dispatch);
     })
     .catch(e => {
       const {code} = e;
@@ -64,6 +67,11 @@ export const login = (username, password) => dispatch => {
     })
   );
 };
+
+export const logout = (authToken) => dispatch => {
+  dispatch(clearAuth());
+  clearToken(authToken);
+}
 
 export const refreshAuthToken = () => (dispatch, getState) => {
   dispatch(authRequest());

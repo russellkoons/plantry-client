@@ -2,30 +2,32 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Popup from 'reactjs-popup';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
+import {push} from 'connected-react-router';
 import {LoginSchema, SignupSchema} from '../schemas';
 import {login} from '../actions/auth';
-import {registerUser} from '../actions/users'
+import {registerUser} from '../actions/users';
+import {fetchMeals, fetchPlans} from '../actions/protected';
 
 class Login extends React.Component {
   handleLogin = (values, {
     setSubmitting
   }) => {
-    this.props.dispatch(login(values.username, values.password))
-    setSubmitting(false);
+    this.props.login(values.username, values.password)
+      .then(() => setSubmitting(false));
     return;
   }
 
   handleRegister = (values, {
     setSubmitting
   }) => {
-    console.log(values)
-    this.props.dispatch(registerUser(values.username, values.password))
+    this.props.registerUser(values.username, values.password);
+    this.props.login(values.username, values.password);
     setSubmitting(false);
     return;
   }
 
   guestLogin = () => {
-    this.props.dispatch(login('guest', 'abc123'));
+    this.props.login('guest', 'abc123');
     return;
   }
 
@@ -112,4 +114,4 @@ class Login extends React.Component {
   }
 }
 
-export default connect()(Login)
+export default connect(null, { push, login, registerUser, fetchMeals, fetchPlans })(Login)

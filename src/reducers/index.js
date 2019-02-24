@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
+import {connectRouter} from 'connected-react-router';
 import {plantryReducer} from './protected';
 import {authReducer} from './auth';
 
-const rootReducer = combineReducers({
+export default (history) => combineReducers({
     plantry: plantryReducer,
-    auth: authReducer
+    auth: authReducer,
+    router: connectRouter(history)
 });
-
-export default rootReducer;
