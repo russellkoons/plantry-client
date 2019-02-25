@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Switch, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import {ConnectedRouter} from 'connected-react-router';
 import {connect} from 'react-redux';
 import './App.css';

@@ -147,9 +147,7 @@ export const addPlan = (plan) => (dispatch, getState) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`
       },
-      body: JSON.stringify({
-        plan
-      })
+      body: JSON.stringify(plan)
     })
     .then(res => res.json())
     .then(res => {
