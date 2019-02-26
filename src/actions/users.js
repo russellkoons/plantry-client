@@ -30,8 +30,7 @@ export const registerUser = (username, password) => dispatch => {
   })
   .then(res => {
     dispatch(registerSuccess());
-    console.log(res);
-    return res.json;
+    return res.json();
   })
   .catch(err => {
     const {reason, message, location} = err;

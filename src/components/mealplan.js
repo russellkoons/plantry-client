@@ -4,6 +4,7 @@ import Popup from 'reactjs-popup';
 import moment from 'moment';
 import {Formik, Form} from 'formik';
 import {connect} from 'react-redux';
+import {push} from 'connected-react-router';
 import MealForm from './mealform';
 import { closeSesame, addPlan } from '../actions/protected';
 
@@ -11,7 +12,6 @@ class MealPlan extends React.Component {
   handleSubmit = (values, {
     setSubmitting
   }) => {
-    console.log(values);
     const plan = {
       date: moment().format('MMMM Do YYYY'),
       mealplans: [
@@ -102,9 +102,9 @@ class MealPlan extends React.Component {
         }
       ]
     };
-    console.log(plan);
     this.props.addPlan(plan)
-      .then(() => setSubmitting(false));
+      .then(() => setSubmitting(false))
+      .then(() => this.props.history.push('/plans'));
     return;
   }
 
@@ -150,4 +150,4 @@ const mapStateToProps = state => ({
   open: state.plantry.open
 });
 
-export default connect(mapStateToProps, { closeSesame, addPlan })(MealPlan);
+export default connect(mapStateToProps, { closeSesame, addPlan, push })(MealPlan);

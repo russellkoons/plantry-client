@@ -20,9 +20,11 @@ class Login extends React.Component {
   handleRegister = (values, {
     setSubmitting
   }) => {
-    this.props.registerUser(values.username, values.password);
-    this.props.login(values.username, values.password);
-    setSubmitting(false);
+    this.props.registerUser(values.username, values.password)
+      .then(() => {
+        this.props.login(values.username, values.password);
+        setSubmitting(false);
+      });
     return;
   }
 
