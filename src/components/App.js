@@ -10,7 +10,7 @@ import {Info} from './info';
 import {Splash} from './splash';
 import MealPlan from './mealplan';
 import PlanSelect from './planselect';
-import {ShoppingList} from './shoppinglist';
+import ListSelect from './listselect';
 
 class App extends React.Component {
   render() {
@@ -42,7 +42,7 @@ class App extends React.Component {
                 <Route exact path="/" component={Splash} />
                 <Route exact path="/newplan" component={MealPlan} />
                 <Route exact path="/plans" component={PlanSelect} />
-                <Route exact path="/shoppinglist" component={ShoppingList} />
+                <Route exact path="/shoppinglist" component={ListSelect} />
               </main>
               <footer>
                 <p>Created and coded by Russell Koons 2019</p>
