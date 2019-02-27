@@ -1,18 +1,17 @@
 import React from 'react';
 import { Container } from 'react-grid-system';
 import {CalendarRow} from './calendarrow';
-import {MealRow} from './mealrow';
+import MealRow from './mealrow';
 
-export class Calendar extends React.Component {
+export default class Calendar extends React.Component {
   render() {
     return(
       <div>
-        <h2>Meal Plan</h2>
         <Container className="container">
           <CalendarRow />
-          <MealRow />
-          <MealRow />
-          <MealRow />
+          <MealRow time="Breakfast" plan={this.props.plan} />
+          <MealRow time="Lunch" plan={this.props.plan} />
+          <MealRow time="Dinner" plan={this.props.plan} />
         </Container>
         <button>Edit</button>
       </div>

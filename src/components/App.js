@@ -9,7 +9,7 @@ import Nav from './nav';
 import {Info} from './info';
 import {Splash} from './splash';
 import MealPlan from './mealplan';
-import {Calendar} from './calendar';
+import PlanSelect from './planselect';
 import {ShoppingList} from './shoppinglist';
 
 class App extends React.Component {
@@ -41,7 +41,7 @@ class App extends React.Component {
               <main>
                 <Route exact path="/" component={Splash} />
                 <Route exact path="/newplan" component={MealPlan} />
-                <Route exact path="/plans" component={Calendar} />
+                <Route exact path="/plans" component={PlanSelect} />
                 <Route exact path="/shoppinglist" component={ShoppingList} />
               </main>
               <footer>
