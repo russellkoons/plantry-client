@@ -16,7 +16,7 @@ class PlanSelect extends React.Component {
     const val = e.value;
     const plan = this.props.plans[val];
     calendar.push(
-      <Calendar plan={plan} />
+      <Calendar key="0" plan={plan} />
     )
     this.setState({
       cal: calendar
