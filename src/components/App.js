@@ -2,7 +2,7 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import {ConnectedRouter} from 'connected-react-router';
 import {connect} from 'react-redux';
-import './App.css';
+import './app.css';
 import {history} from '../store';
 import {TopNav} from './topnav';
 import Nav from './nav';
