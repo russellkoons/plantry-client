@@ -14,7 +14,7 @@ export const fetchMealsError = error => ({
 
 export const fetchMeals = () => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/meals`, {
+  return fetch(`${API_BASE_URL}meals`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${authToken}`
@@ -41,7 +41,7 @@ export const addMealError = err => ({
 
 export const addMeal = (meal) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/meals`, {
+  return fetch(`${API_BASE_URL}meals`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export const updateMealError = err => ({
 export const updateMeal = (id, meal) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   console.log(meal);
-  return fetch(`${API_BASE_URL}/meals/${id}`, {
+  return fetch(`${API_BASE_URL}meals/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ export const fetchPlansError = error => ({
 
 export const fetchPlans = () => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/plans`, {
+  return fetch(`${API_BASE_URL}plans`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${authToken}`
@@ -130,7 +130,7 @@ export const addPlanError = error => ({
 
 export const addPlan = (plan) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/plans`, {
+  return fetch(`${API_BASE_URL}plans`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ export const updatePlanError = error => ({
 
 export const updatePlan = (id, plan) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/plans/${id}`, {
+  return fetch(`${API_BASE_URL}plans/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -187,7 +187,7 @@ export const deletePlanError = error => ({
 
 export const deletePlan = id => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/plans/${id}`, {
+  return fetch(`${API_BASE_URL}plans/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${authToken}`

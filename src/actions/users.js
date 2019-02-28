@@ -18,7 +18,7 @@ export const registerError = (error) => ({
 
 export const registerUser = (username, password) => dispatch => {
   dispatch(registerRequest());
-  return fetch(`${API_BASE_URL}/users`, {
+  return fetch(`${API_BASE_URL}users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
