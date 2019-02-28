@@ -113,6 +113,29 @@ class MealPlan extends React.Component {
       <div>
         <h2>New Meal Plan</h2>
         <Formik 
+          initialValues={{
+            SundayBreakfast: 'choose',
+            SundayLunch: 'choose',
+            SundayDinner: 'choose',
+            MondayBreakfast: 'choose',
+            MondayLunch: 'choose',
+            MondayDinner: 'choose',
+            TuesdayBreakfast: 'choose',
+            TuesdayLunch: 'choose',
+            TuesdayDinner: 'choose',
+            WednesdayBreakfast: 'choose',
+            WednesdayLunch: 'choose',
+            WednesdayDinner: 'choose',
+            ThursdayBreakfast: 'choose',
+            ThursdayLunch: 'choose',
+            ThursdayDinner: 'choose',
+            FridayBreakfast: 'choose',
+            FridayLunch: 'choose',
+            FridayDinner: 'choose',
+            SaturdayBreakfast: 'choose',
+            SaturdayLunch: 'choose',
+            SaturdayDinner: 'choose'
+          }}
           onSubmit={this.handleSubmit}
           render={({
             isSubmitting

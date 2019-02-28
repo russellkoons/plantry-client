@@ -55,19 +55,19 @@ export class DayCard extends React.Component {
       <fieldset>
         <legend>{day}</legend>
         <label htmlFor="breakfast">Breakfast: </label>
-        <Field component="select" name={ids[0]} id={ids[0]} value={values[ids[0]]} defaultValue="choose" onChange={() => this.openModal(ids[0])}>
+        <Field component="select" name={ids[0]} id={ids[0]} value={values[ids[0]]} onChange={() => this.openModal(ids[0])}>
           <option disabled value="choose">--Choose a meal--</option>
           {breakfast}
           <option value="new">New Meal</option>
         </Field>
         <label htmlFor="lunch"> Lunch: </label>
-        <Field component="select" name={ids[1]} id={ids[1]} value={values[ids[1]]} defaultValue="choose" onChange={() => this.openModal(ids[1])}>
+        <Field component="select" name={ids[1]} id={ids[1]} value={values[ids[1]]} onChange={() => this.openModal(ids[1])}>
           <option disabled value="choose">--Choose a meal--</option>
           {lunch}
           <option value="new">New Meal</option>
         </Field>
         <label htmlFor="dinner"> Dinner: </label>
-        <Field component="select" name={ids[2]} id={ids[2]} value={values[ids[2]]} defaultValue="choose" onChange={() => this.openModal(ids[2])}>
+        <Field component="select" name={ids[2]} id={ids[2]} value={values[ids[2]]} onChange={() => this.openModal(ids[2])}>
           <option disabled value="choose">--Choose a meal--</option>
           {dinner}
           <option value="new">New Meal</option>

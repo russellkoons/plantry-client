@@ -146,11 +146,9 @@ export const addPlan = (plan) => (dispatch, getState) => {
 };
 
 export const UPDATE_PLAN_SUCCESS = 'UPDATE_PLAN_SUCCESS';
-export const updatePlanSuccess = (id, date, mealplans) => ({
+export const updatePlanSuccess = (plan) => ({
   type: UPDATE_PLAN_SUCCESS,
-  id,
-  date,
-  mealplans
+  plan
 });
 
 export const UPDATE_PLAN_ERROR = 'UPDATE_PLAN_ERROR';
@@ -159,7 +157,7 @@ export const updatePlanError = error => ({
   error
 });
 
-export const updatePlan = (id, date, mealplans) => (dispatch, getState) => {
+export const updatePlan = (id, plan) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/plans/${id}`, {
       method: 'PUT',
@@ -167,15 +165,10 @@ export const updatePlan = (id, date, mealplans) => (dispatch, getState) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`
       },
-      body: JSON.stringify({
-        id,
-        date,
-        mealplans
-      })
+      body: JSON.stringify(plan)
     })
-    .then(res => res.json())
     .then(() => {
-      return dispatch(updatePlanSuccess(id, date, mealplans));
+      return dispatch(updatePlanSuccess(plan));
     })
     .catch(err => dispatch(updatePlanError(err)));
 };

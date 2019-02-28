@@ -48,8 +48,6 @@ class RecipeCard extends React.Component {
       mealEdit.times.push({time: 'Dinner'})
     }
 
-    console.log(mealEdit);
-
     this.props.dispatch(updateMeal(id, mealEdit))
       .then(() => {
         setSubmitting(false);
