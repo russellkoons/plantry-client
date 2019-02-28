@@ -30,7 +30,7 @@ export const MealSchema = Yup.object().shape({
     null,
     (obj) => {
       if ( obj.Breakfast || obj.Lunch || obj.Dinner ) {
-        return true; // everything is fine
+        return true;
       }
 
       return new Yup.ValidationError(

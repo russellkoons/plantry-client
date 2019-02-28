@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-grid-system';
-import {RecipePopup} from './recipepopup';
+import RecipePopup from './recipepopup';
 
 export class MealRow extends React.Component {
   render() {

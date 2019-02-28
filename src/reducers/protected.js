@@ -33,11 +33,11 @@ export const plantryReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       meals: state.meals.map(meal => meal.id === action.id ? {
         ...meal,
-        name: action.name,
-        url: action.url,
-        notes: action.notes,
-        ingredients: action.ingredients,
-        times: action.times
+        meal: action.meal.meal,
+        url: action.meal.url,
+        notes: action.meal.notes,
+        ingredients: action.meal.ingredients,
+        times: action.meal.times
       }: meal)
     });
   } else if (action.type === actions.UPDATE_MEAL_ERROR) {

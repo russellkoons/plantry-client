@@ -60,14 +60,9 @@ export const addMeal = (meal) => (dispatch, getState) => {
 };
 
 export const UPDATE_MEAL_SUCCESS = 'UPDATE_MEAL_SUCCESS';
-export const updateMealSuccess = (id, name, url, notes, ingredients, times) => ({
+export const updateMealSuccess = (meal) => ({
   type: UPDATE_MEAL_SUCCESS,
-  id,
-  name,
-  url,
-  notes,
-  ingredients,
-  times
+  meal
 });
 
 export const UPDATE_MEAL_ERROR = 'UPDATE_MEAL_ERROR';
@@ -76,26 +71,20 @@ export const updateMealError = err => ({
   err
 });
 
-export const updateMeal = (id, name, url, notes, ingredients, times) => (dispatch, getState) => {
+export const updateMeal = (id, meal) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
+  console.log(meal);
   return fetch(`${API_BASE_URL}/meals/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`
       },
-      body: JSON.stringify({
-        id,
-        name,
-        url,
-        notes,
-        ingredients,
-        times
-      })
+      body: JSON.stringify(meal)
     })
     .then(res => res.json())
     .then(() => {
-      return dispatch(updateMealSuccess(id, name, url, notes, ingredients));
+      return dispatch(updateMealSuccess(meal));
     })
     .catch(err => dispatch(updateMealError(err)));
 };

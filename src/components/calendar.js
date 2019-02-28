@@ -1,9 +1,12 @@
 import React from 'react';
 import { Container } from 'react-grid-system';
+import {connect} from 'react-redux';
+import {push} from 'connected-react-router';
 import {CalendarRow} from './calendarrow';
 import {MealRow} from './mealrow';
+import {deletePlan} from '../actions/protected'
 
-export default class Calendar extends React.Component {
+class Calendar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -13,6 +16,14 @@ export default class Calendar extends React.Component {
 
   editPlan = () => {
     this.setState({editing: true})
+  }
+
+  delete = () => {
+    const id = this.props.plan.id;
+    this.props.deletePlan(id)
+      .then(() => {
+        this.props.history.push('/plans');
+      })
   }
 
   render() {
@@ -41,6 +52,7 @@ export default class Calendar extends React.Component {
             <MealRow time="Dinner" plan={dinner} />
           </Container>
           <button onClick={this.editPlan}>Edit</button>
+          <button onClick={this.delete}>Delete</button>
         </div>
       )
     } else {
@@ -52,3 +64,5 @@ export default class Calendar extends React.Component {
     }
   }
 }
+
+export default connect(null, { deletePlan, push })(Calendar)

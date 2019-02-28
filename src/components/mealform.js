@@ -8,7 +8,6 @@ class MealForm extends React.Component {
   handleSubmit = (values, {
     setSubmitting
   }) => {
-    console.log(values);
     const meal = {
       meal: values.name,
       ingredients: [],
@@ -16,11 +15,13 @@ class MealForm extends React.Component {
       url: values.url,
       notes: values.notes
     };
+
     for (let i = 0; i < values.ingredients.length; i++) {
       meal.ingredients.push({
         ingredient: values.ingredients[i]
       });
     };
+
     Object.keys(values.times).forEach(function(key, index) {
       if (key) {
         meal.times.push({
@@ -28,7 +29,7 @@ class MealForm extends React.Component {
         })
       }
     });
-    console.log(JSON.stringify(meal));
+
     this.props.dispatch(addMeal(meal))
       .then(() => setSubmitting(false))
     this.props.dispatch(closeSesame());
