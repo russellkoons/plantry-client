@@ -139,7 +139,7 @@ class Calendar extends React.Component {
     const breakfast = [];
     const lunch = [];
     const dinner = [];
-    const plan = this.props.plans.find(e => e.id === this.props.plan.id);
+    const plan = this.props.plans.find(e => e.id === this.props.plan);
 
     for (let i = 0; i < plan.mealplans.length; i++) {
       if (plan.mealplans[i].time === 'Breakfast') {
