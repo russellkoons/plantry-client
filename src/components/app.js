@@ -2,10 +2,9 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import {ConnectedRouter} from 'connected-react-router';
 import {connect} from 'react-redux';
-import './app.css';
 import {history} from '../store';
 import {TopNav} from './topnav';
-import Nav from './nav';
+import SecondNav from './secondnav';
 import {Info} from './info';
 import {Splash} from './splash';
 import MealPlan from './mealplan';
@@ -36,7 +35,7 @@ class App extends React.Component {
           <ConnectedRouter history={history}>
             <div className="app">
               <header>
-                <Nav />
+                <SecondNav />
               </header>
               <main>
                 <Route exact path="/" component={Splash} />

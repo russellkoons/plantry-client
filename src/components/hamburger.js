@@ -1,5 +1,6 @@
 import React from 'react';
 import {slide as Menu} from 'react-burger-menu';
+import './hamburger.css';
 
 export class Hamburger extends React.Component {
   render() {

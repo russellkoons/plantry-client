@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Popup from 'reactjs-popup';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
-import {push} from 'connected-react-router';
+import '../index.css';
 import {LoginSchema, SignupSchema} from '../schemas';
 import {login} from '../actions/auth';
 import {registerUser} from '../actions/users';
-import {fetchMeals, fetchPlans} from '../actions/protected';
+import {Button} from './styledcomponents';
 
 class Login extends React.Component {
   handleLogin = (values, {
@@ -36,7 +36,7 @@ class Login extends React.Component {
   render() {
     return(
       <div>
-        <Popup trigger={<button>Login</button>} modal>
+        <Popup trigger={<Button>Login</Button>} modal>
         {close => (
           <div className="modal">
             <button className="close" onClick={close}>
@@ -68,7 +68,7 @@ class Login extends React.Component {
           </div>
         )}
         </Popup>
-        <Popup trigger={<button>Sign Up</button>} modal>
+        <Popup trigger={<Button>Sign Up</Button>} modal>
           {close => (
             <div className="modal">
               <button className="close" onClick={close}>
@@ -116,4 +116,4 @@ class Login extends React.Component {
   }
 }
 
-export default connect(null, { push, login, registerUser, fetchMeals, fetchPlans })(Login)
+export default connect(null, { login, registerUser })(Login)
