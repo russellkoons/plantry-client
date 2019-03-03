@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Formik, Field, Form, FieldArray, ErrorMessage} from 'formik';
-import {addMeal, closeSesame} from '../actions/protected';
+import {addMeal} from '../actions/protected';
 import {MealSchema} from '../schemas';
 
 class MealForm extends React.Component {
@@ -32,7 +32,6 @@ class MealForm extends React.Component {
 
     this.props.dispatch(addMeal(meal))
       .then(() => setSubmitting(false))
-    this.props.dispatch(closeSesame());
     return;
   }
 
@@ -70,7 +69,7 @@ class MealForm extends React.Component {
                         <Field name={`ingredients.${index}`} />
                         <button
                           type="button"
-                          onClick={() => arrayHelpers.insert(index, '')}
+                          onClick={() => arrayHelpers.push('')}
                         >
                           +
                         </button>

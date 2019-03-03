@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {deletePlan} from '../actions/protected';
 import Calendar from './calendar';
 
 class PlanSelect extends React.Component {
@@ -16,18 +17,28 @@ class PlanSelect extends React.Component {
     const val = e.value;
     const plan = this.props.plans[val];
     calendar.push(
-      <Calendar key="0" plan={plan.id} history={this.props.history} />
+      <Calendar key="0" plan={plan.id} history={this.props.history} onDelete={this.delete} />
     )
     this.setState({
       cal: calendar
     })
   }
 
+  delete = () => {
+    const id = this.props.plan.id;
+    this.props.deletePlan(id)
+      .then(() => {
+        this.setState({
+          cal: []
+        })
+      })
+  }
+
   render() {
     const list = [];
     for (let i = 0; i < this.props.plans.length; i++) {
       list.push(
-        <option value={i} key={i + 1}>Plan #{i + 1}</option>
+        <option value={i} key={i + 1}>{this.props.plans[i].date}</option>
       )
     }
 
@@ -48,4 +59,4 @@ const mapStateToProps = state => ({
   plans: state.plantry.plans
 });
 
-export default connect(mapStateToProps)(PlanSelect);
+export default connect(mapStateToProps, { deletePlan })(PlanSelect);

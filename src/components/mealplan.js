@@ -5,8 +5,9 @@ import moment from 'moment';
 import {Formik, Form} from 'formik';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
+import {FormButton} from './styledcomponents';
 import MealForm from './mealform';
-import { closeSesame, addPlan } from '../actions/protected';
+import { addPlan } from '../actions/protected';
 
 class MealPlan extends React.Component {
   handleSubmit = (values, {
@@ -102,6 +103,7 @@ class MealPlan extends React.Component {
         }
       ]
     };
+
     this.props.addPlan(plan)
       .then(() => setSubmitting(false))
       .then(() => this.props.history.push('/plans'));
@@ -112,6 +114,19 @@ class MealPlan extends React.Component {
     return(
       <div>
         <h2>New Meal Plan</h2>
+        <Popup trigger={<FormButton>Add a new meal</FormButton>} 
+          modal
+          closeOnDocumentClick
+        >
+          {close => (
+            <div className="modal">
+              <button className="close" onClick={close}>
+                &times;
+              </button>
+              <MealForm />
+            </div>
+          )}
+        </Popup>
         <Formik 
           initialValues={{
             SundayBreakfast: 'choose',
@@ -141,6 +156,7 @@ class MealPlan extends React.Component {
             isSubmitting
           }) => (
             <Form>
+
               <DayCard day="Sunday" />
               <DayCard day="Monday" />
               <DayCard day="Tuesday" />
@@ -148,22 +164,10 @@ class MealPlan extends React.Component {
               <DayCard day="Thursday" />
               <DayCard day="Friday" />
               <DayCard day="Saturday" />
-              <button type="submit" disabled={isSubmitting}>Submit</button>
+              <FormButton type="submit" disabled={isSubmitting}>Submit</FormButton>
             </Form>
           )} 
         />
-        <Popup
-          open={this.props.open}
-          close={!this.props.open}
-          closeOnDocumentClick
-        >
-          <div className="modal">
-            <button className="close" onClick={this.props.closeSesame}>
-              &times;
-            </button>
-            <MealForm />
-          </div>
-        </Popup>
       </div>
     )
   }
@@ -173,4 +177,4 @@ const mapStateToProps = state => ({
   open: state.plantry.open
 });
 
-export default connect(mapStateToProps, { closeSesame, addPlan, push })(MealPlan);
+export default connect(mapStateToProps, { addPlan, push })(MealPlan);

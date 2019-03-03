@@ -4,7 +4,6 @@ import {CLEAR_AUTH} from '../actions/auth';
 const initialState = {
   meals: [],
   plans: [],
-  open: false,
   error: null
 };
 
@@ -88,14 +87,6 @@ export const plantryReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       meals: [],
       plans: []
-    });
-  } else if (action.type === actions.OPEN_SESAME) {
-    return Object.assign({}, state, {
-      open: true
-    });
-  } else if (action.type === actions.CLOSE_SESAME) {
-    return Object.assign({}, state, {
-      open: false
     });
   }
   return state;

@@ -1,25 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {MealInput} from './mealinput';
 import $ from 'jquery';
+import {MealInput} from './mealinput';
 import {Field} from 'formik';
 import {connect as formikConnect} from 'formik';
-import {openSesame} from '../actions/protected';
 
 export class DayCard extends React.Component {
-  constructor(props) {
-    super(props)
-    this.openModal = this.openModal.bind(this)
+  setFieldValue = id => {
+    const val = $(`#${id}`).val();
+    this.props.formik.setFieldValue(id, val);
   }
-
-  openModal (id) {
-    const val = $(`#${id}`).val()    
-    this.props.formik.setFieldValue(id, val)
-    if (val === 'new') {
-      this.props.dispatch(openSesame());
-    }
-  }
-
+  
   render() {
     const breakfast = [];
     const lunch = [];
@@ -55,22 +46,22 @@ export class DayCard extends React.Component {
       <fieldset>
         <legend>{day}</legend>
         <label htmlFor="breakfast">Breakfast: </label>
-        <Field component="select" name={ids[0]} id={ids[0]} value={values[ids[0]]} onChange={() => this.openModal(ids[0])}>
+        <Field component="select" name={ids[0]} id={ids[0]} value={values[ids[0]]} onChange={() => this.setFieldValue(ids[0])}>
           <option disabled value="choose">--Choose a meal--</option>
           {breakfast}
-          <option value="new">New Meal</option>
+          <option value="Eating out">Going out!</option>
         </Field>
         <label htmlFor="lunch"> Lunch: </label>
-        <Field component="select" name={ids[1]} id={ids[1]} value={values[ids[1]]} onChange={() => this.openModal(ids[1])}>
+        <Field component="select" name={ids[1]} id={ids[1]} value={values[ids[1]]} onChange={() => this.setFieldValue(ids[1])}>
           <option disabled value="choose">--Choose a meal--</option>
           {lunch}
-          <option value="new">New Meal</option>
+          <option value="Eating out">Going out!</option>
         </Field>
         <label htmlFor="dinner"> Dinner: </label>
-        <Field component="select" name={ids[2]} id={ids[2]} value={values[ids[2]]} onChange={() => this.openModal(ids[2])}>
+        <Field component="select" name={ids[2]} id={ids[2]} value={values[ids[2]]} onChange={() => this.setFieldValue(ids[2])}>
           <option disabled value="choose">--Choose a meal--</option>
           {dinner}
-          <option value="new">New Meal</option>
+          <option value="Eating out">Going out!</option>
         </Field>
       </fieldset>
     )

@@ -65,7 +65,12 @@ class RecipeCard extends React.Component {
       this.setState({[key]: true})
     }
   }
-  
+
+  cancel = () => {
+    this.setState({
+      editing: false
+    });
+  }
 
   render() {
     let meal = this.props.meals.find(e => e.meal === this.props.meal);
@@ -135,7 +140,7 @@ class RecipeCard extends React.Component {
                           <Field name={`ingredients.${index}`} />
                           <button
                             type="button"
-                            onClick={() => arrayHelpers.insert(index, '')}
+                            onClick={() => arrayHelpers.push('')}
                           >
                             +
                           </button>
@@ -166,6 +171,7 @@ class RecipeCard extends React.Component {
               <button type="submit" disabled={isSubmitting}>Submit Meal</button>
             </Form>
           )} />
+          <button onClick={this.cancel}>Cancel</button>
         </div>
       )
     }

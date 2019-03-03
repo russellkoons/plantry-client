@@ -196,13 +196,3 @@ export const deletePlan = id => (dispatch, getState) => {
     .then(() => dispatch(deletePlanSuccess(id)))
     .catch(err => dispatch(deletePlanError(err)));
 };
-
-export const OPEN_SESAME = 'OPEN_SESAME';
-export const openSesame = () => ({
-  type: OPEN_SESAME
-});
-
-export const CLOSE_SESAME = 'CLOSE_SESAME';
-export const closeSesame = () => ({
-  type: CLOSE_SESAME
-});

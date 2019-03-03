@@ -4,11 +4,12 @@ import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import {Formik, Form} from 'formik';
 import Popup from 'reactjs-popup';
+import {FormButton} from './styledcomponents';
 import {CalendarRow} from './calendarrow';
 import {MealRow} from './mealrow';
 import DayCard from './daycard';
 import MealForm from './mealform';
-import {deletePlan, closeSesame, updatePlan, fetchPlans} from '../actions/protected'
+import {updatePlan, fetchPlans} from '../actions/protected'
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -127,12 +128,10 @@ class Calendar extends React.Component {
     return;
   }
 
-  delete = () => {
-    const id = this.props.plan.id;
-    this.props.deletePlan(id)
-      .then(() => {
-        this.props.history.push('/plans');
-      })
+  cancel = () => {
+    this.setState({
+      editing: false
+    });
   }
 
   render() {
@@ -160,13 +159,26 @@ class Calendar extends React.Component {
             <MealRow time="Lunch" plan={lunch} />
             <MealRow time="Dinner" plan={dinner} />
           </Container>
-          <button onClick={this.editPlan}>Edit</button>
-          <button onClick={this.delete}>Delete</button>
+          <FormButton onClick={this.editPlan}>Edit</FormButton>
+          <FormButton onClick={this.props.onDelete}>Delete</FormButton>
         </div>
       )
     } else {
       return(
         <div>
+          <Popup trigger={<FormButton>Add a new meal</FormButton>} 
+            modal
+            closeOnDocumentClick
+          >
+            {close => (
+              <div className="modal">
+                <button className="close" onClick={close}>
+                  &times;
+                </button>
+                <MealForm />
+              </div>
+            )}
+          </Popup>
           <Formik
             initialValues={{
               SundayBreakfast: breakfast[0],
@@ -203,22 +215,11 @@ class Calendar extends React.Component {
                 <DayCard day="Thursday" />
                 <DayCard day="Friday" />
                 <DayCard day="Saturday" />
-                <button type="submit" disabled={isSubmitting}>Submit</button>
+                <FormButton type="submit" disabled={isSubmitting}>Submit</FormButton>
               </Form>
             )} 
           />
-          <Popup
-            open={this.props.open}
-            close={!this.props.open}
-            closeOnDocumentClick
-          >
-            <div className="modal">
-              <button className="close" onClick={this.props.closeSesame}>
-                &times;
-              </button>
-              <MealForm />
-            </div>
-          </Popup>
+          <FormButton onClick={this.cancel}>Cancel</FormButton>
         </div>
       )
     }
@@ -230,4 +231,4 @@ const mapStateToProps = state => ({
   plans: state.plantry.plans
 });
 
-export default connect(mapStateToProps, { fetchPlans, deletePlan, updatePlan, closeSesame, push })(Calendar)
+export default connect(mapStateToProps, { fetchPlans, updatePlan, push })(Calendar)

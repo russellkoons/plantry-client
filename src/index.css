@@ -37,3 +37,12 @@ body {
   border-radius: 18px;
   border: 1px solid #cfcece;
 }
+
+.toggle {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
+}
