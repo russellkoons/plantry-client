@@ -10,6 +10,7 @@ import {Splash} from './splash';
 import MealPlan from './mealplan';
 import PlanSelect from './planselect';
 import ListSelect from './listselect';
+import {StyledFooter} from './styledcomponents';
 
 class App extends React.Component {
   render() {
@@ -23,9 +24,9 @@ class App extends React.Component {
             <main>
               <Info />
             </main>
-            <footer>
-              <p>Created and coded by Russell Koons 2019</p>
-            </footer>
+            <StyledFooter>
+              <p>Created and coded by Russell Koons &copy;2019</p>
+            </StyledFooter>
           </div>
         </div> 
       )
@@ -43,9 +44,9 @@ class App extends React.Component {
                 <Route exact path="/plans" component={PlanSelect} />
                 <Route exact path="/shoppinglist" component={ListSelect} />
               </main>
-              <footer>
-                <p>Created and coded by Russell Koons 2019</p>
-              </footer>
+              <StyledFooter>
+                <p>Created and coded by Russell Koons &copy;2019</p>
+              </StyledFooter>
             </div>
           </ConnectedRouter>
         </div>

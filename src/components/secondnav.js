@@ -54,7 +54,7 @@ constructor(props) {
             <Button as="a" href="/shoppinglist">Shopping List</Button>
           </Wide>
           <div>
-            <HamburgerLink href="/newplan" className={this.state.toggle}>New plan</HamburgerLink>
+            <HamburgerLink href="/newplan" className={this.state.toggle}>New Plan</HamburgerLink>
             <HamburgerLink href="/plans" className={this.state.toggle}>Plans</HamburgerLink>
             <HamburgerLink href="/shoppinglist" className={this.state.toggle}>Shopping Lists</HamburgerLink>
           </div>

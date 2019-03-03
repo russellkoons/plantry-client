@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Popup from 'reactjs-popup';
 
 export const NavContainer = styled.nav`
   position: fixed;
@@ -10,9 +11,11 @@ export const NavContainer = styled.nav`
   background: #D8C3A5;
   display: flex;
   justify-content: space-between;
+  height: 65px;
 
   @media only screen and (max-width: 940px) {
     flex-direction: column;
+    height: auto;
   }
 `;
 
@@ -20,14 +23,19 @@ export const Nav = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: auto;
+  margin-bottom: auto;
 
   @media only screen and (max-width: 940px) {
     width: 100%;
+    margin-top: 10px;
   }
 `;
 
 export const Wide = styled.div`
   display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
 
   @media only screen and (max-width: 940px) {
     display: none;
@@ -50,7 +58,7 @@ export const Logo = styled.h1`
   transition: 0.3s;
 
   :hover {
-    color: #E98074;
+    color: #479761;
   }
 `;
 
@@ -82,8 +90,17 @@ export const HamburgerLink = styled.a`
   text-decoration: none;
   color: #E85A4F;
   transition: 0.3s;
+  margin-top: 10px;
 
   :hover {
     color: #E98074;
   }
+`;
+
+export const StyledFooter = styled.footer`
+  margin-top: 100px;
+`;
+
+export const StyledPopup = styled(Popup)`
+  
 `;
