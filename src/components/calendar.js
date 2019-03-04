@@ -1,18 +1,21 @@
 import React from 'react';
-import {Container, Col, Row} from 'react-grid-system';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import {Formik, Form} from 'formik';
+import styled from 'styled-components';
 import {FormButton, CloseButton, StyledPopup, Error} from './styledcomponents';
-import {CalendarRow} from './calendarrow';
-import {MealRow} from './mealrow';
-import {DayRow} from './dayrow';
 import DayCard from './daycard';
 import MealForm from './mealform';
+import {PlanDay} from './planday';
 import {updatePlan, fetchPlans} from '../actions/protected'
 
-// Gotta style the calendar!!!! You're SO CLOSE AHHHHH
-// Reformat small screen layout. It just doesn't work with long meal names
+const Cal = styled.div`
+  display: flex;
+
+  @media only screen and (max-width: 1260px) {
+    flex-direction: column;
+  }
+`;
 
 const style = {
   background: 'grey'
@@ -185,27 +188,16 @@ class Calendar extends React.Component {
     if (!this.state.editing) {
       return(
         <div>
-          <Container className="wide" style={style}>
-            <CalendarRow />
-            <MealRow time="Breakfast" plan={breakfast} />
-            <MealRow time="Lunch" plan={lunch} />
-            <MealRow time="Dinner" plan={dinner} />
-          </Container>
-          <Container className="narrow">
-            <Row>
-              <Col>Day</Col>
-              <Col>Breakfast</Col>
-              <Col>Lunch</Col>
-              <Col>Dinner</Col>
-            </Row>
-            <DayRow day="Sun" plan={s} />
-            <DayRow day="Mon" plan={m} />
-            <DayRow day="Tue" plan={t} />
-            <DayRow day="Wed" plan={w} />
-            <DayRow day="Thu" plan={r} />
-            <DayRow day="Fri" plan={f} />
-            <DayRow day="Sat" plan={a} />
-          </Container>
+          <h3>Click any meal to view or edit!</h3>
+          <Cal>
+            <PlanDay day="Sunday" plan={s} />
+            <PlanDay day="Monday" plan={m} />
+            <PlanDay day="Tuesday" plan={t} />
+            <PlanDay day="Wednesday" plan={w} />
+            <PlanDay day="Thursday" plan={r} />
+            <PlanDay day="Friday" plan={f} />
+            <PlanDay day="Saturday" plan={a} />
+          </Cal>
           <FormButton onClick={this.editPlan}>Edit</FormButton>
           <FormButton onClick={() => this.props.onDelete(plan.id)}>Delete</FormButton>
         </div>

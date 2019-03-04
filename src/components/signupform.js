@@ -51,13 +51,13 @@ class SignupForm extends React.Component {
           render={({isSubmitting}) => {
             return(
               <Form>
-                <label htmlFor="signupusername">Username </label>
+                <label htmlFor="signupusername">Username </label><br />
                 <Field id="usersignup" name="username" /><br />
                 <ErrorMessage name="username" /><br />
-                <label htmlFor="signuppassword">Password </label>
+                <label htmlFor="signuppassword">Password </label><br />
                 <Field id="signuppassword" name="password" type="password" /><br />
                 <ErrorMessage name="password" /><br />
-                <label htmlFor="passconfirm">Confirm password </label>
+                <label htmlFor="passconfirm">Confirm password </label><br />
                 <Field id="passconfirm" name="passconfirm" type="password" /> <br />
                 <ErrorMessage name="passconfirm" /><br />
                 <FormButton type="submit" disabled={isSubmitting}>Submit</FormButton>

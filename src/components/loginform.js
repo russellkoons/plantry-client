@@ -35,10 +35,10 @@ export class LoginForm extends React.Component {
             isSubmitting
           }) => (
               <Form>
-                <label htmlFor="loginusername">Username </label>
+                <label htmlFor="loginusername">Username </label><br />
                 <Field id="username" name="username" /><br />
                 <ErrorMessage name="username" /><br />
-                <label htmlFor="loginpassword">Password </label>
+                <label htmlFor="loginpassword">Password </label><br />
                 <Field id="password" name="password" type="password" /><br />
                 <ErrorMessage name="password" /><br />
                 <FormButton type="submit" disabled={isSubmitting}>Submit</FormButton>

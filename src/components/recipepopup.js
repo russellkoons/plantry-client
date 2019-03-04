@@ -2,7 +2,7 @@ import React from 'react';
 import { Col } from 'react-grid-system';
 import {connect} from 'react-redux';
 import RecipeCard from './recipecard';
-import {StyledPopup, CloseButton} from './styledcomponents';
+import {StyledPopup, CloseButton, FormButton} from './styledcomponents';
 
 class RecipePopup extends React.Component {
   render() {
@@ -23,7 +23,7 @@ class RecipePopup extends React.Component {
       if (meal === undefined) {
         return(
           <Col key={this.props.k}>
-            <StyledPopup trigger={<span>{this.props.meal}</span>} modal>
+            <StyledPopup trigger={<FormButton>{this.props.meal}</FormButton>} modal>
               {close => (
                 <div className="modal">
                   <CloseButton className="close" onClick={close}>
@@ -52,7 +52,7 @@ class RecipePopup extends React.Component {
 
         return(
           <Col key={this.props.k}>
-            <StyledPopup trigger={<span>{this.props.meal}</span>} modal>
+            <StyledPopup trigger={<FormButton>{this.props.meal}</FormButton>} modal>
               {close => (
                 <div className="modal">
                   <CloseButton className="close" onClick={close}>
