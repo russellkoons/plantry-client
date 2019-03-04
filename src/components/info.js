@@ -26,8 +26,13 @@ const Header = styled.h2`
   color: white;
   font-size: 4.5em;
   display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
   @media screen and (min-width: 545px) {
       font-size: 5.5em;
+      margin-top: 60px;
+      margin-bottom: 60px;
   }
 `;
 
@@ -116,7 +121,7 @@ export class Info extends React.Component {
               <StyledIcon color="#FC4A1A" icon="egg"/>
               <h2>Feel Confident</h2>
             </header>
-            <p>When dieting it's really easy to fall off the wagon, but with Plantry you can build a plan that's right for you!</p>
+            <p>When dieting it's easy to fall off the wagon, but with Plantry you can build a plan that's right for you!</p>
           </InfoSection>
         </MainSection>
       </InfoContainer>

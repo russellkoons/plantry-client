@@ -12,6 +12,7 @@ import MealForm from './mealform';
 import {updatePlan, fetchPlans} from '../actions/protected'
 
 // Gotta style the calendar!!!! You're SO CLOSE AHHHHH
+// Reformat small screen layout. It just doesn't work with long meal names
 
 const style = {
   background: 'grey'
