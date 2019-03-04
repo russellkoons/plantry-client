@@ -12,6 +12,20 @@ class RecipePopup extends React.Component {
           <span>Going out!</span>
         </Col>
       )
+    } else if (this.props.meal === undefined) {
+      <Col key={this.props.k}>
+        <StyledPopup trigger={<span>{this.props.meal}</span>} modal>
+          {close => (
+            <div className="modal">
+              <CloseButton className="close" onClick={close}>
+                &times;
+              </CloseButton>
+              <h4>Uh oh!</h4>
+              <p>Meal not found! If you changed the name of one of your meals, please update your plan to reflect these changes. Otherwise we won't be able to serve you properly</p>
+            </div>
+          )}
+        </StyledPopup>
+      </Col>
     } else {
       let meal = this.props.meals.find(e => e.meal === this.props.meal);
       const times = meal.times;
