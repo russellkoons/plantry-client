@@ -14,7 +14,6 @@ class RecipePopup extends React.Component {
       )
     } else {
       let meal = this.props.meals.find(e => e.meal === this.props.meal);
-      const times = meal.times;
       const booleans = {
         b: false,
         l: false,
@@ -38,6 +37,7 @@ class RecipePopup extends React.Component {
           </Col>
         )
       } else {
+        const times = meal.times;
 
         for (let i = 0; i < times.length; i++) {
           let time = times[i].time;
