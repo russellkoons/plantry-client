@@ -21,7 +21,7 @@ class RecipePopup extends React.Component {
         d: false
       };
 
-      if (this.props.meal === undefined) {
+      if (meal === undefined) {
         return(
           <Col key={this.props.k}>
             <StyledPopup trigger={<span>{this.props.meal}</span>} modal>
