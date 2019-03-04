@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Error} from './styledcomponents'
 import '../index.css'
 
 const Item = styled.div`
@@ -18,6 +19,8 @@ export class ShoppingList extends React.Component {
     const meallist = [];
     const list = [];
     const formatted = [];
+    let errors = false;
+    const error = [];
     
     const meals = this.props.meals;
     const mealplan = this.props.plan.mealplans;
@@ -31,11 +34,21 @@ export class ShoppingList extends React.Component {
         continue;
       } else {
         let meal = meals.find(e => e.meal === mealnames[i]);
-        meallist.push(meal);
+        if (meal === undefined) {
+          errors = true;
+        } else {
+          meallist.push(meal);
+        }
       }
     }
 
     const short = [...new Set(meallist)];
+    
+    if (errors) {
+      error.push(
+        <Error>If you changed the name of one of your meals make sure you update your plan to reflect that change!</Error>
+      )
+    }
 
     for (let i = 0; i < short.length; i++) {
       for(let j = 0; j < short[i].ingredients.length; j++) {
@@ -56,6 +69,7 @@ export class ShoppingList extends React.Component {
 
     return(
       <div>
+        {error}
         {formatted}
       </div>
     )
