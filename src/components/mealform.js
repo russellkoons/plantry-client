@@ -87,6 +87,7 @@ class MealForm extends React.Component {
                         >
                           -
                         </PlusMinus>
+                        <ErrorMessage name={`ingredients.${index}`} component={Error} />
                       </div>
                     ))
                   ) : (
@@ -96,10 +97,9 @@ class MealForm extends React.Component {
                   )}
                 </div>
               )} /><br/>
-              <ErrorMessage name="ingredients" component={Error} />
             </FieldSet>
             <label htmlFor="notes">Notes: </label><br />
-            <Field name="notes" type="textarea" /><br />
+            <Field name="notes" component="textarea" rows="5" cols="25" /><br />
             <FieldSet>
               <legend html="times">Times: </legend>
               <Field name="times[Breakfast]" type="checkbox" value="breakfast" /><label>Breakfast</label><br />

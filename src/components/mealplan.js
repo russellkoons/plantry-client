@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import {FormButton, MealPopup, CloseButton, Container} from './styledcomponents';
 import MealForm from './mealform';
-import { addPlan } from '../actions/protected';
+import {addPlan} from '../actions/protected';
 import {PlanSchema} from '../schemas';
 
 class MealPlan extends React.Component {

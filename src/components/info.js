@@ -87,9 +87,9 @@ export class Info extends React.Component {
       <InfoContainer>
         <HeroContainer>
           <Top>
-            <Header>Plan your</Header>
-            <Header>meals with</Header>
             <Logo><FontAwesomeIcon icon="apple-alt" /> Plantry</Logo>
+            <Header>Diet</Header>
+            <Header>Right</Header>
           </Top>
           <LearnMore>
             <p>Learn more</p>

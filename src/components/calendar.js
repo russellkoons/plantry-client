@@ -197,13 +197,13 @@ class Calendar extends React.Component {
               <Col>Lunch</Col>
               <Col>Dinner</Col>
             </Row>
-            <DayRow day="Sunday" plan={s} />
-            <DayRow day="Monday" plan={m} />
-            <DayRow day="Tuesday" plan={t} />
-            <DayRow day="Wednesday" plan={w} />
-            <DayRow day="Thursday" plan={r} />
-            <DayRow day="Friday" plan={f} />
-            <DayRow day="Saturday" plan={a} />
+            <DayRow day="Sun" plan={s} />
+            <DayRow day="Mon" plan={m} />
+            <DayRow day="Tue" plan={t} />
+            <DayRow day="Wed" plan={w} />
+            <DayRow day="Thu" plan={r} />
+            <DayRow day="Fri" plan={f} />
+            <DayRow day="Sat" plan={a} />
           </Container>
           <FormButton onClick={this.editPlan}>Edit</FormButton>
           <FormButton onClick={this.props.onDelete}>Delete</FormButton>

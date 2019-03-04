@@ -27,8 +27,12 @@ export class ShoppingList extends React.Component {
     }
 
     for (let i = 0; i < mealnames.length; i++) {
-      let meal = meals.find(e => e.meal === mealnames[i])
-      meallist.push(meal)
+      if (mealnames[i] === 'Eating out') {
+        continue;
+      } else {
+        let meal = meals.find(e => e.meal === mealnames[i]);
+        meallist.push(meal);
+      }
     }
 
     const short = [...new Set(meallist)];

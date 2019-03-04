@@ -4,6 +4,7 @@ import {Formik, Field, Form, FieldArray, ErrorMessage} from 'formik';
 import {updateMeal, fetchMeals} from '../actions/protected';
 import styled from 'styled-components';
 import {FieldSet, FormButton, PlusMinus} from './styledcomponents';
+import '../index.css';
 
 const UL = styled.ul`
   list-style-type: none;
@@ -173,7 +174,7 @@ class RecipeCard extends React.Component {
                 <ErrorMessage name="ingredients" />
               </FieldSet>
               <label htmlFor="notes">Notes: </label><br />
-              <Field name="notes" type="textarea" /><br />
+              <Field name="notes" type="textarea" rows="5" cols="20"/><br />
               <label html="times">Times: </label>
               <Field name="times[Breakfast]" type="checkbox" value="breakfast" checked={this.state.breakfast} onChange={() => this.handleChange('breakfast')} />Breakfast
               <Field name="times[Lunch]" type="checkbox" value="lunch" checked={this.state.lunch} onChange={() => this.handleChange('lunch')} />Lunch

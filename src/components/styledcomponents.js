@@ -11,19 +11,24 @@ export const NavContainer = styled.nav`
   background: #D8C3A5;
   display: flex;
   justify-content: space-between;
-  height: 65px;
+  max-height: 65px;
 
   @media only screen and (max-width: 940px) {
     flex-direction: column;
     height: auto;
+    max-height: 200px;
   }
 `;
 
 export const Container = styled.main`
-  top: 75px;
+  top: 65px;
   position: relative;
   width: 100%;
   align-items: center;
+
+  @media only screen and (max-width: 940px) {
+    top: 70px;
+  }
 `;
 
 export const Nav = styled.div`
@@ -130,7 +135,15 @@ export const StyledPopup = styled(Popup)`
   border: 0px;
   border-radius: 15px;
   max-width: 300px;
-  width: 75% !important;
+  width: 80% !important;
+  max-height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  @media only screen and (max-width: 940px) {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
 `;
 
 export const MealPopup = styled(StyledPopup)`
@@ -143,8 +156,8 @@ export const CloseButton = styled.button`
   display: block;
   padding: 2px 5px;
   line-height: 20px;
-  right: -10px;
-  top: -10px;
+  right: 10px;
+  top: 10px;
   font-size: 24px;
   background: #D8C3A5;
   color: #E85A4F;
@@ -162,6 +175,7 @@ export const FieldSet = styled.fieldset`
   border-color: #E85A4F;
   border-radius: 15px;
   max-width: 1000px;
+  margin: auto;
 
   @media only screen and (max-width: 940px) {
     display: block;
