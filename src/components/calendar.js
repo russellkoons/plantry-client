@@ -17,10 +17,6 @@ const Cal = styled.div`
   }
 `;
 
-const style = {
-  background: 'grey'
-};
-
 class Calendar extends React.Component {
   constructor(props) {
     super(props)
