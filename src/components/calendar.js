@@ -207,7 +207,7 @@ class Calendar extends React.Component {
             <DayRow day="Sat" plan={a} />
           </Container>
           <FormButton onClick={this.editPlan}>Edit</FormButton>
-          <FormButton onClick={this.props.onDelete}>Delete</FormButton>
+          <FormButton onClick={() => this.props.onDelete(plan.id)}>Delete</FormButton>
         </div>
       )
     } else {

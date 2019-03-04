@@ -9,12 +9,16 @@ class PlanSelect extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      cal: []
+      cal: [],
+      id: null
     }
   }
 
   handleChange = () => {
-    const calendar = []
+    this.setState({
+      cal: []
+    });
+    const calendar = [];
     const e = document.getElementById("planselect");
     const val = e.value;
     const plan = this.props.plans[val];
@@ -26,14 +30,12 @@ class PlanSelect extends React.Component {
     })
   }
 
-  delete = () => {
-    const id = this.props.plan.id;
+  delete = (id) => {
+    this.setState({cal: []})
     this.props.deletePlan(id)
       .then(() => {
-        this.setState({
-          cal: []
-        })
-      })
+        this.forceUpdate()
+      });
   }
 
   render() {
