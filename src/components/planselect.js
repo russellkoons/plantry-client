@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {deletePlan} from '../actions/protected';
 import Calendar from './calendar';
+import {Container} from './styledcomponents';
+import '../index.css';
 
 class PlanSelect extends React.Component {
   constructor(props) {
@@ -43,14 +45,14 @@ class PlanSelect extends React.Component {
     }
 
     return(
-      <div>
+      <Container>
         <h2>Meal Plan</h2>
         <select id="planselect" defaultValue="choose" onChange={this.handleChange}>
           <option value="choose" key="0" disabled>--Choose a plan--</option>
           {list}
         </select>
         {this.state.cal}
-      </div>
+      </Container>
     )
   }
 }

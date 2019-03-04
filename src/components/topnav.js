@@ -1,11 +1,10 @@
 import React from 'react';
-import Popup from 'reactjs-popup';
 import '../index.css';
 import LoginForm from './loginform';
 import SignupForm from './signupform';
 import {Login} from './login';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {NavContainer, Logo, Nav, Wide, Narrow, Button, HamburgerLink} from './styledcomponents';
+import {NavContainer, Logo, Nav, Wide, Narrow, Button, HamburgerLink, CloseButton, StyledPopup} from './styledcomponents';
 
 export class TopNav extends React.Component {
   constructor(props) {
@@ -47,26 +46,26 @@ export class TopNav extends React.Component {
             <Login />
           </Wide>
           <div>
-            <Popup trigger={<HamburgerLink className={this.state.toggle}>Login</HamburgerLink>} modal>
+            <StyledPopup trigger={<HamburgerLink className={this.state.toggle}>Login</HamburgerLink>} modal>
               {close => (
-                <div className="modal">
-                  <button className="close" onClick={close}>
+                <div>
+                  <CloseButton onClick={close}>
                     &times;
-                  </button>
+                  </CloseButton>
                   <LoginForm />
                 </div>
               )}
-              </Popup>
-            <Popup trigger={<HamburgerLink className={this.state.toggle}>Sign Up</HamburgerLink>} modal>
+              </StyledPopup>
+            <StyledPopup trigger={<HamburgerLink className={this.state.toggle}>Sign Up</HamburgerLink>} modal>
               {close => (
-                <div className="modal">
-                  <button className="close" onClick={close}>
+                <div>
+                  <CloseButton onClick={close}>
                     &times;
-                  </button>
+                  </CloseButton>
                   <SignupForm />
                 </div>
               )}
-            </Popup>
+            </StyledPopup>
           </div>
         </div>
       </NavContainer>

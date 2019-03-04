@@ -1,4 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
+import '../index.css'
+
+const Item = styled.div`
+  color: #E85A4F;
+  font-size: 20px;
+  width: 150px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+`;
 
 export class ShoppingList extends React.Component {
   render() {
@@ -32,9 +44,9 @@ export class ShoppingList extends React.Component {
 
     for (let i = 0; i < ingredients.length; i++) {
       formatted.push(
-        <div key={i}>
+        <Item id={`item${i}`} key={i}>
           <input type="checkbox" /><span>{ingredients[i]}</span>
-        </div>
+        </Item>
       )
     }
 

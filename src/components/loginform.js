@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {LoginSchema} from '../schemas';
 import {login} from '../actions/auth';
+import {FormButton} from './styledcomponents';
 
 export class LoginForm extends React.Component {
   handleLogin = (values, {
@@ -34,7 +35,7 @@ export class LoginForm extends React.Component {
                 <label htmlFor="loginpassword">Password </label>
                 <Field id="password" name="password" type="password" /><br />
                 <ErrorMessage name="password" /><br />
-                <button type="submit" disabled={isSubmitting}>Submit</button>
+                <FormButton type="submit" disabled={isSubmitting}>Submit</FormButton>
               </Form>
             )
           } 

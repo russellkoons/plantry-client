@@ -2,6 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Formik, Field, Form, FieldArray, ErrorMessage} from 'formik';
 import {updateMeal, fetchMeals} from '../actions/protected';
+import styled from 'styled-components';
+import {FieldSet, FormButton, PlusMinus} from './styledcomponents';
+
+const UL = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  width: 150;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
 class RecipeCard extends React.Component {
   constructor(props) {
@@ -98,15 +108,16 @@ class RecipeCard extends React.Component {
           <h3>{meal.meal}</h3>
           <a href={meal.url}>{meal.url}</a>
           <h4>Ingredients</h4>
-          <ul>
+          <UL>
             {ingredients}
-          </ul>
-          <p>Notes: {meal.notes}</p><br />
-          <p>Times:</p>
-          <ul>
+          </UL>
+          <h4>Notes</h4>
+          <p>{meal.notes}</p><br />
+          <h4>Meal Times</h4>
+          <UL>
             {times}
-          </ul>
-          <button onClick={this.editMeal}>Edit</button>
+          </UL>
+          <FormButton onClick={this.editMeal}>Edit</FormButton>
         </div>
       )
     } else {
@@ -130,7 +141,7 @@ class RecipeCard extends React.Component {
               <ErrorMessage name="name" /><br />
               <label htmlFor="url">Recipe URL: </label>
               <Field type="text" id="url" name="url" /><br />
-              <fieldset>
+              <FieldSet>
                 <legend>Ingredients</legend>
                 <FieldArray type="text" name="ingredients" render={arrayHelpers => (
                   <div>
@@ -138,29 +149,29 @@ class RecipeCard extends React.Component {
                       values.ingredients.map((ingredient, index) => (
                         <div key={index}>
                           <Field name={`ingredients.${index}`} />
-                          <button
+                          <PlusMinus
                             type="button"
                             onClick={() => arrayHelpers.push('')}
                           >
                             +
-                          </button>
-                          <button
+                          </PlusMinus>
+                          <PlusMinus
                             type="button"
                             onClick={() => arrayHelpers.remove(index)}
                           >
                             -
-                          </button>
+                          </PlusMinus>
                         </div>
                       ))
                     ) : (
-                      <button type="button" onClick={() => arrayHelpers.push('')}>
+                      <FormButton type="button" onClick={() => arrayHelpers.push('')}>
                         Add ingredient
-                      </button>
+                      </FormButton>
                     )}
                   </div>
                 )} /><br/>
                 <ErrorMessage name="ingredients" />
-              </fieldset>
+              </FieldSet>
               <label htmlFor="notes">Notes: </label><br />
               <Field name="notes" type="textarea" /><br />
               <label html="times">Times: </label>
@@ -168,10 +179,10 @@ class RecipeCard extends React.Component {
               <Field name="times[Lunch]" type="checkbox" value="lunch" checked={this.state.lunch} onChange={() => this.handleChange('lunch')} />Lunch
               <Field name="times[Dinner]" type="checkbox" value="dinner" checked={this.state.dinner} onChange={() => this.handleChange('dinner')} />Dinner<br />
               <ErrorMessage name="times" /><br />
-              <button type="submit" disabled={isSubmitting}>Submit Meal</button>
+              <FormButton type="submit" disabled={isSubmitting}>Submit Meal</FormButton>
             </Form>
           )} />
-          <button onClick={this.cancel}>Cancel</button>
+          <FormButton onClick={this.cancel}>Cancel</FormButton>
         </div>
       )
     }

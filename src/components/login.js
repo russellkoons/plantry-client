@@ -1,35 +1,34 @@
 import React from 'react';
-import Popup from 'reactjs-popup';
 import '../index.css';
 import LoginForm from './loginform';
 import SignupForm from './signupform';
-import {Button} from './styledcomponents';
+import {Button, StyledPopup, CloseButton} from './styledcomponents';
 
 export class Login extends React.Component {
 
   render() {
     return(
       <div>
-        <Popup trigger={<Button>Login</Button>} modal>
+        <StyledPopup trigger={<Button>Login</Button>} modal>
         {close => (
-          <div className="modal">
-            <button className="close" onClick={close}>
+          <div>
+            <CloseButton onClick={close}>
               &times;
-            </button>
+            </CloseButton>
             <LoginForm />
           </div>
         )}
-        </Popup>
-        <Popup trigger={<Button>Sign Up</Button>} modal>
+        </StyledPopup>
+        <StyledPopup trigger={<Button>Sign Up</Button>} modal>
           {close => (
-            <div className="modal">
-              <button className="close" onClick={close}>
+            <div>
+              <CloseButton onClick={close}>
                 &times;
-              </button>
+              </CloseButton>
               <SignupForm />
             </div>
           )}
-        </Popup>
+        </StyledPopup>
       </div>
     )
   }

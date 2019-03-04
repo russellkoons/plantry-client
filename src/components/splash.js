@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Gottc fix this
+
 export class Splash extends React.Component {
   render() {
     return(

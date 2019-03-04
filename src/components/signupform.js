@@ -4,6 +4,7 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {SignupSchema} from '../schemas';
 import {login} from '../actions/auth';
 import {registerUser} from '../actions/users';
+import {FormButton} from './styledcomponents';
 
 class SignupForm extends React.Component {
   handleRegister = (values, {
@@ -53,12 +54,12 @@ class SignupForm extends React.Component {
                 <label htmlFor="passconfirm">Confirm password </label>
                 <Field id="passconfirm" name="passconfirm" type="password" /> <br />
                 <ErrorMessage name="passconfirm" /><br />
-                <button type="submit" disabled={isSubmitting}>Submit</button>
+                <FormButton type="submit" disabled={isSubmitting}>Submit</FormButton>
               </Form>
             );
           }} 
         />
-        <button onClick={this.guestLogin}>Login as Guest</button>
+        <FormButton onClick={this.guestLogin}>Login as Guest</FormButton>
       </div>
     )
   }

@@ -1,13 +1,13 @@
 import React from 'react';
 import DayCard from './daycard';
-import Popup from 'reactjs-popup';
 import moment from 'moment';
 import {Formik, Form} from 'formik';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
-import {FormButton} from './styledcomponents';
+import {FormButton, MealPopup, CloseButton, Container} from './styledcomponents';
 import MealForm from './mealform';
 import { addPlan } from '../actions/protected';
+import {PlanSchema} from '../schemas';
 
 class MealPlan extends React.Component {
   handleSubmit = (values, {
@@ -112,51 +112,51 @@ class MealPlan extends React.Component {
 
   render() {
     return(
-      <div>
+      <Container>
         <h2>New Meal Plan</h2>
-        <Popup trigger={<FormButton>Add a new meal</FormButton>} 
+        <MealPopup trigger={<FormButton>Add a new meal</FormButton>} 
           modal
           closeOnDocumentClick
         >
           {close => (
             <div className="modal">
-              <button className="close" onClick={close}>
+              <CloseButton className="close" onClick={close}>
                 &times;
-              </button>
-              <MealForm />
+              </CloseButton>
+              <MealForm close={close}/>
             </div>
           )}
-        </Popup>
+        </MealPopup>
         <Formik 
           initialValues={{
-            SundayBreakfast: 'choose',
-            SundayLunch: 'choose',
-            SundayDinner: 'choose',
-            MondayBreakfast: 'choose',
-            MondayLunch: 'choose',
-            MondayDinner: 'choose',
-            TuesdayBreakfast: 'choose',
-            TuesdayLunch: 'choose',
-            TuesdayDinner: 'choose',
-            WednesdayBreakfast: 'choose',
-            WednesdayLunch: 'choose',
-            WednesdayDinner: 'choose',
-            ThursdayBreakfast: 'choose',
-            ThursdayLunch: 'choose',
-            ThursdayDinner: 'choose',
-            FridayBreakfast: 'choose',
-            FridayLunch: 'choose',
-            FridayDinner: 'choose',
-            SaturdayBreakfast: 'choose',
-            SaturdayLunch: 'choose',
-            SaturdayDinner: 'choose'
+            SundayBreakfast: '',
+            SundayLunch: '',
+            SundayDinner: '',
+            MondayBreakfast: '',
+            MondayLunch: '',
+            MondayDinner: '',
+            TuesdayBreakfast: '',
+            TuesdayLunch: '',
+            TuesdayDinner: '',
+            WednesdayBreakfast: '',
+            WednesdayLunch: '',
+            WednesdayDinner: '',
+            ThursdayBreakfast: '',
+            ThursdayLunch: '',
+            ThursdayDinner: '',
+            FridayBreakfast: '',
+            FridayLunch: '',
+            FridayDinner: '',
+            SaturdayBreakfast: '',
+            SaturdayLunch: '',
+            SaturdayDinner: ''
           }}
+          validationSchema={PlanSchema}
           onSubmit={this.handleSubmit}
           render={({
             isSubmitting
           }) => (
             <Form>
-
               <DayCard day="Sunday" />
               <DayCard day="Monday" />
               <DayCard day="Tuesday" />
@@ -168,7 +168,7 @@ class MealPlan extends React.Component {
             </Form>
           )} 
         />
-      </div>
+      </Container>
     )
   }
 }

@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Formik, Field, Form, FieldArray, ErrorMessage} from 'formik';
+import {Formik, Form, FieldArray, ErrorMessage, Field} from 'formik';
 import {addMeal} from '../actions/protected';
 import {MealSchema} from '../schemas';
+import {FormButton, PlusMinus, FieldSet, Error} from './styledcomponents';
+import '../index.css';
 
 class MealForm extends React.Component {
   handleSubmit = (values, {
@@ -30,8 +32,13 @@ class MealForm extends React.Component {
       }
     });
 
+    console.log(meal);
+
     this.props.dispatch(addMeal(meal))
-      .then(() => setSubmitting(false))
+      .then(() => {
+        this.props.close();
+        setSubmitting(false)
+      })
     return;
   }
 
@@ -51,15 +58,16 @@ class MealForm extends React.Component {
           onSubmit={this.handleSubmit} 
           render={({
             values,
-            isSubmitting
+            isSubmitting,
+            handleChange
           }) => (
           <Form>
             <label htmlFor="name">Name: </label>
             <Field type="text" id="name" name="name" /><br />
-            <ErrorMessage name="name" /><br />
+            <ErrorMessage name="name" component={Error} /><br />
             <label htmlFor="url">Recipe URL: </label>
             <Field type="text" id="url" name="url" /><br />
-            <fieldset>
+            <FieldSet>
               <legend>Ingredients</legend>
               <FieldArray type="text" name="ingredients" render={arrayHelpers => (
                 <div>
@@ -67,37 +75,39 @@ class MealForm extends React.Component {
                     values.ingredients.map((ingredient, index) => (
                       <div key={index}>
                         <Field name={`ingredients.${index}`} />
-                        <button
+                        <PlusMinus
                           type="button"
                           onClick={() => arrayHelpers.push('')}
                         >
                           +
-                        </button>
-                        <button
+                        </PlusMinus>
+                        <PlusMinus
                           type="button"
                           onClick={() => arrayHelpers.remove(index)}
                         >
                           -
-                        </button>
+                        </PlusMinus>
                       </div>
                     ))
                   ) : (
-                    <button type="button" onClick={() => arrayHelpers.push('')}>
+                    <FormButton type="button" onClick={() => arrayHelpers.push('')}>
                       Add ingredient
-                    </button>
+                    </FormButton>
                   )}
                 </div>
               )} /><br/>
-              <ErrorMessage name="ingredients" />
-            </fieldset>
+              <ErrorMessage name="ingredients" component={Error} />
+            </FieldSet>
             <label htmlFor="notes">Notes: </label><br />
             <Field name="notes" type="textarea" /><br />
-            <label html="times">Times: </label>
-            <Field name="times[Breakfast]" type="checkbox" value="breakfast" />Breakfast
-            <Field name="times[Lunch]" type="checkbox" value="lunch" />Lunch
-            <Field name="times[Dinner]" type="checkbox" value="dinner" />Dinner<br />
-            <ErrorMessage name="times" /><br />
-            <button type="submit" disabled={isSubmitting}>Submit Meal</button>
+            <FieldSet>
+              <legend html="times">Times: </legend>
+              <Field name="times[Breakfast]" type="checkbox" value="breakfast" /><label>Breakfast</label><br />
+              <Field name="times[Lunch]" type="checkbox" value="lunch" /><label>Lunch</label><br />
+              <Field name="times[Dinner]" type="checkbox" value="dinner" /><label>Dinner</label><br />
+              <ErrorMessage name="times" component={Error} /><br />
+            </FieldSet>
+            <FormButton type="submit" disabled={isSubmitting}>Submit Meal</FormButton>
           </Form>
         )} />
       </div>

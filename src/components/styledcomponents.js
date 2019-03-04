@@ -19,6 +19,13 @@ export const NavContainer = styled.nav`
   }
 `;
 
+export const Container = styled.main`
+  top: 75px;
+  position: relative;
+  width: 100%;
+  align-items: center;
+`;
+
 export const Nav = styled.div`
   display: flex;
   flex-direction: row;
@@ -86,6 +93,21 @@ export const FormButton = styled(Button)`
   }
 `;
 
+export const PlusMinus = styled.button`
+  background: #EAE7DC;
+  color: #E85A4F;
+  font-size: 1em;
+  height: 22px;
+  border: 0px;
+  border-radius: 3%;
+  transition: 0.3s;
+  text-decoration: none;
+
+  :hover {
+    background: #D8C3A5;
+  }
+`;
+
 export const HamburgerLink = styled.a`
   text-decoration: none;
   color: #E85A4F;
@@ -99,8 +121,66 @@ export const HamburgerLink = styled.a`
 
 export const StyledFooter = styled.footer`
   margin-top: 100px;
+  color: #E85A4F;
 `;
 
 export const StyledPopup = styled(Popup)`
+  background: #EAE7DC !important;
+  color: #E85A4F;
+  border: 0px;
+  border-radius: 15px;
+  max-width: 300px;
+  width: 75% !important;
+`;
+
+export const MealPopup = styled(StyledPopup)`
+  max-width: 400px;
+`;
+
+export const CloseButton = styled.button`
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #D8C3A5;
+  color: #E85A4F;
+  border: 0px;
+  border-radius: 18px;
+  transition: 0.3s;
   
+  :hover {
+    background: #EAE7DC;
+  }
+`;
+
+export const FieldSet = styled.fieldset`
+  color: #E85A4F;
+  border-color: #E85A4F;
+  border-radius: 15px;
+  max-width: 1000px;
+
+  @media only screen and (max-width: 940px) {
+    display: block;
+  }
+`;
+
+export const PlanDiv = styled.div`
+  display: inline;
+
+  @media only screen and (max-width: 940px) {
+    display: block;
+  }
+`;
+
+export const Error = styled.span`
+  background: red;
+  color: white;
+  border-radius: 2px;
+  border: 0px;
+  padding: 2px;
+  margin: 2px;
 `;

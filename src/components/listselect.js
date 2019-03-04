@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {ShoppingList} from './shoppinglist';
+import {Container} from './styledcomponents';
+import '../index.css';
 
 class ListSelect extends React.Component {
   constructor(props) {
@@ -27,19 +29,19 @@ class ListSelect extends React.Component {
     const list = [];
     for (let i = 0; i < this.props.plans.length; i++) {
       list.push(
-        <option value={i} key={i + 1}>Plan #{i + 1}</option>
+        <option value={i} key={i + 1}>{this.props.plans[i].date}</option>
       )
     }
 
     return(
-      <div>
+      <Container>
         <h2>Shopping List</h2>
         <select id="listselect" defaultValue="choose" onChange={this.handleChange}>
           <option value="choose" key="0" disabled>--Choose a plan--</option>
           {list}
         </select>
         {this.state.list}
-      </div>
+      </Container>
     )
   }
 }

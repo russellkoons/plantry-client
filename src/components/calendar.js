@@ -1,15 +1,21 @@
 import React from 'react';
-import {Container} from 'react-grid-system';
+import {Container, Col, Row} from 'react-grid-system';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import {Formik, Form} from 'formik';
-import Popup from 'reactjs-popup';
-import {FormButton} from './styledcomponents';
+import {FormButton, CloseButton, StyledPopup} from './styledcomponents';
 import {CalendarRow} from './calendarrow';
 import {MealRow} from './mealrow';
+import {DayRow} from './dayrow';
 import DayCard from './daycard';
 import MealForm from './mealform';
 import {updatePlan, fetchPlans} from '../actions/protected'
+
+// Gotta style the calendar!!!! You're SO CLOSE AHHHHH
+
+const style = {
+  background: 'grey'
+};
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -138,6 +144,13 @@ class Calendar extends React.Component {
     const breakfast = [];
     const lunch = [];
     const dinner = [];
+    const s = [];
+    const m = [];
+    const t = [];
+    const w = [];
+    const r = [];
+    const f = [];
+    const a = [];
     const plan = this.props.plans.find(e => e.id === this.props.plan);
 
     for (let i = 0; i < plan.mealplans.length; i++) {
@@ -150,14 +163,47 @@ class Calendar extends React.Component {
       }
     }
 
+    for (let i = 0; i < plan.mealplans.length; i++) {
+      if (plan.mealplans[i].day === 'Sunday') {
+        s.push(plan.mealplans[i].meal)
+      } else if (plan.mealplans[i].day === 'Monday') {
+        m.push(plan.mealplans[i].meal)
+      } else if (plan.mealplans[i].day === 'Tuesday') {
+        t.push(plan.mealplans[i].meal)
+      } else if (plan.mealplans[i].day === 'Wednesday') {
+        w.push(plan.mealplans[i].meal)
+      } else if (plan.mealplans[i].day === 'Thursday') {
+        r.push(plan.mealplans[i].meal)
+      } else if (plan.mealplans[i].day === 'Friday') {
+        f.push(plan.mealplans[i].meal)
+      } else if (plan.mealplans[i].day === 'Saturday') {
+        a.push(plan.mealplans[i].meal)
+      }
+    }
+
     if (!this.state.editing) {
       return(
         <div>
-          <Container className="container">
+          <Container className="wide" style={style}>
             <CalendarRow />
             <MealRow time="Breakfast" plan={breakfast} />
             <MealRow time="Lunch" plan={lunch} />
             <MealRow time="Dinner" plan={dinner} />
+          </Container>
+          <Container className="narrow">
+            <Row>
+              <Col>Day</Col>
+              <Col>Breakfast</Col>
+              <Col>Lunch</Col>
+              <Col>Dinner</Col>
+            </Row>
+            <DayRow day="Sunday" plan={s} />
+            <DayRow day="Monday" plan={m} />
+            <DayRow day="Tuesday" plan={t} />
+            <DayRow day="Wednesday" plan={w} />
+            <DayRow day="Thursday" plan={r} />
+            <DayRow day="Friday" plan={f} />
+            <DayRow day="Saturday" plan={a} />
           </Container>
           <FormButton onClick={this.editPlan}>Edit</FormButton>
           <FormButton onClick={this.props.onDelete}>Delete</FormButton>
@@ -166,19 +212,19 @@ class Calendar extends React.Component {
     } else {
       return(
         <div>
-          <Popup trigger={<FormButton>Add a new meal</FormButton>} 
+          <StyledPopup trigger={<FormButton>Add a new meal</FormButton>} 
             modal
             closeOnDocumentClick
           >
             {close => (
               <div className="modal">
-                <button className="close" onClick={close}>
+                <CloseButton className="close" onClick={close}>
                   &times;
-                </button>
+                </CloseButton>
                 <MealForm />
               </div>
             )}
-          </Popup>
+          </StyledPopup>
           <Formik
             initialValues={{
               SundayBreakfast: breakfast[0],
