@@ -43,6 +43,12 @@ class MealForm extends React.Component {
   }
 
   render() {
+    let e;
+
+    if (this.props.error) {
+      e = <Error>{this.props.error}</Error>
+    }
+
     return(
       <div>
         <h2>New Meal</h2>
@@ -110,9 +116,14 @@ class MealForm extends React.Component {
             <FormButton type="submit" disabled={isSubmitting}>Submit Meal</FormButton>
           </Form>
         )} />
+        {e}
       </div>
     )
   }
 }
 
-export default connect()(MealForm);
+const mapStateToProps = state => ({
+  error: state.auth.error
+});
+
+export default connect(mapStateToProps)(MealForm);

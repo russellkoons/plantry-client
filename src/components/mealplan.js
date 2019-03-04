@@ -4,7 +4,7 @@ import moment from 'moment';
 import {Formik, Form} from 'formik';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
-import {FormButton, MealPopup, CloseButton, Container} from './styledcomponents';
+import {FormButton, MealPopup, CloseButton, Container, Error} from './styledcomponents';
 import MealForm from './mealform';
 import {addPlan} from '../actions/protected';
 import {PlanSchema} from '../schemas';
@@ -111,6 +111,12 @@ class MealPlan extends React.Component {
   }
 
   render() {
+    let e;
+
+    if (this.props.error) {
+      e = <Error>{this.props.error}</Error>
+    }
+
     return(
       <Container>
         <h2>New Meal Plan</h2>
@@ -168,13 +174,14 @@ class MealPlan extends React.Component {
             </Form>
           )} 
         />
+        {e}
       </Container>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  open: state.plantry.open
+  error: state.auth.error
 });
 
 export default connect(mapStateToProps, { addPlan, push })(MealPlan);

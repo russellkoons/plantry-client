@@ -3,7 +3,7 @@ import {Container, Col, Row} from 'react-grid-system';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import {Formik, Form} from 'formik';
-import {FormButton, CloseButton, StyledPopup} from './styledcomponents';
+import {FormButton, CloseButton, StyledPopup, Error} from './styledcomponents';
 import {CalendarRow} from './calendarrow';
 import {MealRow} from './mealrow';
 import {DayRow} from './dayrow';
@@ -33,7 +33,7 @@ class Calendar extends React.Component {
   handleUpdate = (values, {
     setSubmitting
   }) => {
-    const id = this.props.plan.id
+    const id = this.props.plan;
     const planUpdate = {
       id: id,
       mealplans: [
@@ -211,6 +211,12 @@ class Calendar extends React.Component {
         </div>
       )
     } else {
+      let e;
+
+      if (this.props.error) {
+        e = <Error>{this.props.error}</Error>
+      }
+
       return(
         <div>
           <StyledPopup trigger={<FormButton>Add a new meal</FormButton>} 
@@ -266,6 +272,7 @@ class Calendar extends React.Component {
               </Form>
             )} 
           />
+          {e}
           <FormButton onClick={this.cancel}>Cancel</FormButton>
         </div>
       )
@@ -274,8 +281,8 @@ class Calendar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  open: state.plantry.open,
-  plans: state.plantry.plans
+  plans: state.plantry.plans,
+  error: state.auth.error
 });
 
 export default connect(mapStateToProps, { fetchPlans, updatePlan, push })(Calendar)

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {LoginSchema} from '../schemas';
 import {login} from '../actions/auth';
-import {FormButton} from './styledcomponents';
+import {FormButton, Error} from './styledcomponents';
 
 export class LoginForm extends React.Component {
   handleLogin = (values, {
@@ -15,6 +15,12 @@ export class LoginForm extends React.Component {
   }
 
   render() {
+    let e;
+
+    if (this.props.error) {
+      e = <Error>{this.props.error}</Error>
+    }
+
     return(
       <div>  
         <h2>Login</h2>
@@ -40,9 +46,14 @@ export class LoginForm extends React.Component {
             )
           } 
         />
+        {e}
       </div>
     )
   }
 }
 
-export default connect(null, { login })(LoginForm)
+const mapStateToProps = state => ({
+  error: state.auth.error
+});
+
+export default connect(mapStateToProps, { login })(LoginForm)

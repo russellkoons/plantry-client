@@ -2,6 +2,7 @@ import jwtDecode from 'jwt-decode';
 import {API_BASE_URL} from '../config';
 import {saveToken, clearToken} from '../local-storage';
 import {fetchMeals, fetchPlans} from './protected';
+import {normalizeErrors} from './utility';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
@@ -53,6 +54,7 @@ export const login = (username, password) => dispatch => {
         password
       })
     })
+    .then(res => normalizeErrors(res))
     .then(res => {
       return res.json();
     })

@@ -1,4 +1,5 @@
 import {API_BASE_URL} from '../config';
+import {normalizeErrors} from './utility';
 
 export const FETCH_MEALS_SUCCESS = 'FETCH_MEALS_SUCCESS';
 export const fetchMealsSuccess = meals => ({
@@ -20,6 +21,7 @@ export const fetchMeals = () => (dispatch, getState) => {
         Authorization: `Bearer ${authToken}`
       }
     })
+    .then(res => normalizeErrors(res))
     .then(res => res.json())
     .then(res => dispatch(fetchMealsSuccess(res)))
     .catch(err => {
@@ -49,6 +51,7 @@ export const addMeal = (meal) => (dispatch, getState) => {
       },
       body: JSON.stringify(meal)
     })
+    .then(res => normalizeErrors(res))
     .then(res => res.json())
     .then(res => {
       return dispatch(addMealSuccess(res));
@@ -82,6 +85,7 @@ export const updateMeal = (id, meal) => (dispatch, getState) => {
       },
       body: JSON.stringify(meal)
     })
+    .then(res => normalizeErrors(res))
     .then(res => res.json())
     .then(() => {
       return dispatch(updateMealSuccess(meal));
@@ -109,6 +113,7 @@ export const fetchPlans = () => (dispatch, getState) => {
         Authorization: `Bearer ${authToken}`
       }
     })
+    .then(res => normalizeErrors(res))
     .then(res => res.json())
     .then(res => dispatch(fetchPlansSuccess(res)))
     .catch(err => {
@@ -138,6 +143,7 @@ export const addPlan = (plan) => (dispatch, getState) => {
       },
       body: JSON.stringify(plan)
     })
+    .then(res => normalizeErrors(res))
     .then(res => res.json())
     .then(res => {
       return dispatch(addPlanSuccess(res));
@@ -167,6 +173,7 @@ export const updatePlan = (id, plan) => (dispatch, getState) => {
       },
       body: JSON.stringify(plan)
     })
+    .then(res => normalizeErrors(res))
     .then(() => {
       return dispatch(updatePlanSuccess(plan));
     })
@@ -193,6 +200,7 @@ export const deletePlan = id => (dispatch, getState) => {
         Authorization: `Bearer ${authToken}`
       }
     })
+    .then(res => normalizeErrors(res))
     .then(() => dispatch(deletePlanSuccess(id)))
     .catch(err => dispatch(deletePlanError(err)));
 };

@@ -4,15 +4,15 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {SignupSchema} from '../schemas';
 import {login} from '../actions/auth';
 import {registerUser} from '../actions/users';
-import {FormButton} from './styledcomponents';
+import {FormButton, Error} from './styledcomponents';
 
 class SignupForm extends React.Component {
   handleRegister = (values, {
     setSubmitting
   }) => {
     this.props.registerUser(values.username, values.password)
-      .then(() => {
-        this.props.login(values.username, values.password);
+      .then(res => {
+        this.props.login(values.username, values.password)
         setSubmitting(false);
       });
     return;
@@ -24,6 +24,12 @@ class SignupForm extends React.Component {
   }
 
   render() {
+    let e;
+
+    if (this.props.error) {
+      e = <Error>{this.props.error}</Error>
+    }
+
     return(
       <div>
         <h2>Sign Up</h2>
@@ -59,10 +65,15 @@ class SignupForm extends React.Component {
             );
           }} 
         />
+        {e}<br />
         <FormButton onClick={this.guestLogin}>Login as Guest</FormButton>
       </div>
     )
   }
 }
 
-export default connect(null, { login, registerUser })(SignupForm)
+const mapStateToProps = state => ({
+  error: state.auth.error
+});
+
+export default connect(mapStateToProps, { login, registerUser })(SignupForm)

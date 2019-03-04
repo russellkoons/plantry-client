@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Formik, Field, Form, FieldArray, ErrorMessage} from 'formik';
 import {updateMeal, fetchMeals} from '../actions/protected';
 import styled from 'styled-components';
-import {FieldSet, FormButton, PlusMinus} from './styledcomponents';
+import {FieldSet, FormButton, PlusMinus, Error} from './styledcomponents';
 import '../index.css';
 
 const UL = styled.ul`
@@ -122,6 +122,12 @@ class RecipeCard extends React.Component {
         </div>
       )
     } else {
+      let e;
+
+      if (this.props.error) {
+        e = <Error>{this.props.error}</Error>
+      }
+
       return(
         <div>        
           <Formik 
@@ -183,6 +189,7 @@ class RecipeCard extends React.Component {
               <FormButton type="submit" disabled={isSubmitting}>Submit Meal</FormButton>
             </Form>
           )} />
+          {e}
           <FormButton onClick={this.cancel}>Cancel</FormButton>
         </div>
       )
@@ -191,7 +198,8 @@ class RecipeCard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  meals: state.plantry.meals
+  meals: state.plantry.meals,
+  error: state.auth.error
 });
 
 export default connect(mapStateToProps)(RecipeCard);

@@ -1,4 +1,5 @@
 import {API_BASE_URL} from '../config';
+import {normalizeErrors} from './utility';
 
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const registerRequest = () => ({
@@ -28,6 +29,7 @@ export const registerUser = (username, password) => dispatch => {
       password
     })
   })
+  .then(res => normalizeErrors(res))
   .then(res => {
     dispatch(registerSuccess());
     return res.json();
