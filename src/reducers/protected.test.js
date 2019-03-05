@@ -11,8 +11,8 @@ describe('plantryReducer', () => {
   const plan3 = {id: 3, date: 'February 26, 1986'};
 
   const user = {
-    user: 'fakeuser'
-    error: null,
-    loading: false
+    meals: [],
+    plans: [];
+    error: null
   };
 })

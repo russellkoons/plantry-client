@@ -8,7 +8,7 @@ describe('fetchMealsSuccess', () => {
       meals: {}
     };
     const action = actions.fetchMealsSuccess(meals);
-    expect(action.type).toEqual(FETCH_MEALS_SUCCESS);
+    expect(action.type).toEqual(actions.FETCH_MEALS_SUCCESS);
     expect(action.meals).toEqual(meals);
   });
 });
@@ -17,7 +17,7 @@ describe('fetchMealsError', () => {
   it('Should return the action', () => {
     const error = 'error';
     const action = actions.fetchMealsError(error);
-    expect(action.type).toEqual(FETCH_MEALS_ERROR);
+    expect(action.type).toEqual(actions.FETCH_MEALS_ERROR);
     expect(action.error).toEqual(error);
   });
 });
@@ -49,7 +49,7 @@ describe('fetchMeals', () => {
           Authorization: `Bearer ${getState().auth.authToken}`
         }
       });
-      expect(dispatch).toHaveBeenCalledWith(fetchMealsSuccess(meals));
+      expect(dispatch).toHaveBeenCalledWith(actions.fetchMealsSuccess(meals));
     });
   });
 
@@ -72,7 +72,7 @@ describe('fetchMeals', () => {
           Authorization: `Bearer ${getState().auth.authToken}`
         }
       });
-      expect(dispatch).toHaveBeenCalledWith(fetchMealsError(error));
+      expect(dispatch).toHaveBeenCalledWith(actions.fetchMealsError(error));
     });
   });
 });
@@ -178,7 +178,7 @@ describe('updateMeal', () => {
       }
     }));
 
-    return actions.updateMeal(meal)(dispatch, getState).then(() => {
+    return actions.updateMeal(meal.id, meal)(dispatch, getState).then(() => {
       expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}meals/${meal.id}`, {
         method: 'PUT',
         headers: {
@@ -199,7 +199,7 @@ describe('fetchPlansSuccess', () => {
       plan: {}
     };
     const action = actions.fetchPlansSuccess(plans);
-    expect(action.type).toEqual(FETCH_PLANS_SUCCESS);
+    expect(action.type).toEqual(actions.FETCH_PLANS_SUCCESS);
     expect(action.plans).toEqual(plans);
   });
 });
@@ -208,7 +208,7 @@ describe('fetchPlansError', () => {
   it('Should return the action', () => {
     const error = 'error';
     const action = actions.fetchPlansError(error);
-    expect(action.type).toEqual(FETCH_PLANS_ERROR);
+    expect(action.type).toEqual(actions.FETCH_PLANS_ERROR);
     expect(action.error).toEqual(error);
   });
 });
@@ -240,7 +240,7 @@ describe('fetchPlans', () => {
           Authorization: `Bearer ${getState().auth.authToken}`
         }
       });
-      expect(dispatch).toHaveBeenCalledWith(fetchPlansSuccess(plans));
+      expect(dispatch).toHaveBeenCalledWith(actions.fetchPlansSuccess(plans));
     });
   });
 
@@ -263,7 +263,7 @@ describe('fetchPlans', () => {
           Authorization: `Bearer ${getState().auth.authToken}`
         }
       });
-      expect(dispatch).toHaveBeenCalledWith(fetchPlansError(error));
+      expect(dispatch).toHaveBeenCalledWith(actions.fetchPlansError(error));
     });
   });
 });
@@ -365,7 +365,7 @@ describe('updatePlan', () => {
       }
     }));
 
-    return actions.updatePlan(plan)(dispatch, getState).then(() => {
+    return actions.updatePlan(plan.id, plan)(dispatch, getState).then(() => {
       expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}plans/${plan.id}`, {
         method: 'PUT',
         headers: {

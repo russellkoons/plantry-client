@@ -28,12 +28,12 @@ describe('authRequest', () => {
 
 describe('authSuccess', () => {
   it('Should return the action', () => {
-    const currentUser = {
-        username: 'JohnDoe'
+    const user = {
+      username: 'JohnDoe'
     };
-    const action = actions.authSuccess(currentUser);
+    const action = actions.authSuccess(user);
     expect(action.type).toEqual(actions.AUTH_SUCCESS);
-    expect(action.currentUser).toEqual(currentUser);
+    expect(action.user).toEqual(user);
   });
 });
 
@@ -71,7 +71,7 @@ describe('login', () => {
     const dispatch = jest.fn();
 
     return actions.login(user.username, user.password)(dispatch).then(() => {
-      expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/auth/login`, {
+      expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -125,7 +125,7 @@ describe('refreshAuthToken', () => {
     }));
 
     return actions.refreshAuthToken()(dispatch, getState).then(() => {
-      expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/auth/refresh`, {
+      expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}auth/refresh`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${currentAuthToken}`
