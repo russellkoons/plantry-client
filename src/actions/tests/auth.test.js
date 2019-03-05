@@ -82,8 +82,8 @@ describe('login', () => {
         })
       });
       expect(dispatch).toHaveBeenCalledWith(actions.authRequest());
+      expect(dispatch).toHaveBeenCalledWith(actions.authSuccess(user.username));
       expect(dispatch).toHaveBeenCalledWith(actions.setAuthToken(authToken));
-      expect(dispatch).toHaveBeenCalledWith(actions.authSuccess(decodedToken.user));
     });
   });
 });
@@ -132,8 +132,8 @@ describe('refreshAuthToken', () => {
         }
       });
       expect(dispatch).toHaveBeenCalledWith(actions.authRequest());
+      expect(dispatch).toHaveBeenCalledWith(actions.authSuccess(user.username));
       expect(dispatch).toHaveBeenCalledWith(actions.setAuthToken(authToken));
-      expect(dispatch).toHaveBeenCalledWith(actions.authSuccess(newDecodedToken.user));
     });
   });
 });

@@ -11,8 +11,25 @@ describe('plantryReducer', () => {
   const plan3 = {id: 3, date: 'February 26, 1986'};
 
   const user = {
-    meals: [],
-    plans: [];
+    meals: [meal1, meal2],
+    plans: [plan1, plan2, plan3],
     error: null
   };
+
+  it('Should set the initial state when nothing is passed in', () => {
+    const state = plantryReducer(undefined, {type: '__UNKNOWN'});
+    expect(state).toEqual({
+      meals: [],
+      plans: [],
+      error: null
+    });
+  });
+
+  it('Should return the current state on an unknown action', () => {
+    let current = {};
+    const state = plantryReducer(current, {type: '__UNKNOWN'});
+    expect(state).toBe(current);
+  });
+
+  
 })
