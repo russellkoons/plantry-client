@@ -45,7 +45,7 @@ describe('authReducer', () => {
       state = authReducer(state, actions.clearAuth());
       expect(state).toEqual({
         authToken: null,
-        currentUser: null
+        user: null
       });
     });
   });
@@ -68,12 +68,12 @@ describe('authReducer', () => {
     it('Should set the user', () => {
       let state = {
         loading: true, 
-        currentUser: null
+        user: null
       };
       state = authReducer(state, actions.authSuccess(testUser));
       expect(state).toEqual({
         loading: false,
-        currentUser: testCurrentUser
+        user: testUser
       });
     });
   });

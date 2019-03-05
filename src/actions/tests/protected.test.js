@@ -7,7 +7,7 @@ describe('fetchMealsSuccess', () => {
     const meals = {
       meals: {}
     };
-    const action = fetchMealsSuccess(meals);
+    const action = actions.fetchMealsSuccess(meals);
     expect(action.type).toEqual(FETCH_MEALS_SUCCESS);
     expect(action.meals).toEqual(meals);
   });
@@ -16,7 +16,7 @@ describe('fetchMealsSuccess', () => {
 describe('fetchMealsError', () => {
   it('Should return the action', () => {
     const error = 'error';
-    const action = fetchMealsError(error);
+    const action = actions.fetchMealsError(error);
     expect(action.type).toEqual(FETCH_MEALS_ERROR);
     expect(action.error).toEqual(error);
   });
@@ -42,7 +42,7 @@ describe('fetchMeals', () => {
       }
     }));
 
-    return fetchMeals()(dispatch, getState).then(() => {
+    return actions.fetchMeals()(dispatch, getState).then(() => {
       expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}meals`, {
         method: 'GET',
         headers: {
@@ -65,7 +65,7 @@ describe('fetchMeals', () => {
       }
     }));
 
-    return fetchMeals()(dispatch, getState).then(() => {
+    return actions.fetchMeals()(dispatch, getState).then(() => {
       expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}meals`, {
         method: 'GET',
         headers: {
@@ -93,7 +93,6 @@ describe('addMealError', () => {
       const error = 'error';
       const action = actions.addMealError(error);
       expect(action.type).toEqual(actions.ADD_MEAL_ERROR);
-      expect(action.error).toEqual(error);
     });
 });
 
@@ -153,7 +152,6 @@ describe('updateMealError', () => {
     const error = 'error';
     const action = actions.updateMealError(error);
     expect(action.type).toEqual(actions.UPDATE_MEAL_ERROR);
-    expect(action.error).toEqual(error);
   });
 });
 
@@ -180,7 +178,7 @@ describe('updateMeal', () => {
       }
     }));
 
-    return actions.updateBill(meal)(dispatch, getState).then(() => {
+    return actions.updateMeal(meal)(dispatch, getState).then(() => {
       expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}meals/${meal.id}`, {
         method: 'PUT',
         headers: {
@@ -200,7 +198,7 @@ describe('fetchPlansSuccess', () => {
     const plans = {
       plan: {}
     };
-    const action = fetchPlansSuccess(plans);
+    const action = actions.fetchPlansSuccess(plans);
     expect(action.type).toEqual(FETCH_PLANS_SUCCESS);
     expect(action.plans).toEqual(plans);
   });
@@ -209,7 +207,7 @@ describe('fetchPlansSuccess', () => {
 describe('fetchPlansError', () => {
   it('Should return the action', () => {
     const error = 'error';
-    const action = fetchPlansError(error);
+    const action = actions.fetchPlansError(error);
     expect(action.type).toEqual(FETCH_PLANS_ERROR);
     expect(action.error).toEqual(error);
   });
@@ -235,7 +233,7 @@ describe('fetchPlans', () => {
       }
     }));
 
-    return fetchPlans()(dispatch, getState).then(() => {
+    return actions.fetchPlans()(dispatch, getState).then(() => {
       expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}plans`, {
         method: 'GET',
         headers: {
@@ -258,7 +256,7 @@ describe('fetchPlans', () => {
       }
     }));
 
-    return fetchMeals()(dispatch, getState).then(() => {
+    return actions.fetchPlans()(dispatch, getState).then(() => {
       expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}plans`, {
         method: 'GET',
         headers: {
@@ -347,7 +345,7 @@ describe('updatePlanError', () => {
 });
 
 describe('updatePlan', () => {
-  it('Sould dispatch updatePlanSuccess', () => {
+  it('Should dispatch updatePlanSuccess', () => {
     const plan = {
       id: 1,
       date: 'April 1, 2019',
@@ -367,7 +365,7 @@ describe('updatePlan', () => {
       }
     }));
 
-    return actions.updatePlan(meal)(dispatch, getState).then(() => {
+    return actions.updatePlan(plan)(dispatch, getState).then(() => {
       expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}plans/${plan.id}`, {
         method: 'PUT',
         headers: {
@@ -403,7 +401,7 @@ describe('deletePlanError', () => {
 
 describe('deletePlan', () => {
   it('Should dispatch deletePlanSuccess', () => {
-    const lanId = 1;
+    const planId = 1;
 
     global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
