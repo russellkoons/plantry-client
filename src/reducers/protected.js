@@ -30,7 +30,7 @@ export const plantryReducer = (state = initialState, action) => {
     });
   } else if (action.type === actions.UPDATE_MEAL_SUCCESS) {
     return Object.assign({}, state, {
-      meals: state.meals.map(meal => meal.id === action.id ? {
+      meals: state.meals.map(meal => meal.id === action.meal.id ? {
         ...meal,
         meal: action.meal.meal,
         url: action.meal.url,
@@ -65,10 +65,10 @@ export const plantryReducer = (state = initialState, action) => {
     });
   } else if (action.type === actions.UPDATE_PLAN_SUCCESS) {
     return Object.assign({}, state, {
-      plans: state.plans.map(plan => plan.id === action.id ? {
+      plans: state.plans.map(plan => plan.id === action.plan.id ? {
         ...plan,
-        date: action.date,
-        mealplans: action.mealplans
+        date: action.plan.date,
+        mealplans: action.plan.mealplans
       }: plan)
     });
   } else if (action.type === actions.UPDATE_PLAN_ERROR) {
