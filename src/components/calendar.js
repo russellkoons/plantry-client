@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import {Formik, Form} from 'formik';
-import styled from 'styled-components';
 import {FormButton, CloseButton, StyledPopup, Error} from './styledcomponents';
 import DayCard from './daycard';
 import MealForm from './mealform';
