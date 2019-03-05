@@ -1,4 +1,4 @@
-import * as actions from '../protected-data';
+import * as actions from '../protected';
 import {API_BASE_URL} from '../../config';
 
 // Fetch Meal Action
