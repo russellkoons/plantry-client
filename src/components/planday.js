@@ -9,15 +9,23 @@ const Time = styled.h4`
 `;
 
 const Day = styled(FieldSet)`
-  max-width: 150px;
-  height: 340px;
   margin-top: 15px;
+  max-width: 800px;
 
-  @media only screen and (max-width: 1260px) {
+  @media only screen and (max-width: 700px) {
     height: auto;
     max-height: 400px;
     width: 350px;
     max-width: 80%;
+  }
+`;
+
+const Plan = styled.div`
+  display: flex;
+  justify-content: center;
+
+  @media only screen and (max-width: 700px) {
+    flex-direction: column;
   }
 `;
 
@@ -28,12 +36,20 @@ export class PlanDay extends React.Component {
     return(
       <Day>
         <legend>{this.props.day}</legend>
-        <Time>Breakfast</Time>
-        <RecipePopup meal={plan[0]} k={this.props.day + 'Breakfast'} />
-        <Time>Lunch</Time>
-        <RecipePopup meal={plan[1]} k={this.props.day + 'Lunch'} />
-        <Time>Dinner</Time>
-        <RecipePopup meal={plan[2]} k={this.props.day + 'Dinner'} />
+        <Plan>
+          <div>
+            <Time>Breakfast</Time>
+            <RecipePopup meal={plan[0]} k={this.props.day + 'Breakfast'} />
+          </div>
+          <div>
+            <Time>Lunch</Time>
+            <RecipePopup meal={plan[1]} k={this.props.day + 'Lunch'} />
+          </div>
+          <div>
+            <Time>Dinner</Time>
+            <RecipePopup meal={plan[2]} k={this.props.day + 'Dinner'} />
+          </div>
+        </Plan>
       </Day>
     )
   }

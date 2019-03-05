@@ -9,14 +9,6 @@ import MealForm from './mealform';
 import {PlanDay} from './planday';
 import {updatePlan, fetchPlans} from '../actions/protected'
 
-const Cal = styled.div`
-  display: flex;
-
-  @media only screen and (max-width: 1260px) {
-    flex-direction: column;
-  }
-`;
-
 class Calendar extends React.Component {
   constructor(props) {
     super(props)
@@ -185,7 +177,7 @@ class Calendar extends React.Component {
       return(
         <div>
           <h3>Click any meal to view or edit!</h3>
-          <Cal>
+          <div>
             <PlanDay day="Sunday" plan={s} />
             <PlanDay day="Monday" plan={m} />
             <PlanDay day="Tuesday" plan={t} />
@@ -193,7 +185,7 @@ class Calendar extends React.Component {
             <PlanDay day="Thursday" plan={r} />
             <PlanDay day="Friday" plan={f} />
             <PlanDay day="Saturday" plan={a} />
-          </Cal>
+          </div>
           <FormButton onClick={this.editPlan}>Edit</FormButton>
           <FormButton onClick={() => this.props.onDelete(plan.id)}>Delete</FormButton>
         </div>
