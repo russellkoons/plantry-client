@@ -11,6 +11,8 @@
     "ag-grid-react": "^20.1.0",
     "connected-react-router": "^6.3.1",
     "dotenv": "^6.2.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.10.0",
     "formik": "^1.5.1",
     "history": "^4.7.2",
     "jquery": "^3.3.1",

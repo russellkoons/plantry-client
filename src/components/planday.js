@@ -22,7 +22,8 @@ const Day = styled(FieldSet)`
 
 const Plan = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  flex-grow: 1;
 
   @media only screen and (max-width: 700px) {
     flex-direction: column;

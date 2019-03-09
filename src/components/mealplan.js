@@ -1,7 +1,6 @@
 import React from 'react';
 import DayCard from './daycard';
-import moment from 'moment';
-import {Formik, Form} from 'formik';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import {FormButton, MealPopup, CloseButton, Container, Error} from './styledcomponents';
@@ -14,7 +13,7 @@ class MealPlan extends React.Component {
     setSubmitting
   }) => {
     const plan = {
-      date: moment().format('MMMM Do YYYY'),
+      date: values.name,
       mealplans: [
         {
           meal: values.SundayBreakfast,
@@ -120,6 +119,8 @@ class MealPlan extends React.Component {
     return(
       <Container>
         <h2>New Meal Plan</h2>
+        <p>Click Add New Meal or add your favorite meals</p>
+        <p>Use the meals you make to build your weekly meal plan</p>
         <MealPopup trigger={<FormButton>Add a new meal</FormButton>} 
           modal
           closeOnDocumentClick
@@ -135,6 +136,7 @@ class MealPlan extends React.Component {
         </MealPopup>
         <Formik 
           initialValues={{
+            name: '',
             SundayBreakfast: '',
             SundayLunch: '',
             SundayDinner: '',
@@ -163,6 +165,9 @@ class MealPlan extends React.Component {
             isSubmitting
           }) => (
             <Form>
+              <label>Name your plan: </label>
+              <Field name="name" type="text" />
+              <ErrorMessage component={Error} name="name" />
               <DayCard day="Sunday" />
               <DayCard day="Monday" />
               <DayCard day="Tuesday" />
@@ -170,7 +175,7 @@ class MealPlan extends React.Component {
               <DayCard day="Thursday" />
               <DayCard day="Friday" />
               <DayCard day="Saturday" />
-              <FormButton type="submit" disabled={isSubmitting}>Submit</FormButton>
+              <FormButton type="submit" disabled={isSubmitting}>Save Meal Plan</FormButton>
             </Form>
           )} 
         />

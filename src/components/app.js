@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 import {ConnectedRouter} from 'connected-react-router';
 import {connect} from 'react-redux';
 import {history} from '../store';
-import {TopNav} from './topnav';
+import TopNav from './topnav';
 import SecondNav from './secondnav';
 import {Info} from './info';
 import {Splash} from './splash';

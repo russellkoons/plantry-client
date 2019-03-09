@@ -18,11 +18,6 @@ class SignupForm extends React.Component {
     return;
   }
 
-  guestLogin = () => {
-    this.props.login('guest', 'abc123');
-    return;
-  }
-
   render() {
     let e;
 
@@ -66,7 +61,6 @@ class SignupForm extends React.Component {
           }} 
         />
         {e}<br />
-        <FormButton onClick={this.guestLogin}>Login as Guest</FormButton>
       </div>
     )
   }

@@ -91,7 +91,7 @@ export const Button = styled.button`
 `;
 
 export const FormButton = styled(Button)`
-  background: #EAE7DC;
+  background: #EFE2BA;
 
   :hover {
     background: #D8C3A5;
@@ -159,14 +159,14 @@ export const CloseButton = styled.button`
   right: 10px;
   top: 10px;
   font-size: 24px;
-  background: #D8C3A5;
+  background: #EAE7DC;
   color: #E85A4F;
   border: 0px;
   border-radius: 18px;
   transition: 0.3s;
   
   :hover {
-    background: #EAE7DC;
+    color: E98074;
   }
 `;
 
@@ -196,5 +196,13 @@ export const Error = styled.span`
   border-radius: 2px;
   border: 0px;
   padding: 2px;
-  margin: 2px;
+  margin: 5px;
+
+  @media only screen and (max-width: 940px) {
+    display: block;
+    min-width: 75px;
+    max-width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;

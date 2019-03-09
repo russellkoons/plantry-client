@@ -181,9 +181,9 @@ class RecipeCard extends React.Component {
               </FieldSet>
               <label htmlFor="notes">Notes: </label><br />
               <Field name="notes" type="textarea" rows="5" cols="20"/><br />
-              <label html="times">Times: </label>
-              <Field name="times[Breakfast]" type="checkbox" value="breakfast" checked={this.state.breakfast} onChange={() => this.handleChange('breakfast')} />Breakfast
-              <Field name="times[Lunch]" type="checkbox" value="lunch" checked={this.state.lunch} onChange={() => this.handleChange('lunch')} />Lunch
+              <label html="times">Times: </label><br />
+              <Field name="times[Breakfast]" type="checkbox" value="breakfast" checked={this.state.breakfast} onChange={() => this.handleChange('breakfast')} />Breakfast<br />
+              <Field name="times[Lunch]" type="checkbox" value="lunch" checked={this.state.lunch} onChange={() => this.handleChange('lunch')} />Lunch<br />
               <Field name="times[Dinner]" type="checkbox" value="dinner" checked={this.state.dinner} onChange={() => this.handleChange('dinner')} />Dinner<br />
               <ErrorMessage name="times" /><br />
               <FormButton type="submit" disabled={isSubmitting}>Submit Meal</FormButton>

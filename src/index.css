@@ -9,13 +9,20 @@ input, select, textarea {
   border-radius: 2px;
 }
 
+input {
+  height: 20px;
+}
+
 .toggle {
-  display: flex;
-  flex-direction: column;
+  display: none;
 }
 
 .hidden {
   display: none;
+}
+
+.center {
+  text-align: center;
 }
 
 .narrow {
@@ -33,5 +40,10 @@ input[type=checkbox]:checked + span {
 
   .narrow {
     display: initial;
+  }
+
+  .toggle {   
+    display: flex;
+    flex-direction: column;
   }
 }

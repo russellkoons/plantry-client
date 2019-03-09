@@ -39,7 +39,6 @@ constructor(props) {
             <Logo as="a" href="/">
               <FontAwesomeIcon icon="apple-alt" /> Plantry
             </Logo>
-            <Button onClick={this.handleLogout}>Logout</Button>
           </div>            
           <Narrow>
             <Button onClick={this.classToggle}>
@@ -52,11 +51,13 @@ constructor(props) {
             <Button as="a" href="/newplan">New Plan</Button>
             <Button as="a" href="/plans">Plans</Button>
             <Button as="a" href="/shoppinglist">Shopping List</Button>
+            <Button onClick={this.handleLogout}>Logout</Button>
           </Wide>
           <div>
             <HamburgerLink href="/newplan" className={this.state.toggle}>New Plan</HamburgerLink>
             <HamburgerLink href="/plans" className={this.state.toggle}>Plans</HamburgerLink>
             <HamburgerLink href="/shoppinglist" className={this.state.toggle}>Shopping Lists</HamburgerLink>
+            <HamburgerLink href="/" onClick={this.handleLogout} className={this.state.toggle}>Logout</HamburgerLink>
           </div>
         </div>
       </NavContainer>

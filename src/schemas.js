@@ -43,6 +43,7 @@ export const MealSchema = Yup.object().shape({
 });
 
 export const PlanSchema = Yup.object().shape({
+  name: Yup.string().required('Required'),
   SundayBreakfast: Yup.string().required('Required'),
   SundayLunch: Yup.string().required('Required'),
   SundayDinner: Yup.string().required('Required'),

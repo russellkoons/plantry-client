@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {login} from '../actions/auth';
 import '../index.css';
 import LoginForm from './loginform';
 import SignupForm from './signupform';
@@ -6,12 +8,17 @@ import {Login} from './login';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {NavContainer, Logo, Nav, Wide, Narrow, Button, HamburgerLink, CloseButton, StyledPopup} from './styledcomponents';
 
-export class TopNav extends React.Component {
+class TopNav extends React.Component {
   constructor(props) {
     super(props) 
     this.state = {
       toggle: 'hidden'
     }
+  }
+
+  guestLogin = () => {
+    this.props.login('guest', 'abc123');
+    return;
   }
   
   classToggle = () => {
@@ -43,6 +50,7 @@ export class TopNav extends React.Component {
         </Nav>
         <div>
           <Wide>
+            <Button onClick={this.guestLogin}>Demo Account</Button>
             <Login />
           </Wide>
           <div>
@@ -72,3 +80,5 @@ export class TopNav extends React.Component {
     )
   }
 }
+
+export default connect(null, { login })(TopNav);
