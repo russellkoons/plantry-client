@@ -1,16 +1,15 @@
 import React from 'react';
-import { Col } from 'react-grid-system';
 import {connect} from 'react-redux';
 import RecipeCard from './recipecard';
 import {StyledPopup, CloseButton, FormButton} from './styledcomponents';
 
-class RecipePopup extends React.Component {
+export class RecipePopup extends React.Component {
   render() {
     if (this.props.meal === 'Eating out') {
       return(
-        <Col key={this.props.k}>
+        <div key={this.props.k}>
           <span>Going out!</span>
-        </Col>
+        </div>
       )
     } else {
       let meal = this.props.meals.find(e => e.meal === this.props.meal);
@@ -22,7 +21,7 @@ class RecipePopup extends React.Component {
 
       if (meal === undefined) {
         return(
-          <Col key={this.props.k}>
+          <div key={this.props.k}>
             <StyledPopup trigger={<FormButton>{this.props.meal}</FormButton>} modal>
               {close => (
                 <div className="modal">
@@ -34,7 +33,7 @@ class RecipePopup extends React.Component {
                 </div>
               )}
             </StyledPopup>
-          </Col>
+          </div>
         )
       } else {
         const times = meal.times;
@@ -51,7 +50,7 @@ class RecipePopup extends React.Component {
         }
 
         return(
-          <Col key={this.props.k}>
+          <div key={this.props.k}>
             <StyledPopup trigger={<FormButton>{this.props.meal}</FormButton>} modal>
               {close => (
                 <div className="modal">
@@ -62,7 +61,7 @@ class RecipePopup extends React.Component {
                 </div>
               )}
             </StyledPopup>
-          </Col>
+          </div>
         )
       }
     }
