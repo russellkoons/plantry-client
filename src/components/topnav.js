@@ -8,7 +8,7 @@ import {Login} from './login';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {NavContainer, Logo, Nav, Wide, Narrow, Button, HamburgerLink, CloseButton, StyledPopup} from './styledcomponents';
 
-class TopNav extends React.Component {
+export class TopNav extends React.Component {
   constructor(props) {
     super(props) 
     this.state = {
@@ -39,22 +39,22 @@ class TopNav extends React.Component {
         <Nav>
           <div>
             <Logo as="a" href="/">
-              <FontAwesomeIcon icon="apple-alt" /> Plantry
+              <FontAwesomeIcon icon={['fa', 'apple-alt']} /> Plantry
             </Logo>
           </div>
           <Narrow>  
-            <Button onClick={this.classToggle}>
-              <FontAwesomeIcon icon="bars" />
+            <Button id="burger" onClick={() => this.classToggle()}>
+              <FontAwesomeIcon icon={['fa', 'bars']} />
             </Button>
           </Narrow>
         </Nav>
         <div>
           <Wide>
-            <Button onClick={this.guestLogin}>Demo Account</Button>
+            <Button id="guestbutton" onClick={() => this.guestLogin()}>Demo Account</Button>
             <Login />
           </Wide>
           <div>            
-            <HamburgerLink onClick={this.guestLogin} className={this.state.toggle}>Demo Account</HamburgerLink>
+            <HamburgerLink id="burgerguest" onClick={() => this.guestLogin()} className={this.state.toggle}>Demo Account</HamburgerLink>
             <StyledPopup trigger={<HamburgerLink className={this.state.toggle}>Login</HamburgerLink>} modal>
               {close => (
                 <div>
@@ -75,7 +75,6 @@ class TopNav extends React.Component {
                 </div>
               )}
             </StyledPopup>
-            
           </div>
         </div>
       </NavContainer>

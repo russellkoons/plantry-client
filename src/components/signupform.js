@@ -6,14 +6,12 @@ import {login} from '../actions/auth';
 import {registerUser} from '../actions/users';
 import {FormButton, Error} from './styledcomponents';
 
-class SignupForm extends React.Component {
-  handleRegister = (values, {
-    setSubmitting
-  }) => {
+export class SignupForm extends React.Component {
+  handleRegister = (values, actions) => {
     this.props.registerUser(values.username, values.password)
       .then(res => {
         this.props.login(values.username, values.password)
-        setSubmitting(false);
+        actions.setSubmitting(false);
       });
     return;
   }
@@ -29,6 +27,7 @@ class SignupForm extends React.Component {
       <div>
         <h2>Sign Up</h2>
         <Formik 
+          id="register"
           initialValues={{
             username: '',
             password: '',
@@ -42,7 +41,7 @@ class SignupForm extends React.Component {
             }
             return errors;
           }}
-          onSubmit={this.handleRegister}
+          onSubmit={(values, actions) => this.handleRegister(values, actions)}
           render={({isSubmitting}) => {
             return(
               <Form>

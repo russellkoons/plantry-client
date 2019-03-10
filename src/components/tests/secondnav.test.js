@@ -14,6 +14,9 @@ describe('<SecondNav />', () => {
     wrapper.find('#burger').simulate('click');
     expect(spy).toHaveBeenCalled();
     expect(wrapper.state('toggle')).toEqual('toggle');
+    wrapper.find('#burger').simulate('click');
+    expect(spy).toHaveBeenCalled();
+    expect(wrapper.state('toggle')).toEqual('hidden');
   });
 
   it('Calls handleLogout on button click', () => {

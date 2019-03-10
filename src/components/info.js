@@ -92,33 +92,33 @@ export class Info extends React.Component {
       <InfoContainer>
         <HeroContainer>
           <Top>
-            <Logo><FontAwesomeIcon icon="apple-alt" /> Plantry</Logo>
+            <Logo><FontAwesomeIcon icon={['fa', 'apple-alt']} /> Plantry</Logo>
             <Header>Diet</Header>
             <Header>Right</Header>
           </Top>
           <LearnMore>
             <p>Learn more</p>
-            <FontAwesomeIcon icon="chevron-down"/>
+            <FontAwesomeIcon icon={['fa', 'chevron-down']}/>
           </LearnMore>
         </HeroContainer>
         <MainSection>
           <InfoSection>
             <header>
-              <StyledIcon color="#276A73" icon="bread-slice" />
+              <StyledIcon color="#276A73" icon={['fa', 'bread-slice']} />
               <h2>Make Dieting Easy</h2>
             </header>
             <p>With Plantry you can build a weekly meal plan with recipes you know and love.</p>
           </InfoSection>
           <InfoSection>
             <header>
-              <StyledIcon color="#F7B733" icon="carrot" />
+              <StyledIcon color="#F7B733" icon={['fa', 'carrot']} />
               <h2>Get Quick Grocery Lists</h2>
             </header>
             <p>Plantry will automatically create shopping lists for you based on your saved plans and meals.</p>
           </InfoSection>
           <InfoSection>
             <header>
-              <StyledIcon color="#FC4A1A" icon="egg"/>
+              <StyledIcon color="#FC4A1A" icon={['fa', 'egg']} />
               <h2>Feel Confident</h2>
             </header>
             <p>When dieting it's easy to fall off the wagon, but with Plantry you can build a plan that's right for you!</p>

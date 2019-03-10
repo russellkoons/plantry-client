@@ -37,12 +37,12 @@ constructor(props) {
         <Nav>
           <div>
             <Logo as="a" href="/">
-              <FontAwesomeIcon icon="apple-alt" /> Plantry
+              <FontAwesomeIcon icon={['fa', 'apple-alt']} /> Plantry
             </Logo>
           </div>            
           <Narrow>
             <Button id="burger" onClick={() => this.classToggle()}>
-              <FontAwesomeIcon icon="bars" />
+              <FontAwesomeIcon icon={['fa', 'bars']} />
             </Button>
           </Narrow>
         </Nav>
