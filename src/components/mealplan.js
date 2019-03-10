@@ -8,10 +8,8 @@ import MealForm from './mealform';
 import {addPlan} from '../actions/protected';
 import {PlanSchema} from '../schemas';
 
-class MealPlan extends React.Component {
-  handleSubmit = (values, {
-    setSubmitting
-  }) => {
+export class MealPlan extends React.Component {
+  handleSubmit = (values, actions) => {
     const plan = {
       date: values.name,
       mealplans: [
@@ -104,7 +102,7 @@ class MealPlan extends React.Component {
     };
 
     this.props.addPlan(plan)
-      .then(() => setSubmitting(false))
+      .then(() => actions.setSubmitting(false))
       .then(() => this.props.history.push('/plans'));
     return;
   }
@@ -134,7 +132,8 @@ class MealPlan extends React.Component {
             </div>
           )}
         </MealPopup>
-        <Formik 
+        <Formik
+          id="newmealplan"
           initialValues={{
             name: '',
             SundayBreakfast: '',
@@ -160,7 +159,7 @@ class MealPlan extends React.Component {
             SaturdayDinner: ''
           }}
           validationSchema={PlanSchema}
-          onSubmit={this.handleSubmit}
+          onSubmit={(values, actions) => this.handleSubmit(values, actions)}
           render={({
             isSubmitting
           }) => (

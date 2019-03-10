@@ -29,6 +29,18 @@ describe('<Calendar />', () => {
     shallow(<Calendar plans={plans} plan={plan} />);
   });
 
+  it('Renders the plan initially', () => {
+    const wrapper = shallow(<Calendar plans={plans} plan={plan} />);
+    expect(wrapper.hasClass('plan')).toEqual(true);
+  });
+
+  it('Renders a form when editing', () => {
+    const wrapper = shallow(<Calendar plans={plans} plan={plan} />);
+    wrapper.instance().editPlan();
+    wrapper.update();
+    expect(wrapper.hasClass('edit')).toEqual(true);
+  });
+
   it('Sets editing', () => {
     const wrapper = shallow(<Calendar plans={plans} plan={plan} />);
     wrapper.find('#planedit').simulate('click');

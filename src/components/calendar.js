@@ -175,7 +175,7 @@ export class Calendar extends React.Component {
 
     if (!this.state.editing) {
       return(
-        <div>
+        <div className="plan">
           <h3>Click any meal to view or edit!</h3>
           <div>
             <PlanDay day="Sunday" plan={s} />
@@ -198,7 +198,7 @@ export class Calendar extends React.Component {
       }
 
       return(
-        <div>
+        <div className="edit">
           <MealPopup trigger={<FormButton>Add a new meal</FormButton>} 
             modal
             closeOnDocumentClick
