@@ -5,7 +5,7 @@ import {logout} from '../actions/auth';
 import {NavContainer, Logo, Button, Nav, Wide, Narrow, HamburgerLink} from './styledcomponents';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-class SecondNav extends React.Component {
+export class SecondNav extends React.Component {
 constructor(props) {
   super(props) 
   this.state = {
@@ -41,7 +41,7 @@ constructor(props) {
             </Logo>
           </div>            
           <Narrow>
-            <Button onClick={this.classToggle}>
+            <Button id="burger" onClick={() => this.classToggle()}>
               <FontAwesomeIcon icon="bars" />
             </Button>
           </Narrow>
@@ -51,13 +51,13 @@ constructor(props) {
             <Button as="a" href="/newplan">New Plan</Button>
             <Button as="a" href="/plans">Plans</Button>
             <Button as="a" href="/shoppinglist">Shopping List</Button>
-            <Button onClick={this.handleLogout}>Logout</Button>
+            <Button id="logoutbutton" onClick={() => this.handleLogout()}>Logout</Button>
           </Wide>
           <div>
             <HamburgerLink href="/newplan" className={this.state.toggle}>New Plan</HamburgerLink>
             <HamburgerLink href="/plans" className={this.state.toggle}>Plans</HamburgerLink>
             <HamburgerLink href="/shoppinglist" className={this.state.toggle}>Shopping Lists</HamburgerLink>
-            <HamburgerLink href="/" onClick={this.handleLogout} className={this.state.toggle}>Logout</HamburgerLink>
+            <HamburgerLink id="hamburgerlogout" href="/" onClick={() => this.handleLogout()} className={this.state.toggle}>Logout</HamburgerLink>
           </div>
         </div>
       </NavContainer>
