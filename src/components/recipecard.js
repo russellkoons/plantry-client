@@ -14,7 +14,7 @@ const UL = styled.ul`
   margin-right: auto;
 `;
 
-class RecipeCard extends React.Component {
+export class RecipeCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -29,9 +29,7 @@ class RecipeCard extends React.Component {
     this.setState({editing: true});
   }
 
-  submitEdit = (values, {
-    setSubmitting 
-  }) => {
+  submitEdit = (values, actions) => {
     let meal = this.props.meals.find(e => e.meal === this.props.meal);
     const id = meal.id;
     const mealEdit = {
@@ -61,7 +59,7 @@ class RecipeCard extends React.Component {
 
     this.props.dispatch(updateMeal(id, mealEdit))
       .then(() => {
-        setSubmitting(false);
+        actions.setSubmitting(false);
         this.props.dispatch(fetchMeals());
         this.forceUpdate();
         this.setState({editing: false});
@@ -105,7 +103,7 @@ class RecipeCard extends React.Component {
 
     if (!this.state.editing) {
       return(
-        <div>
+        <div className="recipe">
           <h3>{meal.meal}</h3>
           <a href={meal.url}>{meal.url}</a>
           <h4>Ingredients</h4>
@@ -118,7 +116,7 @@ class RecipeCard extends React.Component {
           <UL>
             {times}
           </UL>
-          <FormButton onClick={this.editMeal}>Edit</FormButton>
+          <FormButton id="editmeal" onClick={() => this.editMeal()}>Edit</FormButton>
         </div>
       )
     } else {
@@ -129,15 +127,16 @@ class RecipeCard extends React.Component {
       }
 
       return(
-        <div>        
+        <div className="edit">        
           <Formik 
+          id="editmeal"
           initialValues={{
             name: meal.meal,
             url: meal.url, 
             ingredients: ingredientValues, 
             notes: meal.notes
           }}
-          onSubmit={this.submitEdit}
+          onSubmit={(values, actions) => this.submitEdit(values, actions)}
           render={({
             values,
             isSubmitting
@@ -182,15 +181,15 @@ class RecipeCard extends React.Component {
               <label htmlFor="notes">Notes: </label><br />
               <Field name="notes" type="textarea" rows="5" cols="20"/><br />
               <label html="times">Times: </label><br />
-              <Field name="times[Breakfast]" type="checkbox" value="breakfast" checked={this.state.breakfast} onChange={() => this.handleChange('breakfast')} />Breakfast<br />
-              <Field name="times[Lunch]" type="checkbox" value="lunch" checked={this.state.lunch} onChange={() => this.handleChange('lunch')} />Lunch<br />
-              <Field name="times[Dinner]" type="checkbox" value="dinner" checked={this.state.dinner} onChange={() => this.handleChange('dinner')} />Dinner<br />
+              <Field name="times[Breakfast]" id="breakfast" type="checkbox" value="breakfast" checked={this.state.breakfast} onChange={() => this.handleChange('breakfast')} />Breakfast<br />
+              <Field name="times[Lunch]" id="lunch" type="checkbox" value="lunch" checked={this.state.lunch} onChange={() => this.handleChange('lunch')} />Lunch<br />
+              <Field name="times[Dinner]" id="dinner" type="checkbox" value="dinner" checked={this.state.dinner} onChange={() => this.handleChange('dinner')} />Dinner<br />
               <ErrorMessage name="times" /><br />
               <FormButton type="submit" disabled={isSubmitting}>Submit Meal</FormButton>
             </Form>
           )} />
           {e}
-          <FormButton onClick={this.cancel}>Cancel</FormButton>
+          <FormButton id="cancel" onClick={() => this.cancel()}>Cancel</FormButton>
         </div>
       )
     }
