@@ -3,7 +3,7 @@ import DayCard from './daycard';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
-import {FormButton, MealPopup, CloseButton, Container, Error} from './styledcomponents';
+import {FormButton, Container, Error} from './styledcomponents';
 import MealForm from './mealform';
 import {addPlan} from '../actions/protected';
 import {PlanSchema} from '../schemas';
@@ -121,19 +121,7 @@ class MealPlan extends React.Component {
         <h2>New Meal Plan</h2>
         <p>Click Add New Meal or add your favorite meals</p>
         <p>Use the meals you make to build your weekly meal plan</p>
-        <MealPopup trigger={<FormButton>Add a new meal</FormButton>} 
-          modal
-          closeOnDocumentClick
-        >
-          {close => (
-            <div className="modal">
-              <CloseButton className="close" onClick={close}>
-                &times;
-              </CloseButton>
-              <MealForm close={close}/>
-            </div>
-          )}
-        </MealPopup>
+        <MealForm />
         <Formik 
           initialValues={{
             name: '',

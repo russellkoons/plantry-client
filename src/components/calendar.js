@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import {Formik, Form} from 'formik';
-import {FormButton, CloseButton, StyledPopup, Error} from './styledcomponents';
+import {FormButton, Error} from './styledcomponents';
 import DayCard from './daycard';
 import MealForm from './mealform';
 import {PlanDay} from './planday';
@@ -11,6 +11,7 @@ import {updatePlan, fetchPlans} from '../actions/protected'
 export class Calendar extends React.Component {
   constructor(props) {
     super(props)
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.state = {
       editing: false
     }
@@ -20,9 +21,9 @@ export class Calendar extends React.Component {
     this.setState({editing: true})
   }
 
-  handleUpdate = (values, {
+  handleUpdate(values, {
     setSubmitting
-  }) => {
+  }) {
     const id = this.props.plan;
     const planUpdate = {
       id: id,
@@ -198,20 +199,9 @@ export class Calendar extends React.Component {
 
       return(
         <div>
-          <StyledPopup trigger={<FormButton>Add a new meal</FormButton>} 
-            modal
-            closeOnDocumentClick
-          >
-            {close => (
-              <div className="modal">
-                <CloseButton className="close" onClick={close}>
-                  &times;
-                </CloseButton>
-                <MealForm />
-              </div>
-            )}
-          </StyledPopup>
-          <Formik
+          <MealForm />
+          <Formik  
+            id="updateplan"
             initialValues={{
               SundayBreakfast: breakfast[0],
               SundayLunch: lunch[0],

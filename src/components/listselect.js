@@ -4,7 +4,7 @@ import {ShoppingList} from './shoppinglist';
 import {Container} from './styledcomponents';
 import '../index.css';
 
-class ListSelect extends React.Component {
+export class ListSelect extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

@@ -53,7 +53,8 @@ class TopNav extends React.Component {
             <Button onClick={this.guestLogin}>Demo Account</Button>
             <Login />
           </Wide>
-          <div>
+          <div>            
+            <HamburgerLink onClick={this.guestLogin} className={this.state.toggle}>Demo Account</HamburgerLink>
             <StyledPopup trigger={<HamburgerLink className={this.state.toggle}>Login</HamburgerLink>} modal>
               {close => (
                 <div>
@@ -74,6 +75,7 @@ class TopNav extends React.Component {
                 </div>
               )}
             </StyledPopup>
+            
           </div>
         </div>
       </NavContainer>

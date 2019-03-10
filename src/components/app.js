@@ -12,7 +12,7 @@ import PlanSelect from './planselect';
 import ListSelect from './listselect';
 import {StyledFooter} from './styledcomponents';
 
-class App extends React.Component {
+export class App extends React.Component {
   render() {
     if (this.props.authToken === null) {
       return(

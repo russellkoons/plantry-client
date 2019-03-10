@@ -1,9 +1,8 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import {Calendar} from '../calendar';
 import {PlanDay} from '../planday';
 import MealForm from '../mealform';
-import {DayCard} from '../daycard';
 
 const plans = [
   {
@@ -49,8 +48,22 @@ describe('<Calendar />', () => {
     expect(callback).toHaveBeenCalled();
   });
 
+  it('Should call handleUpdate', () => {
+    const spy = jest.spyOn(Calendar.prototype, 'handleUpdate').mockImplementation(() => console.log('Success'));
+    const wrapper = shallow(<Calendar plans={plans} plan={plan} />);
+    wrapper.instance().editPlan();
+    wrapper.update();
+    wrapper.find('#updateplan').simulate('submit');
+    expect(spy).toHaveBeenCalled();
+  });
+
   it('Should render correct elements', () => {
     const wrapper = shallow(<Calendar plans={plans} plan={plan} />);
     expect(wrapper.containsMatchingElement(<PlanDay />)).toEqual(true);
+
+    const wrapper2 = shallow(<Calendar plans={plans} plan={plan} />);
+    wrapper2.instance().editPlan();
+    wrapper2.update();
+    expect(wrapper2.containsMatchingElement(<MealForm />)).toEqual(true);
   });
 });
