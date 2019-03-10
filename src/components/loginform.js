@@ -6,11 +6,9 @@ import {login} from '../actions/auth';
 import {FormButton, Error} from './styledcomponents';
 
 export class LoginForm extends React.Component {
-  handleLogin = (values, {
-    setSubmitting
-  }) => {
+  handleLogin = (values, actions) => {
     this.props.login(values.username, values.password)
-      .then(() => setSubmitting(false));
+      .then(() => actions.setSubmitting(false));
     return;
   }
 
@@ -30,7 +28,7 @@ export class LoginForm extends React.Component {
             password: ''
           }}
           validationSchema={LoginSchema}
-          onSubmit={values => this.handleLogin(values)}
+          onSubmit={(values, actions) => this.handleLogin(values, actions)}
           render={({
             isSubmitting
           }) => (

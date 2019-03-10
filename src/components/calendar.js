@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import {Formik, Form} from 'formik';
-import {FormButton, Error} from './styledcomponents';
+import {FormButton, Error, MealPopup, CloseButton} from './styledcomponents';
 import DayCard from './daycard';
 import MealForm from './mealform';
 import {PlanDay} from './planday';
@@ -199,7 +199,19 @@ export class Calendar extends React.Component {
 
       return(
         <div>
-          <MealForm />
+          <MealPopup trigger={<FormButton>Add a new meal</FormButton>} 
+            modal
+            closeOnDocumentClick
+          >
+            {close => (
+              <div className="modal">
+                <CloseButton className="close" onClick={close}>
+                  &times;
+                </CloseButton>
+                <MealForm />
+              </div>
+            )}
+          </MealPopup>
           <Formik  
             id="updateplan"
             initialValues={{

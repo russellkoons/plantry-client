@@ -56,14 +56,4 @@ describe('<Calendar />', () => {
     wrapper.find('#updateplan').simulate('submit');
     expect(spy).toHaveBeenCalled();
   });
-
-  it('Should render correct elements', () => {
-    const wrapper = shallow(<Calendar plans={plans} plan={plan} />);
-    expect(wrapper.containsMatchingElement(<PlanDay />)).toEqual(true);
-
-    const wrapper2 = shallow(<Calendar plans={plans} plan={plan} />);
-    wrapper2.instance().editPlan();
-    wrapper2.update();
-    expect(wrapper2.containsMatchingElement(<MealForm />)).toEqual(true);
-  });
 });
