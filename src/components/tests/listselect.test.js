@@ -19,7 +19,7 @@ describe('<ListSelect />', () => {
   it('Calls handleChange on change', () => {
     const wrapper = shallow(<ListSelect plans={plans} />);
     const instance = wrapper.instance();
-    const spy = jest.spyOn(instance, 'handleChange').mockImplementation(() => console.log('It is working'));
+    const spy = jest.spyOn(instance, 'handleChange').mockImplementation(() => {});
     wrapper.find('#listselect').simulate('change');
     expect(spy).toHaveBeenCalled();
   });

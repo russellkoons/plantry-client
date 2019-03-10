@@ -24,13 +24,13 @@ export class LoginForm extends React.Component {
     return(
       <div>  
         <h2>Login</h2>
-        <Formik 
+        <Formik id="login"
           initialValues={{
             username: '',
             password: ''
           }}
           validationSchema={LoginSchema}
-          onSubmit={this.handleLogin}
+          onSubmit={values => this.handleLogin(values)}
           render={({
             isSubmitting
           }) => (

@@ -36,7 +36,7 @@ export class ListSelect extends React.Component {
     return(
       <Container>
         <h2>Shopping List</h2>
-        <select id="listselect" defaultValue="choose" onChange={this.handleChange}>
+        <select id="listselect" defaultValue="choose" onChange={() => this.handleChange()}>
           <option value="choose" key="0" disabled>--Choose a plan--</option>
           {list}
         </select>
