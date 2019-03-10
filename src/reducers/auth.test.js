@@ -13,7 +13,6 @@ describe('authReducer', () => {
     expect(state).toEqual({
       authToken: null,
       user: null,
-      loading: false,
       error: null
     });
   });
@@ -53,12 +52,10 @@ describe('authReducer', () => {
   describe('authRequest', () => {
     it('Should set loading to true', () => {
       let state = {
-        loading: false, 
         error: testError
       };
       state = authReducer(state, actions.authRequest());
       expect(state).toEqual({
-        loading: true,
         error: null
       });
     });
@@ -67,12 +64,10 @@ describe('authReducer', () => {
   describe('authSuccess', () => {
     it('Should set the user', () => {
       let state = {
-        loading: true, 
         user: null
       };
       state = authReducer(state, actions.authSuccess(testUser));
       expect(state).toEqual({
-        loading: false,
         user: testUser
       });
     });
@@ -81,12 +76,10 @@ describe('authReducer', () => {
   describe('authError', () => {
     it('Should set the error', () => {
       let state = {
-        loading: true,
         error: null
       };
       state = authReducer(state, actions.authError(testError));
       expect(state).toEqual({
-        loading: false,
         error: testError
       });
     });

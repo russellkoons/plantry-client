@@ -15,7 +15,6 @@ import {
 const initialState = {
   authToken: null,
   user: null,
-  loading: false,
   error: null
 };
 
@@ -31,32 +30,26 @@ export const authReducer = (state = initialState, action) => {
     });
   } else if (action.type === REGISTER_REQUEST) {
     return Object.assign({}, state, {
-      loading: true,
       error: null
     });
   } else if (action.type === REGISTER_SUCCESS) {
     return Object.assign({}, state, {
-      loading: false,
       error: null
     });
   } else if (action.type === REGISTER_ERROR) {
     return Object.assign({}, state, {
-      loading: false,
       error: action.error
     });
   } else if (action.type === AUTH_REQUEST) {
     return Object.assign({}, state, {
-      loading: true,
       error: null
     });
   } else if (action.type === AUTH_SUCCESS) {
     return Object.assign({}, state, {
-      loading: false,
       user: action.user
     });
   } else if (action.type === AUTH_ERROR) {
     return Object.assign({}, state, {
-      loading: false,
       error: action.error
     });
   }

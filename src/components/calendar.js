@@ -8,7 +8,7 @@ import MealForm from './mealform';
 import {PlanDay} from './planday';
 import {updatePlan, fetchPlans} from '../actions/protected'
 
-class Calendar extends React.Component {
+export class Calendar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -185,8 +185,8 @@ class Calendar extends React.Component {
             <PlanDay day="Friday" plan={f} />
             <PlanDay day="Saturday" plan={a} />
           </div>
-          <FormButton onClick={this.editPlan}>Edit</FormButton>
-          <FormButton onClick={() => this.props.onDelete(plan.id)}>Delete</FormButton>
+          <FormButton onClick={this.editPlan} id="planedit">Edit</FormButton>
+          <FormButton onClick={() => this.props.onDelete(plan.id)} id="plandelete">Delete</FormButton>
         </div>
       )
     } else {
@@ -252,7 +252,7 @@ class Calendar extends React.Component {
             )} 
           />
           {e}
-          <FormButton onClick={this.cancel}>Cancel</FormButton>
+          <FormButton onClick={this.cancel} id="plancancel">Cancel</FormButton>
         </div>
       )
     }
