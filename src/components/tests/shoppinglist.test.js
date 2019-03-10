@@ -4,14 +4,27 @@ import {ShoppingList} from '../shoppinglist';
 
 const plan = {
   mealplans: {
-    meal: 'Pasta',
+    meal: 'Spaghetti',
     day: 'Sunday',
     time: 'Dinner'
   }
 }
 
+const meals = [
+  {
+    meal: 'Spaghetti',
+    ingredients: [
+      {ingredient: 'pasta'},
+      {ingredient: 'sauce'}
+    ],
+    times: [
+      {time: 'Dinner'}
+    ]
+  }
+]
+
 describe('<ShoppingList />', () => {
     it('Renders without crashing', () => {
-        shallow(<ShoppingList plan={plan} />);
+        shallow(<ShoppingList plan={plan} meals={meals} />);
     });
 });
