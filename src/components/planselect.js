@@ -5,7 +5,7 @@ import Calendar from './calendar';
 import {Container} from './styledcomponents';
 import '../index.css';
 
-class PlanSelect extends React.Component {
+export class PlanSelect extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -49,7 +49,7 @@ class PlanSelect extends React.Component {
     return(
       <Container>
         <h2>Meal Plan</h2>
-        <select id="planselect" defaultValue="choose" onChange={this.handleChange}>
+        <select id="planselect" defaultValue="choose" onChange={() => this.handleChange()}>
           <option value="choose" key="0" disabled>--Choose a plan--</option>
           {list}
         </select>
