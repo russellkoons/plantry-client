@@ -49,7 +49,7 @@ describe('<Calendar />', () => {
   });
 
   it('Should call handleUpdate', () => {
-    const spy = jest.spyOn(Calendar.prototype, 'handleUpdate').mockImplementation(() => console.log('Success'));
+    const spy = jest.spyOn(Calendar.prototype, 'handleUpdate').mockImplementation(() => {});
     const wrapper = shallow(<Calendar plans={plans} plan={plan} />);
     wrapper.instance().editPlan();
     wrapper.update();
