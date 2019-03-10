@@ -76,7 +76,6 @@ export const updateMealError = err => ({
 
 export const updateMeal = (id, meal) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  console.log(meal);
   return fetch(`${API_BASE_URL}meals/${id}`, {
       method: 'PUT',
       headers: {
