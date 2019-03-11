@@ -6,6 +6,8 @@ import {login} from '../actions/auth';
 import {registerUser} from '../actions/users';
 import {FormButton, Error} from './styledcomponents';
 
+// Form to Sign Up a new account
+
 export class SignupForm extends React.Component {
   handleRegister = (values, actions) => {
     this.props.registerUser(values.username, values.password)

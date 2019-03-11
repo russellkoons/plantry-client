@@ -8,6 +8,8 @@ import MealForm from './mealform';
 import {PlanDay} from './planday';
 import {updatePlan, fetchPlans} from '../actions/protected'
 
+// Meal Plan Calendar Component
+
 export class Calendar extends React.Component {
   constructor(props) {
     super(props)

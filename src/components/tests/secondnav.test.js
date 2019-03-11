@@ -2,6 +2,8 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {SecondNav} from '../secondnav';
 
+// SecondNav Tests
+
 describe('<SecondNav />', () => {
   it('Renders without crashing', () => {
     shallow(<SecondNav />);

@@ -8,6 +8,8 @@ import {Login} from './login';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {NavContainer, Logo, Nav, Wide, Narrow, Button, HamburgerLink, CloseButton, StyledPopup} from './styledcomponents';
 
+// Nav for logged out users
+
 export class TopNav extends React.Component {
   constructor(props) {
     super(props) 

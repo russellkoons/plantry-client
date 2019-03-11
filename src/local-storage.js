@@ -1,5 +1,7 @@
 import store from 'store';
 
+// Some simple functions to access JWTs
+
 export const loadToken = () => {
   return store.get('authToken');
 };

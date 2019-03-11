@@ -5,6 +5,8 @@ import {LoginSchema} from '../schemas';
 import {login} from '../actions/auth';
 import {FormButton, Error} from './styledcomponents';
 
+// Login Form Component
+
 export class LoginForm extends React.Component {
   handleLogin = (values, actions) => {
     this.props.login(values.username, values.password)

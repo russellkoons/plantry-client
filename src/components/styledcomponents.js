@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import Popup from 'reactjs-popup';
 
+// A bunch of styled components I use throughout the app
+
 export const NavContainer = styled.nav`
   position: fixed;
   left: 0;

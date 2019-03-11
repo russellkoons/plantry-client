@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
 
+// Form Validation Schemas
+
 export const LoginSchema = Yup.object().shape({
   username: Yup.string()
     .required('Required'),

@@ -3,6 +3,8 @@ import RecipePopup from './recipepopup';
 import styled from 'styled-components';
 import {FieldSet} from './styledcomponents';
 
+// Cards for the Calendar
+
 const Time = styled.h4`
   margin-top: 5px;
   margin-bottom: 5px;

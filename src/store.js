@@ -5,6 +5,8 @@ import {createBrowserHistory} from 'history';
 import {loadToken} from './local-storage';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 
+// Creating the Redux store
+
 export const history = createBrowserHistory();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -16,9 +18,9 @@ const store = createStore(rootReducer(history), enhancer);
 const authToken = loadToken();
 
 if (authToken) {
-    const token = authToken;
-    store.dispatch(setAuthToken(token));
-    store.dispatch(refreshAuthToken());
+  const token = authToken;
+  store.dispatch(setAuthToken(token));
+  store.dispatch(refreshAuthToken());
 }
 
 export default store;

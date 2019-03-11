@@ -7,6 +7,8 @@ import {connect as formikConnect} from 'formik';
 import '../index.css';
 import {FieldSet, PlanDiv, Error} from './styledcomponents';
 
+// Plan From Card Component
+
 export class DayCard extends React.Component {
   setFieldValue = id => {
     const val = $(`#${id}`).val();

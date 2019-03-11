@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import firstBackground from '../images/veggies.jpg';
 
+// Front Page Components
+
 const InfoContainer = styled.main`
   top: 65px;
   position: relative;

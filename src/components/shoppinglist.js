@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import {Error} from './styledcomponents'
 import '../index.css'
 
+// ShoppingList Component
+
 const Item = styled.div`
   color: #E85A4F;
   font-size: 20px;

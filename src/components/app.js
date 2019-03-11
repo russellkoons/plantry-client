@@ -12,6 +12,9 @@ import PlanSelect from './planselect';
 import ListSelect from './listselect';
 import {StyledFooter} from './styledcomponents';
 
+// App Component
+// Controls routes and displays everything
+
 export class App extends React.Component {
   render() {
     if (this.props.authToken === null) {

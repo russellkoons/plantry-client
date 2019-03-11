@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import RecipeCard from './recipecard';
 import {StyledPopup, CloseButton, FormButton} from './styledcomponents';
 
+// Component to fill out the Calendar component with recipes and info
+
 export class RecipePopup extends React.Component {
   render() {
     if (this.props.meal === 'Eating out') {

@@ -2,6 +2,8 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {RecipePopup} from '../recipepopup';
 
+// RecipePopup Test
+
 const meals = [
   {
     meal: 'Spaghetti',

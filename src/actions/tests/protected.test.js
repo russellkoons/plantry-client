@@ -1,7 +1,10 @@
 import * as actions from '../protected';
 import {API_BASE_URL} from '../../config';
 
-// Fetch Meal Action
+// Meal and Plan API Actions Tests
+
+// Fetch Meal Actions
+
 describe('fetchMealsSuccess', () => {
   it('Should return the action', () => {
     const meals = {
@@ -77,7 +80,8 @@ describe('fetchMeals', () => {
   });
 });
 
-// Add Meal Action
+// Add Meal Actions
+
 describe('addMealSuccess', () => {
   it('Should return the action', () => {
     const meal = 'Hello!'
@@ -132,7 +136,8 @@ describe('addMeal', () => {
     });
 });
 
-// Update Meal Action 
+// Update Meal Actions
+
 describe('updateMealSuccess', () => {
   it('Should return the action', () => {
     const meal = {
@@ -192,7 +197,8 @@ describe('updateMeal', () => {
   });
 });
 
-// Fetch Plan Action
+// Fetch Plan Actions
+
 describe('fetchPlansSuccess', () => {
   it('Should return the action', () => {
     const plans = {
@@ -268,7 +274,8 @@ describe('fetchPlans', () => {
   });
 });
 
-// Add Plan Action
+// Add Plan Actions
+
 describe('addPlanSuccess', () => {
   it('Should return the action', () => {
     const plan = 'Hello!'
@@ -322,7 +329,8 @@ describe('addPlan', () => {
     });
 });
 
-// Update Plan Action 
+// Update Plan Actions
+
 describe('updatePlanSuccess', () => {
   it('Should return the action', () => {
     const plan = {
@@ -379,8 +387,8 @@ describe('updatePlan', () => {
   });
 });
 
+// Delete Plan Actions
 
-// Delete Plan Action
 describe('deletePlanSuccess', () => {
   it('Should return the action', () => {
     const planId = 1;

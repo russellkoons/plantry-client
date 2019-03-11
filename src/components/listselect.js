@@ -4,6 +4,9 @@ import {ShoppingList} from './shoppinglist';
 import {Container} from './styledcomponents';
 import '../index.css';
 
+// Initial Shopping List Component
+// Choosing a plan from the list creates a shopping list
+
 export class ListSelect extends React.Component {
   constructor(props) {
     super(props)

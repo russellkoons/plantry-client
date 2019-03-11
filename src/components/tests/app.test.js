@@ -4,6 +4,8 @@ import {Provider} from 'react-redux';
 import App from '../app';
 import store from '../../store';
 
+// App Test
+
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(  

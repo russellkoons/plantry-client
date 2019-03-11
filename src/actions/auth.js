@@ -4,6 +4,8 @@ import {saveToken, clearToken} from '../local-storage';
 import {fetchMeals, fetchPlans} from './protected';
 import {normalizeErrors} from './utility';
 
+// Authorization Actions
+
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
   type: SET_AUTH_TOKEN,

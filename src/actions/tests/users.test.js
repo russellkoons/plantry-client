@@ -1,6 +1,8 @@
 import {registerUser} from '../users';
 import {API_BASE_URL} from '../../config';
 
+// User Registration Test
+
 describe('registerUser', () => {
   it('Should fetch a registered user', () => {
     const user = {

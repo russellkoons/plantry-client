@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import background from '../images/veggies2.jpg';
 import {Container} from './styledcomponents';
 
+// Front Page for logged in users
+
 const LandingSection = styled.section`
   min-height: 200px;
   max-width: 400px;

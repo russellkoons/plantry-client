@@ -2,6 +2,8 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {RecipeCard} from '../recipecard';
 
+// RecipeCard Tests
+
 const meal = 'Spaghetti';
 const times = {
   b: false,

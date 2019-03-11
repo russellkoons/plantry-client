@@ -8,7 +8,7 @@ To use the app, after logging in, go to New Plan in the menu. On the New Plan pa
 
 ## Live App
 - Checkout the live app - [Plantry](https://plantry-client.herokuapp.com/)
-- Checkout the Server Side Code - [Plantry Client](https://github.com/russellkoons/plantry-server) 
+- Checkout the Server Side Code - [Plantry Client](https://github.com/russellkoons/plantry-api) 
 
 ## Built With...
 ### Front-End
@@ -26,11 +26,11 @@ To use the app, after logging in, go to New Plan in the menu. On the New Plan pa
   - Knex
   - Objection.js
 
-## Testing
+### Testing
   - Jest
   - Enzyme
   - Mocha
   - Chai
 
-## Authentication
+### Authentication
   - JSON Web Token

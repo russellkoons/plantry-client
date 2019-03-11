@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import {FieldSet, FormButton, PlusMinus, Error} from './styledcomponents';
 import '../index.css';
 
+// RecipeCard lets you view the recipes you've saved and allows for editing too
+
 const UL = styled.ul`
   list-style-type: none;
   padding: 0;

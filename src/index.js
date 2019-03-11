@@ -9,6 +9,8 @@ import store from './store';
 
 library.add(faAppleAlt, faBars, faChevronDown, faBreadSlice, faCarrot, faEgg);
 
+// Where the App actually gets called
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

@@ -4,6 +4,8 @@ import LoginForm from './loginform';
 import SignupForm from './signupform';
 import {Button, StyledPopup, CloseButton} from './styledcomponents';
 
+// Login Buttons and Popups
+
 export class Login extends React.Component {
 
   render() {

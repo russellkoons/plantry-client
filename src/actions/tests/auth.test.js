@@ -3,6 +3,8 @@ import {API_BASE_URL} from '../../config';
 import jwt from 'jsonwebtoken';
 import jwtDecode from 'jwt-decode';
 
+// Authorization Tests
+
 describe('setAuthToken', () => {
   it('Should return the action', () => {
     const authToken = 'fakeAuthToken1234';

@@ -2,6 +2,8 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {SignupForm} from '../signupform';
 
+// SignupForm Tests
+
 describe('<SignupForm />', () => {
   it('Renders without crashing', () => {
     shallow(<SignupForm />);

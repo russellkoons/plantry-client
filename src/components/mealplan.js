@@ -8,6 +8,8 @@ import MealForm from './mealform';
 import {addPlan} from '../actions/protected';
 import {PlanSchema} from '../schemas';
 
+// New Meal Plan Form Component
+
 export class MealPlan extends React.Component {
   handleSubmit = (values, actions) => {
     const plan = {

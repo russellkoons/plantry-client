@@ -6,6 +6,8 @@ import {MealSchema} from '../schemas';
 import {FormButton, PlusMinus, FieldSet, Error} from './styledcomponents';
 import '../index.css';
 
+// Form to create new meals
+
 export class MealForm extends React.Component {
   handleSubmit = (values, actions) => {
     const meal = {

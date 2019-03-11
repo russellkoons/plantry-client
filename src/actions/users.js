@@ -1,6 +1,8 @@
 import {API_BASE_URL} from '../config';
 import {normalizeErrors} from './utility';
 
+// User Registration Actions
+
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const registerRequest = () => ({
   type: REGISTER_REQUEST

@@ -5,6 +5,9 @@ import Calendar from './calendar';
 import {Container} from './styledcomponents';
 import '../index.css';
 
+// Initial Saved Plan Component
+// Selecting a plan from the dropdown lets you view, edit or delete your plans
+
 export class PlanSelect extends React.Component {
   constructor(props) {
     super(props)

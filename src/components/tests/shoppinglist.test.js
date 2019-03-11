@@ -2,6 +2,8 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {ShoppingList} from '../shoppinglist';
 
+// ShoppingList Test
+
 const plan = {
   mealplans: {
     meal: 'Spaghetti',

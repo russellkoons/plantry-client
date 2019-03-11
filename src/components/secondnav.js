@@ -5,6 +5,8 @@ import {logout} from '../actions/auth';
 import {NavContainer, Logo, Button, Nav, Wide, Narrow, HamburgerLink} from './styledcomponents';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
+// Nav for signed in users
+
 export class SecondNav extends React.Component {
 constructor(props) {
   super(props) 

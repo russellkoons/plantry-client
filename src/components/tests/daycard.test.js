@@ -2,6 +2,8 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {DayCard} from '../daycard';
 
+// DayCard Tests
+
 const meals = [
   {
     meal: 'Spaghetti',
