@@ -8,7 +8,7 @@ To use the app, after logging in, go to New Plan in the menu. On the New Plan pa
 
 ## Live App
 - Checkout the live app - [Plantry](https://plantry-client.herokuapp.com/)
-- Checkout the Server Side Code - [Plantry Client](https://github.com/russellkoons/plantry-api) 
+- Checkout the Server Side Code - [Plantry API](https://github.com/russellkoons/plantry-api) 
 
 ## Built With...
 ### Front-End
