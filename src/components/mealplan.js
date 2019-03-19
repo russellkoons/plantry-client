@@ -130,7 +130,7 @@ export class MealPlan extends React.Component {
               <CloseButton className="close" onClick={close}>
                 &times;
               </CloseButton>
-              <MealForm />
+              <MealForm close={close} />
             </div>
           )}
         </MealPopup>

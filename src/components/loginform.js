@@ -24,7 +24,8 @@ export class LoginForm extends React.Component {
     return(
       <div>  
         <h2>Login</h2>
-        <Formik id="login"
+        <Formik 
+          id="login"
           initialValues={{
             username: '',
             password: ''

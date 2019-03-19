@@ -2,19 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {SignupSchema} from '../schemas';
-import {login} from '../actions/auth';
 import {registerUser} from '../actions/users';
 import {FormButton, Error} from './styledcomponents';
 
 // Form to Sign Up a new account
 
 export class SignupForm extends React.Component {
-  handleRegister = (values, actions) => {
-    this.props.registerUser(values.username, values.password)
-      .then(res => {
-        this.props.login(values.username, values.password)
-        actions.setSubmitting(false);
-      });
+  handleRegister = values => {
+    this.props.registerUser(values.username, values.password);
     return;
   }
 
@@ -43,9 +38,8 @@ export class SignupForm extends React.Component {
             }
             return errors;
           }}
-          onSubmit={(values, actions) => this.handleRegister(values, actions)}
-          render={({isSubmitting}) => {
-            return(
+          onSubmit={values => this.handleRegister(values)}
+          render={() => (
               <Form>
                 <label htmlFor="signupusername">Username </label><br />
                 <Field id="usersignup" name="username" /><br />
@@ -56,10 +50,10 @@ export class SignupForm extends React.Component {
                 <label htmlFor="passconfirm">Confirm password </label><br />
                 <Field id="passconfirm" name="passconfirm" type="password" /> <br />
                 <ErrorMessage name="passconfirm" /><br />
-                <FormButton type="submit" disabled={isSubmitting}>Submit</FormButton>
+                <FormButton type="submit">Submit</FormButton>
               </Form>
-            );
-          }} 
+            )
+          } 
         />
         {e}<br />
       </div>
@@ -71,4 +65,4 @@ const mapStateToProps = state => ({
   error: state.auth.error
 });
 
-export default connect(mapStateToProps, { login, registerUser })(SignupForm)
+export default connect(mapStateToProps, { registerUser })(SignupForm)

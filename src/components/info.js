@@ -14,7 +14,7 @@ const InfoContainer = styled.main`
 const HeroContainer = styled.header`
   background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 90%, #EAE7DC 100%), linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%), url(${firstBackground});
   background-size: cover;
-  height: calc(100vh - 65px);
+  height: calc(75vh - 65px);
   background-position: center 75%;
   background-repeat: no-repeat;
   position: relative;
@@ -26,15 +26,15 @@ const HeroContainer = styled.header`
 
 const Header = styled.h2`
   color: white;
-  font-size: 4.5em;
+  font-size: 4em;
   display: flex;
   margin-top: 30px;
   margin-bottom: 30px;
 
   @media screen and (min-width: 545px) {
-      font-size: 5.5em;
-      margin-top: 60px;
-      margin-bottom: 60px;
+      font-size: 5em;
+      margin-top: 45px;
+      margin-bottom: 45px;
   }
 `;
 
@@ -49,17 +49,6 @@ const Logo = styled(Header)`
 
   :hover {
     color: #479761;
-  }
-`;
-
-const LearnMore = styled.div`
-  position: relative;
-  color: white;
-  left: 0;
-  right: 0;
-  font-size: 1.5em;
-  p {
-      margin: 5px;
   }
 `;
 
@@ -98,10 +87,6 @@ export class Info extends React.Component {
             <Header>Diet</Header>
             <Header>Right</Header>
           </Top>
-          <LearnMore>
-            <p>Learn more</p>
-            <FontAwesomeIcon icon={['fa', 'chevron-down']}/>
-          </LearnMore>
         </HeroContainer>
         <MainSection>
           <InfoSection>

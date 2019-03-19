@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import $ from 'jquery';
 import {MealInput} from './mealinput';
-import {Field, ErrorMessage} from 'formik';
+import {Field} from 'formik';
 import {connect as formikConnect} from 'formik';
 import '../index.css';
-import {FieldSet, PlanDiv, Error} from './styledcomponents';
+import {FieldSet, PlanDiv} from './styledcomponents';
 
 // Plan From Card Component
 
@@ -56,7 +56,6 @@ export class DayCard extends React.Component {
             {breakfast}
             <option value="Eating out">Going out!</option>
           </Field>
-          <ErrorMessage name={ids[0]} component={Error} />
         </PlanDiv>
         <PlanDiv>
           <label htmlFor="lunch"> Lunch: </label>
@@ -65,7 +64,6 @@ export class DayCard extends React.Component {
             {lunch}
             <option value="Eating out">Going out!</option>
           </Field>
-          <ErrorMessage name={ids[1]} component={Error} />
         </PlanDiv>
         <PlanDiv>
           <label htmlFor="dinner"> Dinner: </label>
@@ -74,7 +72,6 @@ export class DayCard extends React.Component {
             {dinner}
             <option value="Eating out">Going out!</option>
           </Field>
-          <ErrorMessage name={ids[2]} component={Error} />
         </PlanDiv>
       </FieldSet>
     )

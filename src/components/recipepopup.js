@@ -13,6 +13,12 @@ export class RecipePopup extends React.Component {
           <span>Going out!</span>
         </div>
       )
+    } else if (this.props.meal === '') {
+      return(
+        <div key={this.props.k}>
+          <span>No meal selected</span>
+        </div>
+      )
     } else {
       let meal = this.props.meals.find(e => e.meal === this.props.meal);
       const booleans = {

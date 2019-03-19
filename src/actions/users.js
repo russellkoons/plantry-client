@@ -1,5 +1,6 @@
 import {API_BASE_URL} from '../config';
 import {normalizeErrors} from './utility';
+import {login} from './auth'
 
 // User Registration Actions
 
@@ -34,6 +35,7 @@ export const registerUser = (username, password) => dispatch => {
   .then(res => normalizeErrors(res))
   .then(res => {
     dispatch(registerSuccess());
+    dispatch(login(username, password))
     return res.json();
   })
   .catch(err => {
