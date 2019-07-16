@@ -26,11 +26,13 @@ export class ShoppingList extends React.Component {
     
     const meals = this.props.meals;
     const mealplan = this.props.plan.mealplans;
-
+    
+    // Push the different meal names into an array
     for (let i = 0; i < mealplan.length; i++) {
       mealnames.push(mealplan[i].meal);
     }
 
+    // Finds the meals from the meal database and adds them all to an array
     for (let i = 0; i < mealnames.length; i++) {
       if (mealnames[i] === 'Eating out') {
         continue;
@@ -44,6 +46,7 @@ export class ShoppingList extends React.Component {
       }
     }
 
+    // Remove duplicates
     const short = [...new Set(meallist)];
     
     if (errors) {
@@ -52,6 +55,7 @@ export class ShoppingList extends React.Component {
       )
     }
 
+    // Creates a list of ingredients
     for (let i = 0; i < short.length; i++) {
       for(let j = 0; j < short[i].ingredients.length; j++) {
         const ingredient = short[i].ingredients[j].ingredient;
@@ -59,6 +63,7 @@ export class ShoppingList extends React.Component {
       }
     }
 
+    // Remove duplicate ingredients
     const ingredients = [...new Set(list)];
 
     for (let i = 0; i < ingredients.length; i++) {
